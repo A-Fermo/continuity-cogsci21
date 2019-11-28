@@ -2,7 +2,7 @@
 
 Here are few articles about methods currently used for accident investigation. These papers don't explicitely deal with a cognitive approach of the problem. They don't propose a model of how one might operate backward induction from the outcome _accident_ to the underlying network of causes. But they present some interesting and technical operational methods usually used.
 
-For a more general overwiew of these methods:
+For a general overwiew:
 * Sklet 2004
 * Hulme 2019
 
