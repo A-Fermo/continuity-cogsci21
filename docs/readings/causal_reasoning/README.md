@@ -4,7 +4,7 @@ Here are few articles about methods currently used for accident investigation. T
 
 For a general overwiew:
 * Sklet 2004
-* Hulme 2019
+* Hulme 2019 (compares with each other and discusses several methods)
 
 For a more precise exemple of method of investigation applied to aircraft accident:
 * Zotov 2011
@@ -13,4 +13,8 @@ From a psychological point of view:
 * Benner 1975
 * Benner 1978
 
-The other articles aim to compare some methods with each other or evaluate the interaction between human an system in accident analysis (see for instance Lee 2018).
+About the interaction between human and system:
+* Lee 2018 (for accident analysis).
+* Adriaensen 2019 (more generally)
+
+And other papers...
