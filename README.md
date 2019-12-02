@@ -17,7 +17,7 @@ So the project (to be clearly specified...) would consist in developing a comput
 
 Let's take for instance a very simplified version of the model in (Drougard 2017): 
 
-- _V^(_t)_ the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
+- _V_(t)_ the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
 - _S^(_t)_ the space of human hidden mental states, in part inferred from physiological data (eye-tracking, EEG, heart rate, etc.)
 - _A^(_t)_ the space of the different actions and states of the robot (displaying visual alarm, making recommendation, being manually controlled or finally autonomous)
 - _b(s)^(_t)_ the belief state of the system
