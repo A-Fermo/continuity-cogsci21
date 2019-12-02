@@ -24,11 +24,9 @@ However the objective would be to develop a Bayesian model of failure root cause
 
 ### Short example and first prediction
 
-Let's take for instance a very simplified version of the model in ([Drougard 2017](https://github.com/Sonybronx/Hypothesis_generation/blob/master/docs/readings/HMI/Drougard2017_Mixed-initiativeMission%20PlanningConsideringHumanOperatorStateEstimation.pdf)):
+Let's take cue from the model in ([Drougard 2017](https://github.com/Sonybronx/Hypothesis_generation/blob/master/docs/readings/HMI/Drougard2017_Mixed-initiativeMission%20PlanningConsideringHumanOperatorStateEstimation.pdf)): here the mixed-initiative system consists of a human agent and a firefighter robot. The robot is located in an area with some trees that might suddenly self-ignite. The goal of the game is too extinguish the fire, but the human has to pay attention to the battery charge level of the robot and the volume of water it contains. If it is not recharged, the game is over, and if its tank is empty then it can no longer extinguish the trees. If the human doesn't pay enough attention to the state of battery and tank, the robot displays visual alarms. Moreover data are recorded from the human physiological reaction to the stress and workload, that informs the robot whether it has to takes the initiative to switch from manual to autonomous mode. 
 
-Here the mixed-initiative system consists of a human agent and a firefighter robot. The robot is located in an area with some trees that might suddenly self-ignite. The goal of the game is too extinguish the fire, but the human has to pay attention to the battery charge level of the robot and the volume of water it contains. If it is not recharged, the game is over, and if its tank is empty then it can no longer extinguish the trees. If the human doesn't pay enough attention to the state of battery and tank, the robot displays visual alarms. Moreover data are recorded from the human physiological reaction to the stress and workload, that informs the robot whether it has to takes the initiative to switch from manual to autonomous mode. 
-
-Thus :
+Thus (by simplifying a lot their model) :
 
 - _V<sub>t</sub>_  the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
 - _S<sub>t</sub>_  the space of human hidden mental states, in part inferred from physiological data (eye-tracking, EEG, heart rate, etc.)
