@@ -22,7 +22,7 @@ So the project (to be clearly specified...) would consist in developing a comput
 
 ### Short example and first prediction
 
-Let's take for instance a very simplified version of the model in (Drougard 2017): 
+Let's take for instance a very simplified version of the model in ([Drougard 2017](https://github.com/Sonybronx/Hypothesis_generation/blob/master/docs/readings/HMI/Drougard2017_Mixed-initiativeMission%20PlanningConsideringHumanOperatorStateEstimation.pdf)): 
 
 - _V<sub>t</sub>_  the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
 - _S<sub>t</sub>_  the space of human hidden mental states, in part inferred from physiological data (eye-tracking, EEG, heart rate, etc.)
