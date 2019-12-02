@@ -1,7 +1,7 @@
 # Where does the failure come from ? 
 ## Proposing a causal model of situation (un)awareness in mixed-initiative systems.
 
-(References might be found in docs/readings/HMI)
+(References might be found in [docs/readings/HMI](https://github.com/Sonybronx/Hypothesis_generation/tree/master/docs/readings/HMI))
 
 ### Background
 
@@ -20,6 +20,8 @@ Some studies (Onnasch 2013, Parasuraman 2010,...) recently proposed psychologica
 So the project (to be clearly specified...) would consist in developing a computational model of how people might infer causal structure from the evidence of a failure in context where they cooperate with an automated aid device. More precisely it would be interesting to see whether one observes any patterns in human causal inquiries depending on the previous states of the system (more or less automated). As a theoretical framework for our mixed-initiative system, we could rely on a simplified example of planning mixed-initiative actions modelled by Partially Observable Markov Decision Process (POMDP) (like in Drougard 2017).
 
 
+### Short example and first prediction
+
 Let's take for instance a very simplified version of the model in (Drougard 2017): 
 
 - _V<sub>t</sub>_  the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
@@ -27,7 +29,9 @@ Let's take for instance a very simplified version of the model in (Drougard 2017
 - _A<sub>t</sub>_  the space of the different actions and states of the robot (displaying visual alarm, making recommendation, being manually controlled or finally autonomous)
 - _b(s)<sub>t</sub>_  the belief state of the system
 
-To roughly sketch out the situation, typically _A_ depends on _b(s)_ which depends on _S_ and _V_, and _S_ depends in part on _V_. Now let's imagine that at time _t_ a failure _F_ occurs. A general question would be : how does the inferred causal structure of the _F_-occurrence depend on _A_ at the previous states of the system (so at times _t-1_, _t-2_, _t-3_,..., _t<sub>0</sub>_) ? The intuitive prediction would be that the more the system has been autonomous before the _F_-occurrence ("more autonomous" being associated with the level of automation from visual alerts to complete autonomy as well as with the number of times the robot was previously in these states), the less the human would be able to infer the causal network underlying the _F_-occurrence.
+To roughly sketch out the situation, typically _A_ depends on _b(s)_ which depends on _S_ and _V_, and _S_ depends in part on _V_. Now let's imagine that at time _t_ a failure _F_ occurs. A general question would be : how does the inferred causal structure of the _F_-occurrence depend on _A_ at the previous states of the system (so at times _t-1_, _t-2_, _t-3_,..., _t<sub>0</sub>_) ? 
+
+The intuitive prediction would be that the more the system has been autonomous before the _F_-occurrence ("more autonomous" being associated with the level of automation from visual alerts to complete autonomy as well as with the number of times the robot was previously in these states), the less the human would be able to infer the causal network underlying the _F_-occurrence.
 
 
 
