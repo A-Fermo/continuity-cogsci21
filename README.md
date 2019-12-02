@@ -1,7 +1,7 @@
 # Where does the failure come from ? 
 ## Proposing a causal model of situation (un)awareness in mixed-initiative systems.
 
-(References might be found in [docs/readings/HMI](https://github.com/Sonybronx/Hypothesis_generation/tree/master/docs/readings/HMI))
+(References can be found in [docs/readings/HMI](https://github.com/Sonybronx/Hypothesis_generation/tree/master/docs/readings/HMI))
 
 ### Background
 
