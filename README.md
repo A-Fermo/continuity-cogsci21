@@ -17,12 +17,12 @@ So the project (to be clearly specified...) would consist in developing a comput
 
 Let's take for instance a very simplified version of the model in (Drougard 2017): 
 
-- _V_t_ the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
-- _S^(_t)_ the space of human hidden mental states, in part inferred from physiological data (eye-tracking, EEG, heart rate, etc.)
-- _A^(_t)_ the space of the different actions and states of the robot (displaying visual alarm, making recommendation, being manually controlled or finally autonomous)
-- _b(s)^(_t)_ the belief state of the system
+- _V<sub>t</sub>_ the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
+- _S<sub>t</sub>_ the space of human hidden mental states, in part inferred from physiological data (eye-tracking, EEG, heart rate, etc.)
+- _A<sub>t</sub>_ the space of the different actions and states of the robot (displaying visual alarm, making recommendation, being manually controlled or finally autonomous)
+- _b(s)<sub>t</sub>_ the belief state of the system
 
-To roughly sketch out the situation, typically _A_ depends on _b(s)_ which depends on _S_ and _V_, and _S_ depends in part on _V_. Now let's imagine that at time _t_ a failure _F_ occurs. A general question would be : how does the inferred causal structure of the _F_-occurrence depend on _A_ at the previous states of the system (so at times _t^(0)_, _t^(1)_, _t^(2)_,..., _t^(n-1)_) ? The intuitive prediction would be that the more the system has been autonomous before the _F_-occurrence ("more autonomous" being associated with the level of automation from visual alerts to complete autonomy as well as with the number of times the robot was previously in these states), the less the human would be able to infer the causal network underlying the _F_-occurrence.
+To roughly sketch out the situation, typically _A_ depends on _b(s)_ which depends on _S_ and _V_, and _S_ depends in part on _V_. Now let's imagine that at time _t_ a failure _F_ occurs. A general question would be : how does the inferred causal structure of the _F_-occurrence depend on _A_ at the previous states of the system (so at times _t<sub>0</sub>_, _t<sub>0</sub>_, _t<sub>0</sub>_,..., _t<sub>0</sub>_) ? The intuitive prediction would be that the more the system has been autonomous before the _F_-occurrence ("more autonomous" being associated with the level of automation from visual alerts to complete autonomy as well as with the number of times the robot was previously in these states), the less the human would be able to infer the causal network underlying the _F_-occurrence.
 
 
 
