@@ -27,7 +27,7 @@ Let's take for instance a very simplified version of the model in (Drougard 2017
 - _V<sub>t</sub>_  the observable state space à time _t_ (location of the robot, whether trees are burning or not, etc.)
 - _S<sub>t</sub>_  the space of human hidden mental states, in part inferred from physiological data (eye-tracking, EEG, heart rate, etc.)
 - _A<sub>t</sub>_  the space of the different actions and states of the robot (displaying visual alarm, making recommendation, being manually controlled or finally autonomous)
-- _b(s)<sub>t</sub>_  the belief state of the system
+- _b<sub>t</sub>(s)_  the belief state of the system
 
 To roughly sketch out the situation, typically _A_ depends on _b(s)_ which depends on _S_ and _V_, and _S_ depends in part on _V_. Now let's imagine that at time _t_ a failure _F_ occurs. A general question would be : how does the inferred causal structure of the _F_-occurrence depend on _A_ at the previous states of the system (so at times _t-1_, _t-2_, _t-3_,..., _t<sub>0</sub>_) ? 
 
