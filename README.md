@@ -35,9 +35,9 @@ Thus :
 - _A<sub>t</sub>_  the space of the different actions and states of the robot (displaying visual alarm, making recommendation, being manually controlled or finally autonomous)
 - _b<sub>t</sub>(s)_  the belief state of the system
 
-To roughly sketch out the situation, typically _A_ depends on _b(s)_ which depends on _S_ and _V_, and _S_ depends in part on _V_. Now let's imagine that at time _t_ a failure _F_ occurs. A general question would be : how does the inferred causal structure of the _F_-occurrence depend on _A_ at the previous states of the system (so at times _t-1_, _t-2_, _t-3_,..., _t<sub>0</sub>_) ? 
+To roughly sketch out the situation, typically _A_ depends on _b(s)_ which depends on _S_ and _V_, and _S_ depends in part on _V_. 
 
-The intuitive prediction would be that the more the system has been autonomous before the _F_-occurrence ("more autonomous" being associated with the level of automation from visual alerts to complete autonomy as well as with the number of times the robot was previously in these states), the less the human would be able to infer the causal network underlying the _F_-occurrence.
+Moreover let's imagine that at time _t_ a failure _F_ occurs. A general question would be : how does the inferred causal structure of the _F_-occurrence depend on _A_ at the previous states of the system (so at times _t-1_, _t-2_, _t-3_,..., _t<sub>0</sub>_) ? The intuitive prediction would be that the more the system has been autonomous before the _F_-occurrence ("more autonomous" being associated with the level of automation from visual alerts to complete autonomy as well as with the number of times the robot was previously in these states), the less the human would be able to infer the causal network underlying the _F_-occurrence. Now we would have to find a model which could explain how the human integrates information from different sources (more or less automation _vs_ own mental states) when searching for the root cause of the failure...
 
 
 
