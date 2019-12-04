@@ -1,5 +1,5 @@
 # Where does the failure come from ? 
-## Proposing a causal model of situation (un)awareness in mixed-initiative systems.
+## Proposing a computational model of root cause understanding when automated device fails.
 
 (References can be found in [docs/readings/HMI](https://github.com/Sonybronx/Hypothesis_generation/tree/master/docs/readings/HMI))
 
