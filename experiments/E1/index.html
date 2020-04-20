@@ -3,13 +3,13 @@
     <head>
         <title>Particules detection</title>
         <script src="Plugins/jspsych.js"></script>
-        <script src="Plugins/jspsych-html-button-response.js"></script>
         <script src="Plugins/jspsych-image-button-response.js"></script>
         <script src="Plugins/jspsych-survey-multi-choice.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="Plugins/jquery.imagemapster.js"></script>
         <script src="Plugins/jspsych-causal-graph-inactive.js"></script>
         <script src="Plugins/jspsych-causal-graph1.js"></script>
+        <script src="Plugins/jspsych-survey-text.js"></script>
         <link href="Plugins/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
     <body>
@@ -434,15 +434,118 @@
     <script>
 
     //var txt_prompt = "<p align='center'>Pick out the detector that is the main cause of the activation of the GCM</p>";
-    var txt_prompt = "Pick out the detector that is the main cause of the activation of the GCM";
+    var width = 605;
+    var height = 529;
     var coord_chain = [[19,245],[94,245],[170,245],[245,245],[321,245],[396,245],[472,245],[547,245]];
     var coord_branch_R = [[19,189],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[19,302],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,245]];
     var coord_branch_L = [[19,245],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[547,189],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,302]];
-    var img_R = ["img/chain_Right.png", "img/chain_Right.png", "img/chain_Right.png","img/branch_SSR0.png", "img/branch_MSR0.png", "img/branch_LSR0.png","img/branch_SER0.png", "img/branch_SER0.png", "img/branch_SER0.png", "img/branch_MER0.png", "img/branch_MER0.png", "img/branch_MER0.png", "img/branch_LER0.png", "img/branch_LER0.png", "img/branch_LER0.png"];
-    var gif_R = ["img/chain_SR.gif", "img/chain_MR.gif", "img/chain_LR.gif", "img/branch_SSR.gif", "img/branch_MSR.gif", "img/branch_LSR.gif", "img/branch_SER1.gif","img/branch_SER2.gif", "img/branch_SER3.gif", "img/branch_MER1.gif", "img/branch_MER2.gif", "img/branch_MER3.gif", "img/branch_LER1.gif", "img/branch_LER2.gif", "img/branch_LER3.gif"];
-    var img_L = ["img/chain_Left.png", "img/chain_Left.png", "img/chain_Left.png", "img/branch_SSL0.png", "img/branch_MSL0.png", "img/branch_LSL0.png","img/branch_SEL0.png", "img/branch_SEL0.png", "img/branch_SEL0.png", "img/branch_MEL0.png", "img/branch_MEL0.png", "img/branch_MEL0.png", "img/branch_LEL0.png", "img/branch_LEL0.png", "img/branch_LEL0.png"];
-    var gif_L = ["img/chain_SL.gif", "img/chain_ML.gif", "img/chain_LL.gif", "img/branch_SSL.gif", "img/branch_MSL.gif", "img/branch_LSL.gif", "img/branch_SEL1.gif", "img/branch_SEL2.gif", "img/branch_SEL3.gif", "img/branch_MEL1.gif", "img/branch_MEL2.gif", "img/branch_MEL3.gif", "img/branch_LEL1.gif", "img/branch_LEL2.gif", "img/branch_LEL3.gif"];
+    var CS_t = 7000;
+    var CM_t = 9000;
+    var CL_t = 11000;
+    var BS_t = 7000;
+    var BS1_t = 9500;
+    var BS2_t = 12000;
+    var BS3_t = 17000
+    var BM_t = 9000;
+    var BM1_t = 13500;
+    var BM2_t = 16000;
+    var BM3_t = 21000;
+    var BL_t = 11000;
+    var BL1_t = 17000;
+    var BL2_t = 20000;
+    var BL3_t = 25000;
+    anim_duration = [CS_t,CM_t,CL_t,BS_t,BS1_t,BS2_t,BS3_t,BM_t,BM1_t,BM2_t,BM3_t,BL_t,BL1_t,BL2_t,BL3_t];
 
+    var inst = ["img/inst_1.png","img/inst_2.png","img/inst_3.png","img/inst_4R.gif","img/inst_4R.gif","img/inst_5.png","img/inst_6.png","img/inst_7.png","img/inst_8.png"];
+    var img_R = ["img/chain_R.png","img/chain_R.png","img/chain_R.png"];
+    var gif_R = ["img/chain_RS.gif","img/chain_RM.gif","img/chain_RL.gif"];
+    var img_L = ["img/chain_L.png","img/chain_L.png","img/chain_L.png"];
+    var gif_L = ["img/chain_LS.gif","img/chain_LM.gif","img/chain_LL.gif"];
+    
+    var gif_RTS = ["img/branch_RTSS.gif","img/branch_RTSE1.gif","img/branch_RTSE2.gif","img/branch_RTSE3.gif"];
+    var gif_RTM = ["img/branch_RTMS.gif","img/branch_RTME1.gif","img/branch_RTME2.gif","img/branch_RTME3.gif"];
+    var gif_RTL = ["img/branch_RTLS.gif","img/branch_RTLE1.gif","img/branch_RTLE2.gif","img/branch_RTLE3.gif"];
+    var gif_LTS = ["img/branch_LTSS.gif","img/branch_LTSE1.gif","img/branch_LTSE2.gif","img/branch_LTSE3.gif"];
+    var gif_LTM = ["img/branch_LTMS.gif","img/branch_LTME1.gif","img/branch_LTME2.gif","img/branch_LTME3.gif"];
+    var gif_LTL = ["img/branch_LTLS.gif","img/branch_LTLE1.gif","img/branch_LTLE2.gif","img/branch_LTLE3.gif"];
+
+    var gif_RBS = ["img/branch_RBSS.gif","img/branch_RBSE1.gif","img/branch_RBSE2.gif","img/branch_RBSE3.gif"];
+    var gif_RBM = ["img/branch_RBMS.gif","img/branch_RBME1.gif","img/branch_RBME2.gif","img/branch_RBME3.gif"];
+    var gif_RBL = ["img/branch_RBLS.gif","img/branch_RBLE1.gif","img/branch_RBLE2.gif","img/branch_RBLE3.gif"];
+    var gif_LBS = ["img/branch_LBSS.gif","img/branch_LBSE1.gif","img/branch_LBSE2.gif","img/branch_LBSE3.gif"];
+    var gif_LBM = ["img/branch_LBMS.gif","img/branch_LBME1.gif","img/branch_LBME2.gif","img/branch_LBME3.gif"];
+    var gif_LBL = ["img/branch_LBLS.gif","img/branch_LBLE1.gif","img/branch_LBLE2.gif","img/branch_LBLE3.gif"];
+
+    var img_RTS = ["img/branch_RTSS.png","img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    var img_RTM = ["img/branch_RTMS.png","img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    var img_RTL = ["img/branch_RTLS.png","img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    var img_LTS = ["img/branch_LTSS.png","img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+    var img_LTM = ["img/branch_LTMS.png","img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+    var img_LTL = ["img/branch_LTLS.png","img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+
+    var img_RBS = ["img/branch_RBSS.png","img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    var img_RBM = ["img/branch_RBMS.png","img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    var img_RBL = ["img/branch_RBLS.png","img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    var img_LBS = ["img/branch_LBSS.png","img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+    var img_LBM = ["img/branch_LBMS.png","img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+    var img_LBL = ["img/branch_LBLS.png","img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+
+    var top_bottom = ["Top","Bottom"];
+    var item_S = top_bottom[Math.floor(Math.random()*top_bottom.length)];
+    var item_M = top_bottom[Math.floor(Math.random()*top_bottom.length)];
+    var item_L = top_bottom[Math.floor(Math.random()*top_bottom.length)];
+
+    if(item_S == "Top"){
+        for(var i=0; i < gif_RTS.length; i++){
+            gif_R.push(gif_RTS[i]);
+            img_R.push(img_RTS[i]);
+            gif_L.push(gif_LTS[i]);
+            img_L.push(img_LTS[i]);
+        }
+    }
+    if(item_S == "Bottom"){
+        for(var i=0; i < gif_RTS.length; i++){
+            gif_R.push(gif_RBS[i]);
+            img_R.push(img_RBS[i]);
+            gif_L.push(gif_LBS[i]);
+            img_L.push(img_LBS[i]);
+        }
+    }
+
+    if(item_M == "Top"){
+        for(var i=0; i < gif_RTS.length; i++){
+            gif_R.push(gif_RTM[i]);
+            img_R.push(img_RTM[i]);
+            gif_L.push(gif_LTM[i]);
+            img_L.push(img_LTM[i]);
+        }
+    }
+    if(item_M == "Bottom"){
+        for(var i=0; i < gif_RTS.length; i++){
+            gif_R.push(gif_RBM[i]);
+            img_R.push(img_RBM[i]);
+            gif_L.push(gif_LBM[i]);
+            img_L.push(img_LBM[i]);
+        }
+    }
+
+    if(item_L == "Top"){
+        for(var i=0; i < gif_RTS.length; i++){
+            gif_R.push(gif_RTL[i]);
+            img_R.push(img_RTL[i]);
+            gif_L.push(gif_LTL[i]);
+            img_L.push(img_LTL[i]);
+        }
+    }
+    if(item_L == "Bottom"){
+        for(var i=0; i < gif_RTS.length; i++){
+            gif_R.push(gif_RBL[i]);
+            img_R.push(img_RBL[i]);
+            gif_L.push(gif_LBL[i]);
+            img_L.push(img_LBL[i]);
+        }
+    }
+    
     var group = ["Right","Left"];
     var condition = group[Math.floor(Math.random()*group.length)];
     if(condition == "Right"){
@@ -450,13 +553,16 @@
         var animations = gif_R;
         var coord_branch = coord_branch_R;
         var inst_4 = "img/inst_4R.gif";
+        var all_images = img_R.concat(gif_R,inst);
     }
     if(condition == "Left"){
         var images = img_L;
         var animations = gif_L;
         var coord_branch = coord_branch_L;
         var inst_4 = "img/inst_4L.gif";
+        var all_images = img_L.concat(gif_L,inst);
     }
+
 
     var timeline = [];
     var introloop=[];
@@ -502,21 +608,28 @@
 
     }
 
+    
+
     function startExperiment(){
     
         jsPsych.init({
             timeline: timeline,
-            preload_images: [img_R,img_L,gif_R,gif_L],
+            show_progress_bar: true,
+            preload_images: all_images,
             /*
             on_finish: function() {
-                //jsPsych.data.displayData();
-            }*/
-            on_finish: function() {
-                endExperiment(jsPsych.data.dataAsCSV(), function() {
-                    document.write('<div id="endscreen" class="endscreen" style="width:1000px"><div class="endscreen" style="text-align:center; border:0px solid; padding:10px; font-size:120%; width:800px; float:right"><p><br><br><br>All done!<br><br>Your completion code is <span id="turkcode" style="font-weight:bold;font-size:130%">' + turkcode + '</span>. To receive payment for the HIT, return to the Amazon Mechanical Turk page and enter this code. Please contact us if something goes wrong and we\'ll fix it as quickly as possible.</p></div></div>')
-                    }
-                )
+                jsPsych.data.displayData();
             }
+            */
+            on_finish: function() {
+                endExperiment( jsPsych.data.get().csv(), function() { document.write('<div id="endscreen" \
+                class="endscreen" style="width:800px ; margin:auto"><div class="endscreen" style="text-align:center; \
+                border:0px solid; padding:200px 0; font-size:120%; width:800px; float:right"><p><br><br><br>All done! \
+                <br><br>If you like, you can download and read the <a href="./wtf/debriefing.pdf" target="_blank">Debriefing Statement</a> \
+                which gives more information about the motivation for the task.<br><br>Your completion code is <span id="turkcode" \
+                style="font-weight:bold;font-size:130%">' + turkcode + '</span>. To receive payment for the HIT, return to the Amazon \
+                Mechanical Turk page and enter this code. Please contact us if something goes wrong and we\'ll fix it as quickly as possible.</p></div></div>') })
+            }    
         });  
     }
 
@@ -540,7 +653,7 @@
 
         startExperiment();
     }
-
+    
     var instructions = {
           type: "image-button-response",
           timing_post_trial: 0,
@@ -553,8 +666,7 @@
               {stimulus: "img/inst_2.png"},
               {stimulus: "img/inst_3.png"},
               {stimulus: inst_4},
-              {stimulus: "img/inst_5.png"},
-              {stimulus: "img/inst_6.png"}
+              {stimulus: "img/inst_5.png"}
           ]
       };
     introloop.push(instructions);
@@ -569,12 +681,12 @@
         questions: [
             {prompt:"<b>Question 1</b>: What is your goal in this task ?", options:[" To find out if the Gauge of Crtical Moment (GCM) is activated or not"," To find out the cause of the activation of each detector"," To find out which detector is the main cause of the activation of a GCM"],required:true},
             {prompt:"<b>Question 2</b>: How to recognize a GCM ?", options:[" A GCM is a square marked with a star", "A GCM is a square without any mark"],required:true},
-            {prompt:"<b>Question 3</b>: What is the difference between a GCM-chain and a GCM-branch ?", options:[" To be activated a GCM-chain has to receive signals from only one inactive detector whereas a GCM-branch from necessarily two inactive detectors"," To be activated a GCM-chain has to receive signals from necessarily two activated detectors whereas a GCM-branch from only one activated detector"," To be activated a GCM-chain has to receive signals from only one activated detector whereas a GCM-branch from necessarily two activated detectors"],required:true},
+            {prompt:"<b>Question 3</b>: What does require a GCM to be activated ?", options:[" A GCM can auto-activate"," To be activated a GCM requires that at least one of all of its inputs turn on"," To be activated a GCM requires that all of its inputs turn on"],required:true},
             {prompt:"<b>Question 4</b>: Stick the correct statement", options:[" You are required to assign a number to each detector"," You have to click on only one detector"," Not all detectors are clickable"],required:true}
         ],
         on_finish: function(data) {
 
-            if( data.responses == '{"Q0":" To find out which detector is the main cause of the activation of a GCM","Q1":" A GCM is a square marked with a star","Q2":" To be activated a GCM-chain has to receive signals from only one activated detector whereas a GCM-branch from necessarily two activated detectors","Q3":" You have to click on only one detector"}') {
+            if( data.responses == '{"Q0":" To find out which detector is the main cause of the activation of a GCM","Q1":" A GCM is a square marked with a star","Q2":" To be activated a GCM requires that all of its inputs turn on","Q3":" You have to click on only one detector"}') {
                 action = false;
                 instructioncorrect = true;
             }
@@ -584,23 +696,6 @@
     }
     introloop.push(instruction_check1)
 
-    
-    var width = 605;
-    var height = 529;
-
-    /*
-    var instruction_check2 = {
-        type: 'causal-graph1',
-        stimulus: "img/check_click.png",
-        stim_width: width,
-        stim_height: height,
-        nodes_coord: [[132,328],[181,249],[204,407],[260,317],[287,192],[328,434],[366,268],[396,358]],
-        button_label_next: "Submit Answers"
-    }
-    
-    introloop.push(instruction_check2);
-    */
-
     var showsplash = true;
     var splash_screen = {
         type: 'image-button-response',
@@ -609,7 +704,7 @@
         choices: ['Click here to read the instructions again'],
         //on_trial_start: function() { setTimeout(function() {setDisplay("jspsych-btn","")}, 1000)},
         is_html: true,
-        stimulus: 'img/inst_7.png'
+        stimulus: 'img/inst_6.png'
     }
 
     var conditional_splash = {
@@ -630,7 +725,7 @@
     timeline.push(loop_node)
 
 
-    /* success trial */
+
     var successtrial = {
         type: 'image-button-response',
         timing_post_trial: 0,
@@ -638,28 +733,28 @@
         choices: ['Click here to begin'],
         //on_trial_start: function() { setTimeout(function() {setDisplay("jspsych-btn","")}, 1000)},
         is_html: true,
-        stimulus: "img/inst_8.png"
+        stimulus: "img/inst_7.png"
     };
     timeline.push(successtrial);
-
+    
     //var gif = ["img/chain_S", "img/chain_M", "img/chain_L", "img/branch_SS", "img/branch_MS", "img/branch_LS"];
      
     var chain_S = [];
     var chain_M = [];
     var chain_L = [];
     var branch_SS = [];
-    var branch_MS = [];
-    var branch_LS = [];
     var branch_SE1 = [];
     var branch_SE2 = [];
     var branch_SE3 = [];
+    var branch_MS = [];
     var branch_ME1 = [];
     var branch_ME2 = [];
     var branch_ME3 = [];
+    var branch_LS = [];
     var branch_LE1 = [];
     var branch_LE2 = [];
     var branch_LE3 = [];
-    var all_trials = [chain_S,chain_M,chain_L,branch_SS,branch_MS,branch_LS,branch_SE1,branch_SE2,branch_SE3,branch_ME1,branch_ME2,branch_ME3,branch_LE1,branch_LE2,branch_LE3];
+    var all_trials = [chain_S,chain_M,chain_L,branch_SS,branch_SE1,branch_SE2,branch_SE3,branch_MS,branch_ME1,branch_ME2,branch_ME3,branch_LS,branch_LE1,branch_LE2,branch_LE3];
 
     for(var i=0; i < all_trials.length; i++){
         if(i<3){
@@ -672,7 +767,7 @@
             stimulus: images[i],
             stim_width: width,
             stim_height: height,
-            prompt: txt_prompt
+            prompt: "Click on RUN to start"
         }
         var graph_gif = {
             type: 'causal-graph1',
@@ -680,9 +775,10 @@
             stim_width: width,
             stim_height: height,
             nodes_coord: coord,
-            prompt: txt_prompt,
+            gif_duration: anim_duration[i],
+            prompt: ["Processing...","Which detector is the main cause of the GCM activation ? Click on it."],
             button_label_again: "Run again",
-            button_label_next: "Next graph"
+            button_label_next: "Next test"
         }
         var graph_loop = {
             timeline: [graph_gif],
@@ -701,37 +797,30 @@
     // var all_trials = [chain_S_loop, chain_M_loop, chain_L_loop, branch_SS_loop, branch_MS_loop, branch_LS_loop];
     var all_trials_rand = jsPsych.randomization.repeat(all_trials, 1);
 
+    all_trials_rand.slice(-1)[0][1]["timeline"][0]["button_label_next"]="Finish";
+
     for (var i=0; i < all_trials_rand.length; i++) {
         timeline.push(all_trials_rand[i][0]);
         timeline.push(all_trials_rand[i][1]);
     }
 
-    var txt_fin = "<div class='debriefing-statement' style='text-align:justify; border:0px solid; padding:10px;  width:800px; font-size:14px; line-height:normal; font-family:initial; float:right'>"+
-        "<p align='center' style='font-size: 19px;'><img src='img/Unimelb.png' alt='Uni logo' style='float:left;width:97px;height:104px;'>"+
-        "<img src='img/Unimelb.png' alt='Uni logo' style='float:right;width:97px;height:104px;'><b>Melbourne School of Psychological Sciences<br><br>Debriefing Statement</b><br></p>"+
-        "<p align='center'>PROJECT TITLE: <i><b>Identifying causes of events</b></i><br><br></p>"+ 
-        "<hr/>"+
-        "<p align='center'><b>Aurélien Fermo (Responsible Researcher)<br></b>"+
-        "Tel: +33 642 249 420; email: aurelien.fermo@ens.fr<br>"+
-        "<b>A/Prof Charles Kemp (co-researcher)</b> email: c.kemp@unimelb.edu</p>"+
-        "<hr/><br>"+
-		"<p align='center'><b>Thank you for participating in our study !</b></p>"+
-		"<p>The study was pretty straightforward so there’s not much more to say, but in case you’re interested in more of the background, here it is:"+
-        "<br><br>As mentioned at the beginning of this experiment, we are interested in understanding how people identify the cause or causes of an effect. Two existing theories make predictions about these judgments. Suppose for example that Suzy throws a rock at a bottle and breaks it. One approach states that if Suzy hadn't thrown the rock, the bottle wouldn't have shattered, and then concludes that Suzy's throw is the cause of the bottle shattering. The other approach says that Suzy’s throw caused the bottle to shatter because the rock transmitted energy to the bottle."+
-        "<br><br>The two theories agree in this simple example but in other contexts they disagree. For instance, suppose that Suzy is piloting a bomber with the goal of destroying an enemy target. On her trajectory she meets an enemy fighter aircraft that is about to intercept her, but Bob who is escorting her shoots the enemy and Suzy succeeds in destroying the target. The first theory states that Bob's action is a cause of the destruction of the target, but the second one states that the only cause of the target’s destruction is Suzy's action, because this is the only action physically connected to the dropping of the bomb. If you are interested in these two competing theories, you can read more <a href= https://www.andrew.cmu.edu/user/ddanks/papers/SingularCause-Final.pdf target='_blank'>here</a>"+
-        "<br><br>The experiment you just did is designed to test a new theory of causation that focuses on changes of state. An effect (e.g. the activation of a detector) is a change of state, and we propose that when an effect occurs people identify a sequence of changes that led to the effect, and identify the first change in the sequence as the primary cause of the effect. In some cases this theory makes predictions that differ from the two standard theories already described, and the experiment you did includes questons that are designed to distinguish between these competing theories"+
-        "<br><br>As always we are very grateful for your thoughtful responses, as they tell us a great deal about how humans think and reason.</p>"+
-        "<br><br>"+
-        "<p style='font-size: 12px;'>This research has been cleared by the Human Research Ethics Committee (HREC ? If you have any concerns about this project please contact the Executive Officer, Human Research Ethics, The University of Melbourne (Tel: 8344 2073; Fax: 9347 6739).</p>"+
-        "</div>"
+    var end_exp = {
+        type: "image-button-response",
+        stimulus: "img/inst_8.png",
+	    button_html: '<button class="jspsych-btn">%choice%</button>',
+        choices: ['Continue'],
+        is_html: true   
+    };
+    timeline.push(end_exp);
 
-    var finish = {
-        type: 'html-button-response',
-        stimulus: txt_fin,
-        choices: ['Finish']
-    }
-
-    timeline.push(finish);
+    var survey_trial = {
+        type: 'survey-text',
+        questions: [
+            {prompt: "(Optional) Please let us know if you have any feedback about the task. This is totally optional <br>\
+            (you'll get paid regardless). We read everything but if you want us to respond you'll have to leave an email <br>\
+            address so we can do so. ", rows: 10, columns: 80},],};
+    
+    timeline.push(survey_trial);
 
     </script>
 </html>

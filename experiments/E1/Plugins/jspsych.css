@@ -88,6 +88,24 @@
   cursor: not-allowed;
 }
 
+/* loader */
+
+.loader {
+  margin:auto;
+  margin-top: 20px;
+  border: 5px solid #aaa; /* Light grey */
+  border-top: 5px solid #000000; /* Blue */
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 /* jsPsych progress bar */
 
 #jspsych-progressbar-container {

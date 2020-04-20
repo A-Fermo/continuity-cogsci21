@@ -43,17 +43,12 @@ jsPsych.plugins['causal-graph-inactive'] = (function() {
     
     var start_time = performance.now();
 
-    var html_prompt = "";
-    // check if there is a prompt and if it is shown above
-    if (trial.prompt !== null) {
-      html_prompt += trial.prompt;
-    }
-
+    var html_prompt = '<p id="prompt">'+trial.prompt+'<\p>';
     var html_img = '<img id="Graphics" src='+trial.stimulus+' usemap="#gra" width='+trial.stim_width+' height='+trial.stim_height+'>'
     var html_map = '<map name="gra"></map>'
     var continue_btn = '<button id="jspsych-causal-graph-inactive-done-btn" class="jspsych-btn">'+trial.button_label+'</button>';
-    var html = html_prompt + html_img + html_map + continue_btn;
-
+    var loader = '<div id="ld" style="visibility:hidden" class="loader"></div>';
+    var html = html_prompt + html_img + html_map + continue_btn + loader;
     display_element.innerHTML = html;
 
     var map = $("#Graphics");
