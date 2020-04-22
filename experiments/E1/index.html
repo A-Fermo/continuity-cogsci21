@@ -679,19 +679,19 @@
         preamble: ["<p align='center'><b>Check your knowledge before you begin !</b></p>"],
         button_label: "Submit Answers",
         questions: [
-            {prompt:"<b>Question 1</b>: What is your goal in this task ?", options:[" To find out if the Gauge of Crtical Moment (GCM) is activated or not"," To find out the cause of the activation of each detector"," To find out which detector is the main cause of the activation of a GCM"],required:true},
-            {prompt:"<b>Question 2</b>: How to recognize a GCM ?", options:[" A GCM is a square marked with a star", "A GCM is a square without any mark"],required:true},
-            {prompt:"<b>Question 3</b>: What does require a GCM to be activated ?", options:[" A GCM can auto-activate"," To be activated a GCM requires that at least one of all of its inputs turn on"," To be activated a GCM requires that all of its inputs turn on"],required:true},
-            {prompt:"<b>Question 4</b>: Stick the correct statement", options:[" You are required to assign a number to each detector"," You have to click on only one detector"," Not all detectors are clickable"],required:true}
+            {prompt:"<b>Question 1</b>: What is your goal in this task ?", options:[" To find out if the Gauge of Critical Moment (GCM) is activated or not"," To decide what causes the activation of each detector"," To decide which detector is the main cause of the activation of a GCM"],required:true},
+            {prompt:"<b>Question 2</b>: How will a GCM be shown?", options:[" A GCM is a square marked with a star", "A GCM is a square without any mark"],required:true},
+            {prompt:"<b>Question 3</b>: When does a GCM become active?", options:[" A GCM can activate itself at any stage"," A GCM becomes active if at least one of its inputs is active"," A GCM becomes active if all of its inputs are active"],required:true},
+            {prompt:"<b>Question 4</b>: Which statement is true?", options:[" You should assign a number to every detector in every network"," You should click on just one detector in each network"," Some detectors are not clickable"],required:true}
         ],
         on_finish: function(data) {
 
-            if( data.responses == '{"Q0":" To find out which detector is the main cause of the activation of a GCM","Q1":" A GCM is a square marked with a star","Q2":" To be activated a GCM requires that all of its inputs turn on","Q3":" You have to click on only one detector"}') {
+            if( data.responses == '{"Q0":" To decide which detector is the main cause of the activation of a GCM","Q1":" A GCM is a square marked with a star","Q2":" A GCM becomes active if all of its inputs are active","Q3":" You should click on just one detector in each network"}') {
                 action = false;
                 instructioncorrect = true;
             }
 
-            //console.log(hack)
+            console.log(data.responses)
         }
     }
     introloop.push(instruction_check1)
