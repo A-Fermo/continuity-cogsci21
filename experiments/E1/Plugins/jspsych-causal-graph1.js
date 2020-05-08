@@ -10,6 +10,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
         type: jsPsych.plugins.parameterType.IMAGE,
         pretty_name: 'Stimulus',
         default: undefined,
+        array: true,
         description: 'Image to be displayed.'
       },
       stim_height: {
@@ -30,10 +31,16 @@ jsPsych.plugins['causal-graph1'] = (function() {
         default: null,
         description: 'How long the animation lasts.'
       },
+      status: {
+      	type: jsPsych.plugins.parameterType.STRING,
+      	pretty_name: 'The status of the plugin',
+      	default: 'active',
+      	description: 'Whether the causal graph is active or not.'
+      },
       nodes_coord: {
         type: jsPsych.plugins.parameterType.OBJECT,
         pretty_name: 'Nodes coordinates',
-        default: undefined,
+        default: null,
         array: true,
         description: 'Coordinates of the top-left of each node'
       },
@@ -53,137 +60,284 @@ jsPsych.plugins['causal-graph1'] = (function() {
       button_label_next: {
         type: jsPsych.plugins.parameterType.STRING,
         pretty_name: 'Button label',
-        default:  'Continue',
+        default:  ['Run','Next network'],
+        array: true,
         description: 'The text that appears on the button to continue to the next trial.'
       }
     }
   }
 
   plugin.trial = function(display_element, trial) {
-    
-    var start_time = performance.now();
-
+  
+  	if(trial.stimulus.length > 1){
+	   if(trial.stimulus[1].split("_")[0].split("/")[1] == "chain"){
+	    	var stim_type = "Chain"
+	    	if(trial.stimulus[1].split("_")[1][1] == "S"){
+	    		var length = "Short";
+	    	}
+	    	if(trial.stimulus[1].split("_")[1][1] == "M"){
+			var length = "Medium";
+	    	}
+	    	if(trial.stimulus[1].split("_")[1][1] == "L"){
+			var length = "Long";
+	    	}
+	    	var branch_first = "";
+	    	var state_OR_event = "";
+	    	var time_interval = "";
+	    } else{
+	    	var stim_type = "AND_Gate"
+	    	if(trial.stimulus[1].split("_")[1][1] == "T"){
+	    		var branch_first = "Top"
+		} else{
+			var branch_first = "Bottom"
+		}
+	    	if(trial.stimulus[1].split("_")[1][2] == "S"){
+	    		var length = "Short"
+		}
+		if(trial.stimulus[1].split("_")[1][2] == "M"){
+	    		var length = "Medium"
+		}
+		if(trial.stimulus[1].split("_")[1][2] == "L"){
+	    		var length = "Long"
+		}
+		if(trial.stimulus[1].split("_")[1][3] == "S"){
+	    		var state_OR_event = "State"
+	    		var time_interval = ""
+		}
+		if(trial.stimulus[1].split("_")[1][3] == "E"){
+	    		var state_OR_event = "Event"
+	    		if(trial.stimulus[1].split("_")[1][4] == "1"){
+	    			var time_interval = "Short"
+			}
+			if(trial.stimulus[1].split("_")[1][4] == "2"){
+	    			var time_interval = "Medium"
+			}
+			if(trial.stimulus[1].split("_")[1][4] == "3"){
+	    			var time_interval = "Long"
+			}
+		}
+		
+	    }
+    	}
     var html_prompt = '<p id="prompt">'+trial.prompt[0]+'<\p>';
-    var html_img = '<img id="Graphics" class="center" src='+trial.stimulus+' usemap="#gra" width='+trial.stim_width+' height='+trial.stim_height+'>'
-    var html_map = '<map name="gra"></map>'
-    var again_btn = '<button id="jspsych-causal-graph1-again-btn" class="jspsych-btn" style="margin-right: 5px";>'+trial.button_label_again+'</button>';
-    var continue_btn = '<button id="jspsych-causal-graph1-done-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next+'</button>';
+    var html_IMG = '<img id="Graphics" class="center" src='+trial.stimulus[0]+' usemap="#gra" width='+trial.stim_width+' height='+trial.stim_height+'>';
+    var html_map = '<map name="gra"></map>';
+    var continue_btn = '<button id="jspsych-causal-graph1-continue-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next[0]+'</button>';
     var loader = '<div id="ld" class="loader"></div>';
-    
-    var html = html_prompt + html_img + html_map + again_btn + continue_btn + loader;
-
+    var html = html_prompt + html_IMG + html_map + continue_btn + loader;
     display_element.innerHTML = html;
-    
-    var ag_btn = document.getElementById("jspsych-causal-graph1-again-btn");
-    var cont_btn = document.getElementById("jspsych-causal-graph1-done-btn");
-    var ld = document.getElementById("ld");
-    ag_btn.disabled = true;
-    cont_btn.disabled = true;
-    
-    //var areas = [];
-    for (var i = 0; i < trial.nodes_coord.length; i++) {
-      var x_left = trial.nodes_coord[i][0];
-      var y_left = trial.nodes_coord[i][1];
-      var x_right = x_left+38;
-      var y_right = y_left+38;
-      var coordinates = x_left+","+y_left+","+x_right+","+y_right;
-      var node_name = "node"+i;
-      /*
-      var area = {
-        key: node_name
-      };
-      areas.push(area);
-      */
-      $('<area/>', {
-        'alt': '',
-        'id': node_name,
-        'coords' : coordinates,  
-        'shape' : 'rect',
-        "href" : '#',
-      }).appendTo("map");
-    }
+    /*
+    if (trial.status == 'active'){
+    	for (var i = 0; i < trial.nodes_coord.length; i++) {
+		var x_left = trial.nodes_coord[i][0];
+		var y_left = trial.nodes_coord[i][1];
+		var x_right = x_left+38;
+		var y_right = y_left+38;
+		var coordinates = x_left+","+y_left+","+x_right+","+y_right;
 
+		if(trial.stimulus[1].split("_")[1][0] == "L"){
+			var node_name = "node"+(trial.nodes_coord.length-i);
+		} else {
+			var node_name = "node"+(i+1);
+		}
+
+		$('<area/>', {
+		'alt': '',
+		'id': node_name,
+		'coords' : coordinates,  
+		'shape' : 'rect',
+		"href" : '#',
+		}).appendTo("map");
+    	}
+    };
+	
     var map = $("#Graphics");
     map.mapster(
-      {
-        noHrefIsMask: true,
-        highlight:false,
-        singleSelect: true,
-        render_highlight: {
-          fillColor: 'ff0000',
-          fillOpacity: 1,
-          stroke: true
-        },
-        render_select: {
-          strokeColor: 'ff0000',
-          strokeWidth: 3,
-          fillOpacity: 0,
-          stroke: true
-        },
-        fadeInterval: 50,
-        staticState:false,
-        mapKey : 'id'
-      }
+    {
+    noHrefIsMask: true,
+    highlight:false,
+    singleSelect: true,
+    render_highlight: {
+	fillColor: 'ff0000',
+	fillOpacity: 1,
+	stroke: true
+    },
+    render_select: {
+    	strokeColor: 'ff0000',
+    	strokeWidth: 3,
+	fillOpacity: 0,
+	stroke: true
+    },
+    fadeInterval: 50,
+    staticState:false,
+    mapKey : 'id'
+    }
     );
+    
+    */
+    
+    var map = $("#Graphics");
 
-    setTimeout(clickable_areas,trial.gif_duration);
+    map.mapster({
+      mapKey: "id"
+    });
+    
+    var cont_btn = document.getElementById("jspsych-causal-graph1-continue-btn");
+    var ld = document.getElementById("ld");
+    ld.style.visibility="hidden";
 
-    function clickable_areas(){
-      document.getElementById("prompt").innerHTML = trial.prompt[1];
-      ld.style.visibility="hidden";
-      ag_btn.disabled = false;
-      cont_btn.disabled = false;
-
-      map.mapster("set_options",
-        {
-          highlight:true,
-          staticState:null
-        }
-      );
-    } 
-
-    //display_element.querySelector('#jspsych-causal-graph1-done-btn').addEventListener('click', function(){
+    var again_btn = '<button id="jspsych-causal-graph1-again-btn" class="jspsych-btn" style="margin-right: 5px";>'+trial.button_label_again+'</button>';
+    var next_btn = '<button id="jspsych-causal-graph1-next-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next[1]+'</button>';
+    var html_prompt = '<p id="prompt">'+trial.prompt[1]+'<\p>';
     cont_btn.addEventListener('click', function(){
+    
+    	if(trial.stimulus.length > 1){
+    	
+    		var nb_of_run = 1;
+	    //display_element.innerHTML = "";
+	    function run_graph(){
+	        var gif_path = trial.stimulus[1]+"?a="+Math.random();
+    		var html_GIF = '<div id="preload"><img id="Graphics" class="center" src='+gif_path+' usemap="#gra" width='+trial.stim_width+' height='+trial.stim_height+'></div>';
+    		var html = html_prompt + html_GIF + html_map + again_btn + next_btn + loader;
+		display_element.innerHTML = html;
+		
+		///
+		   if (trial.status == 'active'){
+		    	for (var i = 0; i < trial.nodes_coord.length; i++) {
+				var x_left = trial.nodes_coord[i][0];
+				var y_left = trial.nodes_coord[i][1];
+				var x_right = x_left+38;
+				var y_right = y_left+38;
+				var coordinates = x_left+","+y_left+","+x_right+","+y_right;
 
-      var activeKey = map.mapster('get');   // returns a comma-separated list
-      var node_selected = [];
-      for(var key in activeKey.split(',')) {
-        node_selected.push({
-            node: key
-        });
-      }
+				if(trial.stimulus[1].split("_")[1][0] == "L"){
+					var node_name = "node"+(trial.nodes_coord.length-i);
+				} else {
+					var node_name = "node"+(i+1);
+				}
 
-      var again = 0;
-      var end_time = performance.now();
-      var rt = end_time - start_time;
+				$('<area/>', {
+				'alt': '',
+				'id': node_name,
+				'coords' : coordinates,  
+				'shape' : 'rect',
+				"href" : '#',
+				}).appendTo("map");
+		    	}
+		    };
+			
+		    var map = $("#Graphics");
+		    map.mapster(
+		    {
+		    noHrefIsMask: true,
+		    highlight:false,
+		    singleSelect: true,
+		    render_highlight: {
+			fillColor: 'ff0000',
+			fillOpacity: 1,
+			stroke: true
+		    },
+		    render_select: {
+		    	strokeColor: 'ff0000',
+		    	strokeWidth: 3,
+			fillOpacity: 0,
+			stroke: true
+		    },
+		    fadeInterval: 50,
+		    staticState:false,
+		    mapKey : 'id'
+		    }
+		    );
+			
+		   var nxt_btn = document.getElementById("jspsych-causal-graph1-next-btn");
+		   var ag_btn = document.getElementById("jspsych-causal-graph1-again-btn");
+		   var ld = document.getElementById("ld");
+		   ld.style.visibility="visible";
+		   document.getElementById("preload").style.display = "flex";
+		   ag_btn.disabled = true;
+		   nxt_btn.disabled = true;
+	
+		    setTimeout(clickable_areas,trial.gif_duration);
+		    var start_time = performance.now();
+		    function clickable_areas(){
+		    	
+		    	document.getElementById("prompt").innerHTML = trial.prompt[2];
+		    	ld.style.visibility="hidden";
+		    	ag_btn.disabled = false;
+		    	nxt_btn.disabled = false;
+		    	map.mapster("set_options",
+			{
+			  highlight:true,
+			  staticState:null
+			});
+			
+		     }
+			     
+		     nxt_btn.addEventListener('click', function(){
+		     
+		     	      var node_selected = map.mapster('get');   // returns a comma-separated list
 
-      var trial_data = {
-        "rt": rt,
-        "again": again,
-        "node_selected": JSON.stringify(node_selected)
-      };
-
-      // advance to next part
-      display_element.innerHTML = '';
-      jsPsych.finishTrial(trial_data);
-
+			      if(trial.status == 'inactive'){
+			      	var node_selected = "Na"
+			      }
+			      
+			      if (node_selected === ""){
+			      	text_error = "ERROR ! You have to select one detector."
+			      	document.getElementById("prompt").innerHTML = text_error.fontcolor("ff0000")
+			      } else {
+			      
+			      		
+				      //console.log(node_selected);
+				      var run_again = false;
+				      var end_time = performance.now();
+				      var rt = end_time - start_time;
+				      
+				      if(trial.status == 'active'){
+					      var trial_data = {
+						"stim_name": trial.stimulus,
+						"status": trial.status,
+						"stim_type": stim_type,
+						"length": length,
+						"state_OR_event": state_OR_event,
+						"branch_first": branch_first,
+						"time_interval": time_interval,
+						"node_selected": node_selected,
+						"nb_of_run": nb_of_run,
+						"rt": rt
+					      };
+				      } else {
+				      		var trial_data = {
+						"stim_name": trial.stimulus,
+						"status": trial.status,
+						"nb_of_run": nb_of_run
+					      	};
+				      }
+				      // advance to next part
+				      display_element.innerHTML = '';
+				      jsPsych.finishTrial(trial_data);
+				      
+				}
+		     })
+			     
+		     ag_btn.addEventListener('click', function(){
+		     	nb_of_run++;
+		     	run_graph();
+		     })
+		     
+	     }
+	     
+	     run_graph();
+	     
+	} else {
+		var trial_data = {
+			"stim_name": trial.stimulus,
+			"status": trial.status
+		};
+		display_element.innerHTML = '';
+		jsPsych.finishTrial(trial_data);
+	}     	    	
     });
 
-    //display_element.querySelector('#jspsych-causal-graph1-again-btn').addEventListener('click', function(){
-    ag_btn.addEventListener('click', function(){
-      var again = 1;
-      var end_time = performance.now();
-      var rt = end_time - start_time;
-      var trial_data = {
-        "rt": rt,
-        "again": again
-      };
-
-      display_element.innerHTML = '';
-      jsPsych.finishTrial(trial_data);
-
-    });
-  
   };
   return plugin;
 })();

@@ -106,6 +106,12 @@
   100% { transform: rotate(360deg); }
 }
 
+/* preload GIF */
+
+div#preload {
+    display: none;
+}
+
 /* jsPsych progress bar */
 
 #jspsych-progressbar-container {

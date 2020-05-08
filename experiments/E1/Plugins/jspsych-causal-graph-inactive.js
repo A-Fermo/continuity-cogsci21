@@ -56,6 +56,55 @@ jsPsych.plugins['causal-graph-inactive'] = (function() {
     map.mapster({
       mapKey: "id"
     });
+    
+        if(trial.stimulus.split("_")[0].split("/")[1] == "chain"){
+    	var stim_type = "Chain"
+    	if(trial.stimulus.split("_")[1][1] == "S"){
+    		var length = "Short";
+    	}
+    	if(trial.stimulus.split("_")[1][1] == "M"){
+		var length = "Medium";
+    	}
+    	if(trial.stimulus.split("_")[1][1] == "L"){
+		var length = "Long";
+    	}
+    	var branch_first = "";
+    	var state_OR_event = "";
+    	var time_interval = "";
+    } else{
+    	var stim_type = "AND_Gate"
+    	if(trial.stimulus.split("_")[1][1] == "T"){
+    		var branch_first = "Top"
+	} else{
+		var branch_first = "Bottom"
+	}
+    	if(trial.stimulus.split("_")[1][2] == "S"){
+    		var length = "Short"
+	}
+	if(trial.stimulus.split("_")[1][2] == "M"){
+    		var length = "Medium"
+	}
+	if(trial.stimulus.split("_")[1][2] == "L"){
+    		var length = "Long"
+	}
+	if(trial.stimulus.split("_")[1][3] == "S"){
+    		var state_OR_event = "State"
+    		var time_interval = ""
+	}
+	if(trial.stimulus.split("_")[1][3] == "E"){
+    		var state_OR_event = "Event"
+    		if(trial.stimulus.split("_")[1][4] == "1"){
+    			var time_interval = "Short"
+		}
+		if(trial.stimulus.split("_")[1][4] == "2"){
+    			var time_interval = "Medium"
+		}
+		if(trial.stimulus.split("_")[1][4] == "3"){
+    			var time_interval = "Long"
+		}
+	}
+	
+    }
 
     display_element.querySelector('#jspsych-causal-graph-inactive-done-btn').addEventListener('click', function(){
 
@@ -63,7 +112,13 @@ jsPsych.plugins['causal-graph-inactive'] = (function() {
       var rt = end_time - start_time;
 
       var trial_data = {
-        "rt": rt
+        "rt": rt,
+        "stim_name": trial.stimulus,
+        "stim_type": stim_type,
+	"length": length,
+	"state_OR_event": state_OR_event,
+	"branch_first": branch_first,
+	"time_interval": time_interval
       };
 
       // advance to next part
