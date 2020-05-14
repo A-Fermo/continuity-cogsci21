@@ -455,7 +455,7 @@
     var CL_t = 8000;
     var BS_t = 6000;
     var BS1_t = 7250;
-    var BS2_t = 11000;
+    var BS2_t = 8500;
     var BS3_t = 11000
     var BM_t = 7000;
     var BM1_t = 9250;
@@ -752,9 +752,10 @@
             stim_height: height,
             nodes_coord: coord,
             gif_duration: anim_duration[i],
-            prompt: ["Click on RUN to observe an activation sequence.","Processing...","In this sequence what caused the activation of the GCM? Respond by clicking on a detector."],
+            prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of the GCM ?<br> Respond by clicking on a detector."],
             button_label_again: "Run again",
-            button_label_next: ["Run","Next network"]
+            button_label_next: ["Run","Next network"],
+            prompt_error: "ERROR ! You have to select one detector.<br>&nbsp;",
         }
         all_trials.push(network);
     }

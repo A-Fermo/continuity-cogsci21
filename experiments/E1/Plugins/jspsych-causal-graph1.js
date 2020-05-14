@@ -63,6 +63,12 @@ jsPsych.plugins['causal-graph1'] = (function() {
         default:  ['Run','Next network'],
         array: true,
         description: 'The text that appears on the button to continue to the next trial.'
+      },
+      prompt_error: {
+      	type: jsPsych.plugins.parameterType.STRING,
+        pretty_name: 'Prompt error',
+        default: null,
+        description: 'The message displayed in case of error.'
       }
     }
   }
@@ -282,7 +288,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 			      }
 			      
 			      if (node_selected === ""){
-			      	text_error = "ERROR ! You have to select one detector."
+			      	text_error = trial.prompt_error
 			      	document.getElementById("prompt").innerHTML = text_error.fontcolor("ff0000")
 			      } else {
 			      
