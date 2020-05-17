@@ -2,14 +2,14 @@
 <html>
     <head>
         <title>Particules detection</title>
-        <script src="Plugins/jspsych.js"></script>
-        <script src="Plugins/jspsych-image-button-response.js"></script>
-        <script src="Plugins/jspsych-survey-multi-choice.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="Plugins/jquery.imagemapster.js"></script>
-        <script src="Plugins/jspsych-causal-graph1.js"></script>
-        <script src="Plugins/jspsych-survey-text.js"></script>
-        <link href="Plugins/jspsych.css" rel="stylesheet" type="text/css"></link>
+        <script src="js/jspsych.js"></script>
+        <script src="js/plugins/jspsych-image-button-response.js"></script>
+        <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.imagemapster.js"></script>
+        <script src="js/plugins/jspsych-causal-graph1.js"></script>
+        <script src="js/plugins/jspsych-survey-text.js"></script>
+        <link href="js/css/jspsych.css" rel="stylesheet" type="text/css"></link>
     </head>
     <body>
 
@@ -486,11 +486,11 @@
     rd(["img/branch_LTLS.gif","img/branch_LBLS.gif"]),rd(["img/branch_LTLE1.gif","img/branch_LBLE1.gif"]),rd(["img/branch_LTLE2.gif","img/branch_LBLE2.gif"]),
     rd(["img/branch_LTLE3.gif","img/branch_LBLE3.gif"])];
     
-    var img_R = ["img/chain_R.png","img/chain_R.png","img/chain_R.png",gif_R[3],"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",gif_R[7],"img/branch_RE.png",
-    "img/branch_RE.png","img/branch_RE.png",gif_R[11],"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    var img_R = ["img/chain_R.png","img/chain_R.png","img/chain_R.png",gif_R[3].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",
+    gif_R[7].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",gif_R[11].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
     
-    var img_L = ["img/chain_L.png","img/chain_L.png","img/chain_L.png",gif_L[3],"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",gif_L[7],"img/branch_LE.png",
-    "img/branch_LE.png","img/branch_LE.png",gif_L[11],"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+    var img_L = ["img/chain_L.png","img/chain_L.png","img/chain_L.png",gif_L[3].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",
+    gif_L[7].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",gif_L[11].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
     
     var group = ["Right","Left"];
     var condition = group[Math.floor(Math.random()*group.length)];
@@ -504,7 +504,6 @@
         var inst_4 = "img/inst_4R.png";
         var inst_5_png = "img/inst_5R.png";
         var inst_5_gif = rd(["img/inst_5RT.gif","img/inst_5RB.gif"]);
-        var all_images = img_R.concat(inst);
     }
     if(condition == "Left"){
         var images = img_L;
@@ -516,9 +515,9 @@
         var inst_4 = "img/inst_4L.png";
         var inst_5_png = "img/inst_5L.png";
         var inst_5_gif = rd(["img/inst_5LT.gif","img/inst_5LB.gif"]);
-        var all_images = img_L.concat(inst);
+        
     }
-
+    var all_IMG = images.concat(inst);
 
     var timeline = [];
     var introloop=[];
@@ -572,8 +571,7 @@
         jsPsych.init({
             timeline: timeline,
             show_progress_bar: true,
-            preload_images: all_images,
-            
+            preload_images: all_IMG,
             on_finish: function() {
                 endExperiment( jsPsych.data.get().csv(), function() { document.write('<div id="endscreen" \
                 class="endscreen" style="width:800px ; margin:auto"><div class="endscreen" style="text-align:center; \
@@ -677,14 +675,14 @@
         preamble: ["<p align='center'><b>Check your knowledge before you begin !</b></p>"],
         button_label: "Submit Answers",
         questions: [
-            {prompt:"<b>Question 1</b>: What is your goal in this task ?", options:[" To find out if the Gauge of Critical Moment (GCM) is activated or not"," To decide what causes the activation of each detector"," To decide which detector is the main cause of the activation of a GCM"],required:true},
+            {prompt:"<b>Question 1</b>: What is your goal in this task?", options:[" To find out if the Gauge of Critical Moment (GCM) is activated or not"," To decide what causes the activation of each detector"," To decide what caused the activation of the GCM"],required:true},
             {prompt:"<b>Question 2</b>: How will a GCM be shown?", options:[" A GCM is a square marked with a star", "A GCM is a square without any mark"],required:true},
             {prompt:"<b>Question 3</b>: When does a GCM become active?", options:[" A GCM can activate itself at any stage"," A GCM becomes active if at least one of its inputs is active"," A GCM becomes active if all of its inputs are active"],required:true},
             {prompt:"<b>Question 4</b>: Which statement is true?", options:[" You should assign a number to every detector in every network"," You should click on just one detector in each network"," Some detectors are not clickable"],required:true}
         ],
         on_finish: function(data) {
 
-            if( data.responses == '{"Q0":" To decide which detector is the main cause of the activation of a GCM","Q1":" A GCM is a square marked with a star","Q2":" A GCM becomes active if all of its inputs are active","Q3":" You should click on just one detector in each network"}') {
+            if( data.responses == '{"Q0":" To decide what caused the activation of the GCM","Q1":" A GCM is a square marked with a star","Q2":" A GCM becomes active if all of its inputs are active","Q3":" You should click on just one detector in each network"}') {
                 action = false;
                 instructioncorrect = true;
             }
@@ -700,7 +698,6 @@
         timing_post_trial: 0,
 	    button_html: '<button class="jspsych-btn">%choice%</button>',
         choices: ['Click here to read the instructions again'],
-        //on_trial_start: function() { setTimeout(function() {setDisplay("jspsych-btn","")}, 1000)},
         is_html: true,
         stimulus: 'img/inst_7.png'
     }
@@ -716,7 +713,7 @@
     var loop_node = {
         timeline: introloop,
         loop_function: function(data) {
-            //var action = true;
+            
             return !instructioncorrect // stop looping if correct
         }
     }
@@ -729,14 +726,14 @@
         timing_post_trial: 0,
 	    button_html: '<button class="jspsych-btn">%choice%</button>',
         choices: ['Click here to begin'],
-        //on_trial_start: function() { setTimeout(function() {setDisplay("jspsych-btn","")}, 1000)},
         is_html: true,
         stimulus: "img/inst_8.png"
     };
     timeline.push(successtrial);
     
 
-	var all_trials = []
+    var all_trials = []
+
 
     for(var i=0; i < animations.length; i++){
         if(i<3){
@@ -752,7 +749,7 @@
             stim_height: height,
             nodes_coord: coord,
             gif_duration: anim_duration[i],
-            prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of the GCM ?<br> Respond by clicking on a detector."],
+            prompt: [(i+1)+"Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of the GCM?<br> Respond by clicking on a detector."],
             button_label_again: "Run again",
             button_label_next: ["Run","Next network"],
             prompt_error: "ERROR ! You have to select one detector.<br>&nbsp;",
