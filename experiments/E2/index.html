@@ -7,6 +7,7 @@
         <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.imagemapster.js"></script>
+        <script src="js/plugins/jspsych-causal-familiarisation.js"></script>
         <script src="js/plugins/jspsych-causal-graph2.js"></script>
         <script src="js/plugins/jspsych-survey-text.js"></script>
         <link href="js/css/jspsych.css" rel="stylesheet" type="text/css"></link>
@@ -447,9 +448,11 @@
     //var txt_prompt = "<p align='center'>Pick out the detector that is the main cause of the activation of the GCM</p>";
     var width = 605;
     var height = 529;
-    var coord_chain = [[19,245],[94,245],[170,245],[245,245],[321,245],[396,245],[472,245],[547,245]];
+    var coord_chain_R = [[19,245],[94,245],[170,245],[245,245],[321,245],[396,245],[472,245],[547,245]];
+    var coord_chain_L = [[547,245],[472,245],[396,245],[321,245],[245,245],[170,245],[94,245],[19,245]];
     var coord_branch_R = [[19,189],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[19,302],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,245]];
-    var coord_branch_L = [[19,245],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,302],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[547,189]];
+    //var coord_branch_L = [[19,245],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,302],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[547,189]];
+    var coord_branch_L = [[547,189],[472,189],[396,189],[321,189],[245,189],[170,189],[94,189],[547,302],[472,302],[396,302],[321,302],[245,302],[170,302],[94,302],[19,245]];
     var CS_t = 6000;
     var CM_t = 7000;
     var CL_t = 8000;
@@ -472,7 +475,8 @@
     };
 
     var inst = ["img/inst_1.png","img/inst_2R.png","img/inst_2L.png","img/inst_3R.png","img/inst_3L.png","img/inst_4R.png","img/inst_4L.png","img/inst_5R.png","img/inst_5L.png","img/inst_6.png",
-    "img/inst_7.png","img/inst_8.png","img/inst_9.png"];
+    "img/inst_7.png","img/inst_8.png","img/inst_9.png",'img/inst_10.png','img/inst_71.png','img/inst_72.png','img/inst_73.png','img/inst_74.png','img/inst_75.png','img/inst_76.png',
+    'img/inst_77.png','img/inst_78.png','img/inst_79.png','img/inst_710.png'];
     
     var gif_R = ["img/chain_RS.gif","img/chain_RM.gif","img/chain_RL.gif",rd(["img/branch_RTSS.gif","img/branch_RBSS.gif"]),rd(["img/branch_RTSE1.gif","img/branch_RBSE1.gif"]),
     rd(["img/branch_RTSE2.gif","img/branch_RBSE2.gif"]),rd(["img/branch_RTSE3.gif","img/branch_RBSE3.gif"]),rd(["img/branch_RTMS.gif","img/branch_RBMS.gif"]),
@@ -487,16 +491,23 @@
     rd(["img/branch_LTLE3.gif","img/branch_LBLE3.gif"])];
     
     var img_R = ["img/chain_R.png","img/chain_R.png","img/chain_R.png",gif_R[3].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",
-    gif_R[7].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",gif_R[11].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    gif_R[7].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",gif_R[11].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",
+    'img/chain_1.png','img/chain_2.png','img/chain_3.png','img/chain_4.png','img/chain_5.png','img/chain_6.png','img/chain_7.png','img/chain_8.png','img/branch_R1.png','img/branch_R2.png',
+    'img/branch_R3.png','img/branch_R4.png','img/branch_R5.png','img/branch_R6.png','img/branch_R7.png','img/branch_R8.png','img/branch_R9.png','img/branch_R10.png','img/branch_R11.png',
+    'img/branch_R12.png','img/branch_R13.png','img/branch_R14.png','img/branch_R15.png'];
     
     var img_L = ["img/chain_L.png","img/chain_L.png","img/chain_L.png",gif_L[3].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",
-    gif_L[7].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",gif_L[11].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+    gif_L[7].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",gif_L[11].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",
+    'img/chain_1.png','img/chain_2.png','img/chain_3.png','img/chain_4.png','img/chain_5.png','img/chain_6.png','img/chain_7.png','img/chain_8.png','img/branch_L1.png','img/branch_L2.png',
+    'img/branch_L3.png','img/branch_L4.png','img/branch_L5.png','img/branch_L6.png','img/branch_L7.png','img/branch_L8.png','img/branch_L9.png','img/branch_L10.png','img/branch_L11.png',
+    'img/branch_L12.png','img/branch_L13.png','img/branch_L14.png','img/branch_L15.png'];
     
     var group = ["Right","Left"];
     var condition = group[Math.floor(Math.random()*group.length)];
     if(condition == "Right"){
         var images = img_R;
         var animations = gif_R;
+        var coord_chain = coord_chain_R;
         var coord_branch = coord_branch_R;
         var inst_2 = "img/inst_2R.png";
         var inst_3_png = "img/inst_3R.png";
@@ -508,6 +519,7 @@
     if(condition == "Left"){
         var images = img_L;
         var animations = gif_L;
+        var coord_chain = coord_chain_L;
         var coord_branch = coord_branch_L;
         var inst_2 = "img/inst_2L.png";
         var inst_3_png = "img/inst_3L.png";
@@ -664,8 +676,17 @@
           choices: ['Continue'],
           is_html: true
       };
+
+    var inst_7 = {
+        type: 'causal-familiarisation',
+        stimulus: 'img/inst_7.png',
+        stim_width: width,
+        stim_height: height,
+        nodes_coord: [[390,265],[405,427],[439,185],[454,261],[458,473],[461,344],[488,148],[511,227],[518,374],[548,314]],
+        button_label_next: ["Continue"]
+    };
    
-    introloop.push(inst_1, inst_2, inst_3, inst_4, inst_5, inst_6);
+    introloop.push(inst_1, inst_2, inst_3, inst_4, inst_5, inst_6, inst_7);
 
     
     //var instructioncorrect = false;
@@ -676,13 +697,12 @@
         button_label: "Submit Answers",
         questions: [
             {prompt:"<b>Question 1</b>: What is your goal in this task?", options:[" To find out if the Gauge of Critical Moment (GCM) is activated or not"," To decide what causes the activation of each detector"," To decide what caused the activation of the GCM"],required:true},
-            {prompt:"<b>Question 2</b>: How will a GCM be shown?", options:[" A GCM is a square marked with a star", "A GCM is a square without any mark"],required:true},
-            {prompt:"<b>Question 3</b>: When does a GCM become active?", options:[" A GCM can activate itself at any stage"," A GCM becomes active if at least one of its inputs is active"," A GCM becomes active if all of its inputs are active"],required:true},
-            {prompt:"<b>Question 4</b>: Which statement is true?", options:[" You should assign a number to every detector in every network"," You should click on just one detector in each network"," Some detectors are not clickable"],required:true}
+            {prompt:"<b>Question 2</b>: When does a GCM become active?", options:[" A GCM can activate itself at any stage"," A GCM becomes active if at least one of its inputs is active"," A GCM becomes active if all of its inputs are active"],required:true},
+            {prompt:"<b>Question 3</b>: Which statement is true?", options:[" You should assign a number to every detector in every network"," You should click on only one detector in each network"," You should click on and rank all detectors that caused the activation of the GCM"],required:true}
         ],
         on_finish: function(data) {
 
-            if( data.responses == '{"Q0":" To decide what caused the activation of the GCM","Q1":" A GCM is a square marked with a star","Q2":" A GCM becomes active if all of its inputs are active","Q3":" You should click on just one detector in each network"}') {
+            if( data.responses == '{"Q0":" To decide what caused the activation of the GCM","Q1":" A GCM becomes active if all of its inputs are active","Q2":" You should click on and rank all detectors that caused the activation of the GCM"}') {
                 action = false;
                 instructioncorrect = true;
             }
@@ -699,7 +719,7 @@
 	    button_html: '<button class="jspsych-btn">%choice%</button>',
         choices: ['Click here to read the instructions again'],
         is_html: true,
-        stimulus: 'img/inst_7.png'
+        stimulus: 'img/inst_8.png'
     }
 
     var conditional_splash = {
@@ -727,11 +747,10 @@
 	    button_html: '<button class="jspsych-btn">%choice%</button>',
         choices: ['Click here to begin'],
         is_html: true,
-        stimulus: "img/inst_8.png"
+        stimulus: "img/inst_9.png"
     };
     timeline.push(successtrial);
     
-
     var all_trials = []
 
 
@@ -749,7 +768,7 @@
             stim_height: height,
             nodes_coord: coord,
             gif_duration: anim_duration[i],
-            prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of the GCM?<br> Respond by clicking on a detector."],
+            prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of the GCM? Respond by ranking all<br>detectors that qualify as causes, where 1 indicates the most important cause(s)."],
             button_label_again: "Run again",
             button_label_next: ["Run","Next network"],
             prompt_error: "ERROR ! You have to select one detector.<br>&nbsp;",
@@ -768,7 +787,7 @@
 
     var end_exp = {
         type: "image-button-response",
-        stimulus: "img/inst_9.png",
+        stimulus: "img/inst_10.png",
 	    button_html: '<button class="jspsych-btn">%choice%</button>',
         choices: ['Continue'],
         is_html: true   

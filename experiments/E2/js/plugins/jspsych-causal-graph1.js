@@ -146,7 +146,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		}
 		
 	    }
-    	}
+    }
     var html_prompt = '<p id="prompt">'+trial.prompt[0]+'</p>';
     var html_IMG = '<div id="IMG_container"</div>';
     var continue_btn = '<button id="jspsych-causal-graph1-continue-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next[0]+'</button>';
