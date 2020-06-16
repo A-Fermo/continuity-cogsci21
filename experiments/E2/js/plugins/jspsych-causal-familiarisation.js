@@ -94,7 +94,6 @@ jsPsych.plugins['causal-familiarisation'] = (function() {
 
     var rankOptions = [];
     var selectDetect = {};
-    // rendering options for the 1st selected state
     
     for (var i = 1; i <= trial.nodes_coord.length; i++) {
       var displayOptions = {
@@ -108,12 +107,12 @@ jsPsych.plugins['causal-familiarisation'] = (function() {
     }
 
     function ranking(){
-      var nodes_selected = map.mapster('get');   // returns a comma-separated list
+      var nodes_selected = map.mapster('get');
       var nodes_ranked = [];
       for(var key of nodes_selected.split(',')) {
         nodes_ranked.push({
           selected: key,
-          rank: selectDetect[key] // rank is like the color
+          rank: selectDetect[key]
         });
       }
       
@@ -121,38 +120,16 @@ jsPsych.plugins['causal-familiarisation'] = (function() {
     }
 
     function onClick(data) {
-      //console.log("here",data)
-      // get current state (0,1,2) -- default to zero which means unset
       var currentNode = selectDetect[data.key] || 0,
           next = (currentNode + 1) % (trial.nodes_coord.length+1);
-
-      // always unset: if state 0, this is all we need to do. if state
-      // 2, we have to unset first, since setting the state for an area
-      // that's already selected will do nothing. If it happens to be going from 
-      // 0 to 1, then no harm done.
     
       map.mapster('set', false, data.key);
 
-      if (next) {        
-        // now set the area state using the correct options
+      if (next) {
         map.mapster('set', true , data.key, rankOptions[currentNode]);
       }
-    
-      // update local store with current state
-      // add 1, and apply a modulus of 3 to get new state
 
       selectDetect[data.key] = next;
-      /*
-      var nodes_selected = map.mapster('get');   // returns a comma-separated list
-      var nodes_ranked = [];
-      for(var key of nodes_selected.split(',')) {
-        nodes_ranked.push({
-          selected: key,
-          rank: selectDetect[key] // rank is like the color
-        });
-      } 
-      console.log(JSON.stringify(nodes_ranked));
-      */
 
       nodes_ranked = ranking()
 
@@ -183,8 +160,6 @@ jsPsych.plugins['causal-familiarisation'] = (function() {
       },
       fadeInterval: 50,
       mapKey: "id",
-      // setting isSelectable=false will prevent imagemapster from using its own click-select
-      // handling. You could also return false from the onClick event to stop internal handling
       isSelectable: false,
       onClick: onClick
     });
