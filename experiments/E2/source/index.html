@@ -569,12 +569,10 @@
 
     /* save and finish */
     function endExperiment(dataset,callback) {
-        $.post('submit',{"content": dataset});
+        //$.post('submit',{"content": dataset});
         setTimeout(callback,1000)
 
     }
-
-    
 
     function startExperiment(){
     
@@ -590,7 +588,7 @@
                 which gives more information about the motivation for the task.<br><br>Your completion code is <span id="turkcode" \
                 style="font-weight:bold;font-size:130%">' + turkcode + '</span>. To receive payment for the HIT, return to the Amazon \
                 Mechanical Turk page and enter this code. Please contact us if something goes wrong and we\'ll fix it as quickly as possible.</p></div></div>') })
-            }   
+            }
         });  
     }
 

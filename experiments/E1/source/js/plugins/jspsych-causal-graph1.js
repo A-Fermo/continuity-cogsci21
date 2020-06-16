@@ -81,7 +81,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		src: trial.stimulus[0],
 		useMap:"#gra"
 		});
-		IMG.addClass("center");
+		//IMG.addClass("center");
 		var GIFs = [];
 		for (var i=0; i < run_max; i++){
 			var GIF = $("<img>",{
@@ -89,7 +89,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 			src: trial.stimulus[1]+"?a="+Math.random(),
 			useMap:"#gra"
 			});
-			GIF.addClass("center");
+			//GIF.addClass("center");
 			GIFs.push(GIF);
 		}
 
@@ -170,11 +170,10 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		cont_btn.addEventListener('click', function(){
 		
 			if(trial.stimulus.length > 1){
-			
 				var nb_of_run = 1;
 				var index = 0;
 				function run_graph(index){
-					var html_GIF = '<div id="GIF_container style="padding:0px 50px 0px 50px""</div>';
+					var html_GIF = '<div id="GIF_container" style="padding:0px 50px 0px 50px"</div>';
 					var html = html_prompt + html_GIF;
 					display_element.innerHTML = html;
 					GIFs[index].appendTo("#GIF_container");
@@ -199,11 +198,11 @@ jsPsych.plugins['causal-graph1'] = (function() {
 							"href" : '#',
 							}).appendTo("map");
 						}
+
 					}
-						
-					function onClick(){
-						var node_selected = map.mapster('get');
-						console.log(node_selected);
+					
+					function onClick(data){
+						console.log(trial.stimulus[1],data.key)
 					}
 
 					var map = $("#Graphics");
@@ -224,8 +223,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 						},
 						fadeInterval: 50,
 						staticState:false,
-						mapKey : 'id',
-						onClick: onClick
+						mapKey : 'id'
 					});
 					
 					var nxt_btn = document.getElementById("jspsych-causal-graph1-next-btn");
@@ -247,7 +245,8 @@ jsPsych.plugins['causal-graph1'] = (function() {
 						nxt_btn.disabled = false;
 						map.mapster("set_options",{
 							highlight:true,
-							staticState:null
+							staticState:null,
+							onClick: onClick
 							});
 					}
 							

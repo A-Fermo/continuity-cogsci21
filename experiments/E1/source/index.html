@@ -498,6 +498,7 @@
     if(condition == "Right"){
         var images = img_R;
         var animations = gif_R;
+        var coord_chain = coord_chain_R;
         var coord_branch = coord_branch_R;
         var inst_2 = "img/inst_2R.png";
         var inst_3_png = "img/inst_3R.png";
@@ -509,6 +510,7 @@
     if(condition == "Left"){
         var images = img_L;
         var animations = gif_L;
+        var coord_chain = coord_chain_L;
         var coord_branch = coord_branch_L;
         var inst_2 = "img/inst_2L.png";
         var inst_3_png = "img/inst_3L.png";
@@ -560,12 +562,10 @@
 
     /* save and finish */
     function endExperiment(dataset,callback) {
-        $.post('submit',{"content": dataset});
+        //$.post('submit',{"content": dataset});
         setTimeout(callback,1000)
 
     }
-
-    
 
     function startExperiment(){
     
@@ -574,14 +574,14 @@
             show_progress_bar: true,
             preload_images: all_IMG,
             on_finish: function() {
-                endExperiment( jsPsych.data.get().csv(), function() { document.write('<div id="endscreen" \
+                endExperiment(jsPsych.data.get().csv(), function() { document.write('<div id="endscreen" \
                 class="endscreen" style="width:800px ; margin:auto"><div class="endscreen" style="text-align:center; \
                 border:0px solid; padding:200px 0; font-size:120%; width:800px; float:right"><p><br><br><br>All done! \
                 <br><br>If you like, you can download and read the <a href="./wtf/debriefing.pdf" target="_blank">Debriefing Statement</a> \
                 which gives more information about the motivation for the task.<br><br>Your completion code is <span id="turkcode" \
                 style="font-weight:bold;font-size:130%">' + turkcode + '</span>. To receive payment for the HIT, return to the Amazon \
                 Mechanical Turk page and enter this code. Please contact us if something goes wrong and we\'ll fix it as quickly as possible.</p></div></div>') })
-            }   
+            } 
         });  
     }
 

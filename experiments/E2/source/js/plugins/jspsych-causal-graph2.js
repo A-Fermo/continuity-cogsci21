@@ -245,7 +245,7 @@ jsPsych.plugins['causal-graph2'] = (function() {
               }
               selectDetect[data.key] = next;
               nodes_ranked = ranking()
-              console.log(nodes_ranked);
+              console.log(trial.stimulus[1],nodes_ranked);
             }
     
             var altImages = {};
