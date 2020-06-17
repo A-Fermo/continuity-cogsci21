@@ -562,7 +562,7 @@
 
     /* save and finish */
     function endExperiment(dataset,callback) {
-        //$.post('submit',{"content": dataset});
+        $.post('submit',{"content": dataset});
         setTimeout(callback,1000)
 
     }

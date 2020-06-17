@@ -200,10 +200,10 @@ jsPsych.plugins['causal-graph1'] = (function() {
 						}
 
 					}
-					
+					/*
 					function onClick(data){
 						console.log(trial.stimulus[1],data.key)
-					}
+					}*/
 
 					var map = $("#Graphics");
 					map.mapster({
@@ -245,8 +245,8 @@ jsPsych.plugins['causal-graph1'] = (function() {
 						nxt_btn.disabled = false;
 						map.mapster("set_options",{
 							highlight:true,
-							staticState:null,
-							onClick: onClick
+							staticState:null/*,
+							onClick: onClick*/
 							});
 					}
 							
