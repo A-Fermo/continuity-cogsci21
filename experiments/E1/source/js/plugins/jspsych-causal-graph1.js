@@ -81,7 +81,6 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		src: trial.stimulus[0],
 		useMap:"#gra"
 		});
-		//IMG.addClass("center");
 		var GIFs = [];
 		for (var i=0; i < run_max; i++){
 			var GIF = $("<img>",{
@@ -89,7 +88,6 @@ jsPsych.plugins['causal-graph1'] = (function() {
 			src: trial.stimulus[1]+"?a="+Math.random(),
 			useMap:"#gra"
 			});
-			//GIF.addClass("center");
 			GIFs.push(GIF);
 		}
 

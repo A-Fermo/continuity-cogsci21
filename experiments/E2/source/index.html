@@ -692,13 +692,14 @@
         preamble: ["<p align='center'><b>Check your knowledge before you begin !</b></p>"],
         button_label: "Submit Answers",
         questions: [
-            {prompt:"<b>Question 1</b>: What is your goal in this task?", options:[" To find out if the Gauge of Critical Moment (GCM) is activated or not"," To decide what causes the activation of each detector"," To decide what caused the activation of the GCM"],required:true},
-            {prompt:"<b>Question 2</b>: When does a GCM become active?", options:[" A GCM can activate itself at any stage"," A GCM becomes active if at least one of its inputs is active"," A GCM becomes active if all of its inputs are active"],required:true},
-            {prompt:"<b>Question 3</b>: Which statement is true?", options:[" You should assign a number to every detector in every network"," You should click on only one detector in each network"," You should click on and rank all detectors that caused the activation of the GCM"],required:true}
+            {prompt:"<b>Question 1</b>: What is your goal in this task?", options:[" To decide what caused the activation of the GCM"," To find out if the Gauge of Critical Moment (GCM) is activated or not"," To decide what causes the activation of each detector"],required:true},
+            {prompt:"<b>Question 2</b>: When does a detector become active?", options:[" A detector becomes active if it absorbs a radioactive particle"," A detector becomes active if it receives input from an active detector"," A detector becomes active if it absorbs a radioactive particle or receives input from an active detector"],required:true},
+            {prompt:"<b>Question 3</b>: When does a GCM become active?", options:[" A GCM becomes active if it absorbs a radioactive particle"," A GCM becomes active if all of its inputs are active"," A GCM becomes active if at least one of its inputs is active"],required:true},
+            {prompt:"<b>Question 4</b>: Which statement is true?", options:[" You should assign a number to every detector in every network"," You should click on only one detector in each network"," You should click on and rank all detectors that caused the activation of the GCM"],required:true}
         ],
         on_finish: function(data) {
 
-            if( data.responses == '{"Q0":" To decide what caused the activation of the GCM","Q1":" A GCM becomes active if all of its inputs are active","Q2":" You should click on and rank all detectors that caused the activation of the GCM"}') {
+            if( data.responses == '{"Q0":" To decide what caused the activation of the GCM","Q1":" A detector becomes active if it absorbs a radioactive particle or receives input from an active detector","Q2":" A GCM becomes active if all of its inputs are active","Q3":" You should click on and rank all detectors that caused the activation of the GCM"}') {
                 action = false;
                 instructioncorrect = true;
             }
