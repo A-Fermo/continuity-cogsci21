@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Particules detection</title>
+        <script src="js/jspsych.js"></script>
+        <script src="js/plugins/jspsych-image-button-response.js"></script>
+        <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/jquery.imagemapster.js"></script>
+        <script src="js/plugins/jspsych-causal-graph1.js"></script>
+        <script src="js/plugins/jspsych-survey-text.js"></script>
+        <link href="js/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+    </head>
+    <body>
+
+
+        <!-- ####################### Start page ####################### -->
+
+        <div class="start" style="width: 800px; margin:auto;">
+            <!-- Text box for the splash page -->
+            <div class="start" style="text-align:justify; border:0px solid; padding: 10px;  width:800px; float:right; font-size:90%">
+                
+	<p align="left" style="font-size: 19px;color:#094183;"><img src="img/Unimelb.png" alt="Uni logo" style="float:right;width:131px;height:131px;"><b>Computational Cognitive Science Lab</b><br></p>
+		
+	<p align="left" style="color:#094183;"><b><i>Melbourne School of Psychological Sciences</i></b><br><br><br><br><br><br><br><br></p>
+                <p>Thanks for accepting to the HIT. <b>"Particle detectors"</b> is a short psychological study investigating how people make causal judgments. It involves
+                    the following steps:</p>
+                <ol>
+                    <li> We ask for demographic information (not connected to your Amazon ID)<br></li>
+                    <br>
+                    <li> Because this is a University research project, we ask for your informed consent. (The format of the consent form is a standard university document, so it sometimes looks a little weird on MTurk)<br></li>
+                    <br>
+                    <li> The study then explains how to do the task in detail. You will need to pass a short test to check that you understand how the study works.<br></li>
+                    <br>
+                    <li> Next comes the experiment itself.<br></li>
+                    <br>
+                    <li> At the end, we'll give you the completion code you need to get paid for the HIT.</li>
+                </ol>
+                <p>
+                    The total time taken should be about 15 minutes. Please <u>don't</u> use the "back" button on
+                    your browser or close the window until you reach the end and receive your completion code.
+                    This is very likely to break the experiment and may make it difficult for you to get paid.
+                    However, if something does go wrong, please contact us! When you're ready to begin, click
+                    on the "start" button below.</p>
+
+                <br><br>
+
+            <!-- Next button for the splash page -->
+                <p align="center"> <input type="button" id="splashButton" class="start jspsych-btn" value="Start !"
+                        onclick="splashButtonClick()"> </p>
+
+                </div>
+        </div>
+        
+        	<!-- ####################### Consent ####################### -->
+	<div class="plain-language-statement" style="display:none; width:800px; margin:auto;">
+		<!-- Text box for the splash page -->
+		<div class="plain-language-statement" style="text-align:justify; border:0px solid; padding:10px;  width:800px; font-size:90%; float:right">
+
+			<p align="left" style="font-size: 19px;color:#094183;"><img src="img/Unimelb.png" alt="Uni logo" style="float:right;width:131px;height:131px;"><b>Plain language statement
+			</b>
+			</p>
+			<p align="left" style="color:#094183;"><b><i>Melbourne School of Psychological Sciences</i></b><br><br><br><br><br></p>
+              
+
+            <p align="center">PROJECT: <i><b>Identifying causes of events</b></i><br><br>
+            </p>      
+            <p align="center"><b>A/Prof Charles Kemp (Responsible Researcher)<br></b>
+                Tel: +61 8344 9009; email: <font color=#094183>c.kemp@unimelb.edu.au</font><br><br>
+                <b>Mr Aurélien Fermo (Master's student)</b> email: <br><font color=#094183>aurelien.fermo@student.unimelb.edu.au</font>
+			</p>
+            <br>
+			<p align="left" style="color:#094183"><b>Introduction</b></p>
+			<p>You are invited to participate in a study of how people make causal judgments. The goal of this project is to better understand how people determine the cause or causes of an effect.</p>
+
+			<p align="left" style="color:#094183"><b>What will I be asked to do ?</b></p>
+			<p>After answering some optional demographic questions, if you decide to participate, you will be shown animated graphs which will represent activation spreading over networks of detectors. You will have to identify which detector or detectors you consider to be the main cause of the activation of the final detector. Detailed instructions will be provided once the task begins. </p>
+            
+            <p align="left" style="color:#094183"><b>What are the risks ?</b></p>
+			<p>There are risks involved with this project are minimal; the largest risk is a mild degree of boredom.</p>
+
+            <p align="left" style="color:#094183"><b>What are the benefits ?</b></p>
+			<p>This experiment will characterize some of the factors that influence how people identify the causes of an effect. You will be paid for your contribution at a rate of $10/hr.</p>
+
+			<p align="left" style="color:#094183"><b>How would my confidentiality be protected ?</b></p>
+			<p>As an Amazon Worker, we do not have access to identifying personal details. Before the task you will be asked to contribute some demographic details but responding to this question is optional. Our sample size will be large, making it even more difficult to identify any one person. The data from this project will be stored at the University of Melbourne and may be made available in de-identified form for the scientific community. It is expected that the results of this study will be presented at conferences and published in a peer-reviewed journal.</p>
+
+			<p align="left" style="color:#094183"><b>What if I want to withdraw from the research ?</b></p>
+			<p>Participation in this research is completely voluntary. Your data will not be used in the full sample unless you complete the experiment.</p>
+
+			<p align="left" style="color:#094183"><b>Where can I get further information ?</b></p>
+			<p>This research project has been approved by the Human Research Ethics Committee of The University of Melbourne. If you have any concerns or complaints about the conduct of this research project, which you do not wish to discuss with the research team, you should contact the Manager, Human Research Ethics, Research Ethics and Integrity, University of Melbourne, VIC 3010. Tel: +61 3 8344 2073; Fax: +61 3 9347 6739; or Email: humanethics-complaints@unimelb.edu.au All complaints will be treated confidentially. In any correspondence please provide the name of the research team or the name or ethics ID number of the research project. <p>
+
+			<p>Please keep a copy of this information sheet (you can download the pdf <a href="./wtf/pls.pdf" target="_blank">here</a>)</p>
+
+            <p align="left" style="color:#094183"><b>How do I agree to participate ?</b></p>
+            <p>If you wish to participate please read and click ‘Next’ after reading the consent form on the next page.<p></p>
+            <br><br>
+            <table style="width:100%;color:#7F7F7F">
+  		<tr>
+            	<td>HREC No. 2056826.1</td>
+   		<td>Version No. 1.2.8</td> 
+    		<td>April 2020</td>
+    		</tr></table>
+            <br>
+			<p align="center">
+                <input type="button" id="plsButton" class="pls jspsych-btn" value="Go to consent form" onclick="plsButtonClick()" >
+			</p>
+
+		</div>
+        <br><br>
+    </div>
+    
+    <div class="consent" style="display:none; width:800px; margin:auto;">
+		<!-- Text box for the splash page -->
+		<div class="consent" style="text-align:justify; border:0px solid; padding:10px;  width:800px; font-size:90%; float:right">
+
+
+			<p align="left" style="font-size: 19px;color:#094183;"><img src="img/Unimelb.png" alt="Uni logo" style="float:right;width:131px;height:131px;"><b>Consent form for persons <br> participating in a research project</b><br></p>
+		
+	<p align="left" style="color:#094183;"><b><i>Melbourne School of Psychological Sciences</i></b><br><br><br><br><br></p>
+
+            <p align="left">Project: <i><b>Identifying causes of events</b></i><br><br>
+            </p>      
+            
+            <p align="left"><b>Responsible Researcher: A/Prof Charles Kemp<br></b>
+            Additional researchers: Mr Aurélien Fermo (Master's student)</p>
+            <br>
+		<ol>
+                <li>I consent to participate in this project. The purpose of this research is to acquire information about how people make causal judgements.</li>
+                <br>
+                <li>I understand that this project is for research purposes only and not for treatment. It is expected that the results of this study will be presented at conferences and published in a peer-reviewed journal.</li>
+                <br>
+                <li>In this project I will be given some optional demographic questions and then shown a series of animations which will show nodes in a network being activated. For each animation I will be asked to select the node(s) that caused the activation of the final node. The details of this have been explained in the statement on the previous page.</li>
+                <br>
+                <li>I understand that there are risks involved in participating in this research project, although they are minimal; the largest risk is a mild degree of boredom. The length of the study was specified on a previous page.</li>
+                <br>
+                <li>I understand that my participation is voluntary. I am free to withdraw from the project at any time, without explanation or prejudice, and to withdraw any unprocessed data I have provided. Withdrawing from the project will not affect my relationship with the Melbourne School of Psychological Sciences. It will not affect any ongoing assessment, grades or treatment for which I would otherwise be eligible.</li>
+                <br>
+                <li>I have been informed that the data from this research will be stored at the University of Melbourne and may be made available in de-identified form to the scientific community.</li>
+                <br>
+                <li>I have been informed that the confidentiality of the information I provide will be safeguarded subject to any legal requirements. My data will be password protected and accessible only to the named researchers.</li>
+                <br>
+                <li>I understand that by clicking "Next" button I give my consent to participate in this project.</li>
+            </ol>
+            <br><br>
+            
+	    <table style="width:100%;color:#7F7F7F">
+  		<tr>
+            	<td>HREC No. 2056826.1</td>
+   		<td>Version No. 1.2.8</td> 
+    		<td>April 2020</td>
+    		</tr></table>
+            <br>
+            <p align="center">
+                <input type="button" id="consentButton" class="consent jspsych-btn" value="Next >" onclick="consentButtonClick()" >
+			</p>
+
+		</div>
+        <br><br>
+    </div>
+
+        	<!-- ####################### Demographics ####################### -->
+
+	<div class="demographics" style="display:none; text-align:center; width: 800px; margin:auto; padding:200px 0;">
+		<div class="demographics" style="text-align:justify; border:0px solid; width:800px; font-size:90%; float:right">
+			<!-- Explanatory text -->
+            <p font-size:110%><b>Demographic information:</b></p>
+			<p>
+                We need this information for our records, but it is kept completely separate from
+                information about your Amazon ID. As long as you finish the experiment you will get
+                paid no matter what you put here, so please be honest.
+            </p><br>
+
+			<!-- Gender -->
+	 		<label for="gender"><b>Gender: &nbsp;</b></label>
+	  		<input type="radio" name="gender" value="male" /> Male &nbsp;
+	  		<input type="radio" name="gender" value="female" /> Female &nbsp;
+	  		<input type="radio" name="gender" value="other" /> Other<br /><br />
+
+			<!-- Age -->
+	  		<label for="age"><b>Age: &nbsp;</b></label><input id="age" name="age" /><br /><br />
+
+			<!-- Language -->
+	  		<label for="language"><b>Native Language(s): &nbsp;</b></label>
+            <input id="language" name="language" /><br /><br />
+
+			<!-- Country -->
+			<label for="country"><b>Country you live in: &nbsp;</b></label>
+	  		<select name="country" id="country" class='drop-menu'>
+	    		<option>Afghanistan</option>
+                <option>&Aring;land Islands</option>
+                <option>Albania</option>
+                <option>Algeria</option>
+                <option>American Samoa</option>
+                <option>Andorra</option>
+                <option>Angola</option>
+                <option>Anguilla</option>
+                <option>Antarctica</option>
+                <option>Antigua and Barbuda</option>
+                <option>Argentina</option>
+                <option>Armenia</option>
+                <option>Aruba</option>
+                <option selected="selected">Australia</option>
+                <option>Austria</option>
+                <option>Azerbaijan</option>
+                <option>Bahamas</option>
+                <option>Bahrain</option>
+                <option>Bangladesh</option>
+                <option>Barbados</option>
+                <option>Belarus</option>
+                <option>Belgium</option>
+                <option>Belize</option>
+                <option>Benin</option>
+                <option>Bermuda</option>
+                <option>Bhutan</option>
+                <option>Bolivia</option>
+                <option>Bosnia and Herzegovina</option>
+                <option>Botswana</option>
+                <option>Bouvet Island</option>
+                <option>Brazil</option>
+                <option>British Indian Ocean territory</option>
+                <option>Brunei Darussalam</option>
+                <option>Bulgaria</option>
+                <option>Burkina Faso</option>
+                <option>Burundi</option>
+                <option>Cambodia</option>
+                <option>Cameroon</option>
+                <option>Canada</option>
+                <option>Cape Verde</option>
+                <option>Cayman Islands</option>
+                <option>Central African Republic</option>
+                <option>Chad</option>
+                <option>Chile</option>
+                <option>China</option>
+                <option>Christmas Island</option>
+                <option>Cocos (Keeling) Islands</option>
+                <option>Colombia</option>
+                <option>Comoros</option>
+                <option>Congo</option>
+                <option>Congo, Democratic Republic</option>
+                <option>Cook Islands</option>
+                <option>Costa Rica</option>
+                <option>C&ocirc;te d'Ivoire (Ivory Coast)</option>
+                <option>Croatia (Hrvatska)</option>
+                <option>Cuba</option>
+                <option>Cyprus</option>
+                <option>Czech Republic</option>
+                <option>Denmark</option>
+                <option>Djibouti</option>
+                <option>Dominica</option>
+                <option>Dominican Republic</option>
+                <option>East Timor</option>
+                <option>Ecuador</option>
+                <option>Egypt</option>
+                <option>El Salvador</option>
+                <option>Equatorial Guinea</option>
+                <option>Eritrea</option>
+                <option>Estonia</option>
+                <option>Ethiopia</option>
+                <option>Falkland Islands</option>
+                <option>Faroe Islands</option>
+                <option>Fiji</option>
+                <option>Finland</option>
+                <option>France</option>
+                <option>French Guiana</option>
+                <option>French Polynesia</option>
+                <option>French Southern Territories</option>
+                <option>Gabon</option>
+                <option>Gambia</option>
+                <option>Georgia</option>
+                <option>Germany</option>
+                <option>Ghana</option>
+                <option>Gibraltar</option>
+                <option>Greece</option>
+                <option>Greenland</option>
+                <option>Grenada</option>
+                <option>Guadeloupe</option>
+                <option>Guam</option>
+                <option>Guatemala</option>
+                <option>Guinea</option>
+                <option>Guinea-Bissau</option>
+                <option>Guyana</option>
+                <option>Haiti</option>
+                <option>Heard and McDonald Islands</option>
+                <option>Honduras</option>
+                <option>Hong Kong</option>
+                <option>Hungary</option>
+                <option>Iceland</option>
+                <option>India</option>
+                <option>Indonesia</option>
+                <option>Iran</option>
+                <option>Iraq</option>
+                <option>Ireland</option>
+                <option>Israel</option>
+                <option>Italy</option>
+                <option>Jamaica</option>
+                <option>Japan</option>
+                <option>Jordan</option>
+                <option>Kazakhstan</option>
+                <option>Kenya</option>
+                <option>Kiribati</option>
+                <option>Korea (north)</option>
+                <option>Korea (south)</option>
+                <option>Kuwait</option>
+                <option>Kyrgyzstan</option>
+                <option>Lao People's Democratic Republic</option>
+                <option>Latvia</option>
+                <option>Lebanon</option>
+                <option>Lesotho</option>
+                <option>Liberia</option>
+                <option>Libyan Arab Jamahiriya</option>
+                <option>Liechtenstein</option>
+                <option>Lithuania</option>
+                <option>Luxembourg</option>
+                <option>Macao</option>
+                <option>Macedonia, Former Yugoslav Republic Of</option>
+                <option>Madagascar</option>
+                <option>Malawi</option>
+                <option>Malaysia</option>
+                <option>Maldives</option>
+                <option>Mali</option>
+                <option>Malta</option>
+                <option>Marshall Islands</option>
+                <option>Martinique</option>
+                <option>Mauritania</option>
+                <option>Mauritius</option>
+                <option>Mayotte</option>
+                <option>Mexico</option>
+                <option>Micronesia</option>
+                <option>Moldova</option>
+                <option>Monaco</option>
+                <option>Mongolia</option>
+                <option>Montenegro</option>
+                <option>Montserrat</option>
+                <option>Morocco</option>
+                <option>Mozambique</option>
+                <option>Myanmar</option>
+                <option>Namibia</option>
+                <option>Nauru</option>
+                <option>Nepal</option>
+                <option>Netherlands</option>
+                <option>Netherlands Antilles</option>
+                <option>New Caledonia</option>
+                <option>New Zealand</option>
+                <option>Nicaragua</option>
+                <option>Niger</option>
+                <option>Nigeria</option>
+                <option>Niue</option>
+                <option>Norfolk Island</option>
+                <option>Northern Mariana Islands</option>
+                <option>Norway</option>
+                <option>Oman</option>
+                <option>Pakistan</option>
+                <option>Palau</option>
+                <option>Palestinian Territories</option>
+                <option>Panama</option>
+                <option>Papua New Guinea</option>
+                <option>Paraguay</option>
+                <option>Peru</option>
+                <option>Philippines</option>
+                <option>Pitcairn</option>
+                <option>Poland</option>
+                <option>Portugal</option>
+                <option>Puerto Rico</option>
+                <option>Qatar</option>
+                <option>R&eacute;union</option>
+                <option>Romania</option>
+                <option>Russian Federation</option>
+                <option>Rwanda</option>
+                <option>Saint Helena</option>
+                <option>Saint Kitts and Nevis</option>
+                <option>Saint Lucia</option>
+                <option>Saint Pierre and Miquelon</option>
+                <option>Saint Vincent and the Grenadines</option>
+                <option>Samoa</option>
+                <option>San Marino</option>
+                <option>Sao Tome and Principe</option>
+                <option>Saudi Arabia</option>
+                <option>Senegal</option>
+                <option>Serbia</option>
+                <option>Seychelles</option>
+                <option>Sierra Leone</option>
+                <option>Singapore</option>
+                <option>Slovakia</option>
+                <option>Slovenia</option>
+                <option>Solomon Islands</option>
+                <option>Somalia</option>
+                <option>South Africa</option>
+                <option>South Georgia and the South Sandwich Islands</option>
+                <option>Spain</option>
+                <option>Sri Lanka</option>
+                <option>Sudan</option>
+                <option>Suriname</option>
+                <option>Svalbard and Jan Mayen Islands</option>
+                <option>Swaziland</option>
+                <option>Sweden</option>
+                <option>Switzerland</option>
+                <option>Syria</option>
+                <option>Taiwan</option>
+                <option>Tajikistan</option>
+                <option>Tanzania</option>
+                <option>Thailand</option>
+                <option>Togo</option>
+                <option>Tokelau</option>
+                <option>Tonga</option>
+                <option>Trinidad and Tobago</option>
+                <option>Tunisia</option>
+                <option>Turkey</option>
+                <option>Turkmenistan</option>
+                <option>Turks and Caicos Islands</option>
+                <option>Tuvalu</option>
+                <option>Uganda</option>
+                <option>Ukraine</option>
+                <option>United Arab Emirates</option>
+                <option>United Kingdom</option>
+                <option>United States of America</option>
+                <option>Uruguay</option>
+                <option>Uzbekistan</option>
+                <option>Vanuatu</option>
+                <option>Vatican City</option>
+                <option>Venezuela</option>
+                <option>Vietnam</option>
+                <option>Virgin Islands (British)</option>
+                <option>Virgin Islands (US)</option>
+                <option>Wallis and Futuna Islands</option>
+                <option>Western Sahara</option>
+                <option>Yemen</option>
+                <option>Zaire</option>
+                <option>Zambia</option>
+                <option>Zimbabwe</option>
+	    	</select>
+
+			<br>
+		<br><br>
+
+		<!-- Demographics  button -->
+        <p align="center">
+                <input type="button" class="demographics jspsych-btn" id="demographicsButton" value="Next >"
+                       onclick="demographicsButtonClick()">
+       </p>
+    </div>
+
+    </body>
+    <script>
+
+    //var txt_prompt = "<p align='center'>Pick out the detector that is the main cause of the activation of the GCM</p>";
+    var width = 605;
+    var height = 529;
+    var coord_chain_R = [[19,245],[94,245],[170,245],[245,245],[321,245],[396,245],[472,245],[547,245]];
+    var coord_chain_L = [[547,245],[472,245],[396,245],[321,245],[245,245],[170,245],[94,245],[19,245]];
+    var coord_branch_R = [[19,189],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[19,302],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,245]];
+    var coord_branch_L = [[547,189],[472,189],[396,189],[321,189],[245,189],[170,189],[94,189],[547,302],[472,302],[396,302],[321,302],[245,302],[170,302],[94,302],[19,245]];
+    var t = 1000;
+    var CS_t = 5200+t;
+    var CM_t = 5400+t;
+    var CL_t = 5600+t;
+    var BS_t = 5200+t;
+    var BS1_t = 7200+t;
+    var BS2_t = 9200+t;
+    var BS3_t = 11200+t;
+    var BM_t = 5400+t;
+    var BM1_t = 7600+t;
+    var BM2_t = 9600+t;
+    var BM3_t = 11600+t;
+    var BL_t = 5600+t;
+    var BL1_t = 8000+t;
+    var BL2_t = 10000+t;
+    var BL3_t = 12000+t;
+    anim_duration = [CS_t,CM_t,CL_t,BS_t,BS1_t,BS2_t,BS3_t,BM_t,BM1_t,BM2_t,BM3_t,BL_t,BL1_t,BL2_t,BL3_t];
+    
+    function rd(conditions){
+    	return conditions[Math.floor(Math.random()*conditions.length)];
+    };
+
+    var inst = ["img/inst_1.png","img/inst_2R.png","img/inst_2L.png","img/inst_3R.png","img/inst_3L.png","img/inst_4R.png","img/inst_4L.png","img/inst_5R.png","img/inst_5L.png","img/inst_6.png",
+    "img/inst_7.png","img/inst_8.png","img/inst_9.png"];
+    
+    var gif_R = ["img/chain_RS.gif","img/chain_RM.gif","img/chain_RL.gif",rd(["img/branch_RTSS.gif","img/branch_RBSS.gif"]),rd(["img/branch_RTSE1.gif","img/branch_RBSE1.gif"]),
+    rd(["img/branch_RTSE2.gif","img/branch_RBSE2.gif"]),rd(["img/branch_RTSE3.gif","img/branch_RBSE3.gif"]),rd(["img/branch_RTMS.gif","img/branch_RBMS.gif"]),
+    rd(["img/branch_RTME1.gif","img/branch_RBME1.gif"]),rd(["img/branch_RTME2.gif","img/branch_RBME2.gif"]),rd(["img/branch_RTME3.gif","img/branch_RBME3.gif"]),
+    rd(["img/branch_RTLS.gif","img/branch_RBLS.gif"]),rd(["img/branch_RTLE1.gif","img/branch_RBLE1.gif"]),rd(["img/branch_RTLE2.gif","img/branch_RBLE2.gif"]),
+    rd(["img/branch_RTLE3.gif","img/branch_RBLE3.gif"])];
+    
+    var gif_L = ["img/chain_LS.gif","img/chain_LM.gif","img/chain_LL.gif",rd(["img/branch_LTSS.gif","img/branch_LBSS.gif"]),rd(["img/branch_LTSE1.gif","img/branch_LBSE1.gif"]),
+    rd(["img/branch_LTSE2.gif","img/branch_LBSE2.gif"]),rd(["img/branch_LTSE3.gif","img/branch_LBSE3.gif"]),rd(["img/branch_LTMS.gif","img/branch_LBMS.gif"]),
+    rd(["img/branch_LTME1.gif","img/branch_LBME1.gif"]),rd(["img/branch_LTME2.gif","img/branch_LBME2.gif"]),rd(["img/branch_LTME3.gif","img/branch_LBME3.gif"]),
+    rd(["img/branch_LTLS.gif","img/branch_LBLS.gif"]),rd(["img/branch_LTLE1.gif","img/branch_LBLE1.gif"]),rd(["img/branch_LTLE2.gif","img/branch_LBLE2.gif"]),
+    rd(["img/branch_LTLE3.gif","img/branch_LBLE3.gif"])];
+    
+    var img_R = ["img/chain_R.png","img/chain_R.png","img/chain_R.png",gif_R[3].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",
+    gif_R[7].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png",gif_R[11].replace("gif","png"),"img/branch_RE.png","img/branch_RE.png","img/branch_RE.png"];
+    
+    var img_L = ["img/chain_L.png","img/chain_L.png","img/chain_L.png",gif_L[3].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",
+    gif_L[7].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png",gif_L[11].replace("gif","png"),"img/branch_LE.png","img/branch_LE.png","img/branch_LE.png"];
+    
+    var group = ["Right","Left"];
+    var condition = group[Math.floor(Math.random()*group.length)];
+    if(condition == "Right"){
+        var images = img_R;
+        var animations = gif_R;
+        var coord_chain = coord_chain_R;
+        var coord_branch = coord_branch_R;
+        var inst_2 = "img/inst_2R.png";
+        var inst_3_png = "img/inst_3R.png";
+        var inst_3_gif = "img/inst_3R.gif";
+        var inst_4 = "img/inst_4R.png";
+        var inst_5_png = "img/inst_5R.png";
+        var inst_5_gif = rd(["img/inst_5RT.gif","img/inst_5RB.gif"]);
+    }
+    if(condition == "Left"){
+        var images = img_L;
+        var animations = gif_L;
+        var coord_chain = coord_chain_L;
+        var coord_branch = coord_branch_L;
+        var inst_2 = "img/inst_2L.png";
+        var inst_3_png = "img/inst_3L.png";
+        var inst_3_gif = "img/inst_3L.gif";
+        var inst_4 = "img/inst_4L.png";
+        var inst_5_png = "img/inst_5L.png";
+        var inst_5_gif = rd(["img/inst_5LT.gif","img/inst_5LB.gif"]);
+        
+    }
+    var all_IMG = images.concat(inst);
+
+    var timeline = [];
+    var introloop=[];
+    
+    var turkcode = 'R56' + (Math.floor(Math.random() * 899999) + 100000).toString() + '7' + (Math.floor(Math.random() * 89) + 10).toString()   + '0gxrw'; // generate completion code
+
+    // get the value of a radio button
+    function getRadioButton(name) {
+        var i, radios = document.getElementsByName(name);
+        for (i = 0; i < radios.length; i = i + 1) {
+            if (radios[i].checked) {
+                return (radios[i].value);
+            }
+        }
+    return("NA")
+    }
+
+    function setDisplay(theClass, theValue) {
+            var i, classElements = document.getElementsByClassName(theClass);
+            for (i = 0; i < classElements.length; i = i + 1) {
+                classElements[i].style.display = theValue;
+            }
+        }
+
+    function splashButtonClick() {
+            setDisplay('start', 'none');
+            setDisplay('plain-language-statement', '');
+        }
+
+    function plsButtonClick() {
+        setDisplay('plain-language-statement', 'none');
+        setDisplay('consent', '');
+    }
+
+    function consentButtonClick() {
+        setDisplay('consent', 'none');
+        setDisplay('demographics', '');
+    }
+
+    /* save and finish */
+    function endExperiment(dataset,callback) {
+        $.post('submit',{"content": dataset});
+        setTimeout(callback,1000)
+
+    }
+
+    function startExperiment(){
+    
+        jsPsych.init({
+            timeline: timeline,
+            show_progress_bar: true,
+            preload_images: all_IMG,
+            on_finish: function() {
+                endExperiment(jsPsych.data.get().csv(), function() { document.write('<div id="endscreen" \
+                class="endscreen" style="width:800px ; margin:auto"><div class="endscreen" style="text-align:center; \
+                border:0px solid; padding:200px 0; font-size:120%; width:800px; float:right"><p><br><br><br>All done! \
+                <br><br>If you like, you can download and read the <a href="./wtf/debriefing.pdf" target="_blank">Debriefing Statement</a> \
+                which gives more information about the motivation for the task.<br><br>Your completion code is <span id="turkcode" \
+                style="font-weight:bold;font-size:130%">' + turkcode + '</span>. To receive payment for the HIT, return to the Amazon \
+                Mechanical Turk page and enter this code. Please contact us if something goes wrong and we\'ll fix it as quickly as possible.</p></div></div>') })
+            } 
+        });  
+    }
+
+    function demographicsButtonClick() {
+        setDisplay('demographics', 'none');
+        setDisplay('header','none');
+
+        jsPsych.data.addProperties({
+            gender: getRadioButton("gender"),
+            age: document.getElementById("age").value,
+            language: document.getElementById("language").value,
+            country: document.getElementById("country").value
+        });
+
+
+        // record the condition assignment in the jsPsych data
+        jsPsych.data.addProperties({
+            sampling: condition,
+            turkcode: turkcode
+        });
+
+        startExperiment();
+    }
+    
+    var inst_1 = {
+          type: "image-button-response",
+          stimulus: "img/inst_1.png",
+          timing_post_trial: 0,
+          button_html: '<button class="jspsych-btn">%choice%</button>',
+          choices: ['Continue'],
+          is_html: true
+      };
+    
+    var inst_2 = {
+            type: 'causal-graph1',
+            status: 'inactive',
+            stimulus: [inst_2],
+            stim_width: width,
+            stim_height: height,
+            prompt: [""],
+            button_label_next: ["Continue"]
+    };
+    
+    var inst_3 = {
+            type: 'causal-graph1',
+            status: 'inactive',
+            stimulus: [inst_3_png,inst_3_gif],
+            stim_width: width,
+            stim_height: height,
+            gif_duration: 2500,
+            prompt: ["","",""],
+            button_label_again: "Run again"
+    };
+    
+    var inst_4 = {
+            type: 'causal-graph1',
+            status: 'inactive',
+            stimulus: [inst_4],
+            stim_width: width,
+            stim_height: height,
+            prompt: ["",""],
+            button_label_next: ["Continue"]
+    };
+    
+    var inst_5 = {
+            type: 'causal-graph1',
+            status: 'inactive',
+            stimulus: [inst_5_png,inst_5_gif],
+            stim_width: width,
+            stim_height: height,
+            gif_duration: 7300,
+            prompt: ["","",""],
+            button_label_again: "Run again"
+    };
+    
+    var inst_6 = {
+          type: "image-button-response",
+          stimulus: "img/inst_6.png",
+          timing_post_trial: 0,
+          button_html: '<button class="jspsych-btn">%choice%</button>',
+          choices: ['Continue'],
+          is_html: true
+      };
+   
+    introloop.push(inst_1, inst_2, inst_3, inst_4, inst_5, inst_6);
+
+    
+    //var instructioncorrect = false;
+    var instructioncorrect = false;
+    var instruction_check1 = {
+        type: "survey-multi-choice",
+        preamble: ["<p align='center'><b>Check your knowledge before you begin !</b></p>"],
+        button_label: "Submit Answers",
+        questions: [
+            {prompt:"<b>Question 1</b>: What is your goal in this task?", options:[" To decide what caused the activation of the GCM"," To find out if the Gauge of Critical Moment (GCM) is activated or not"," To decide what causes the activation of each detector"],required:true},
+            {prompt:"<b>Question 2</b>: When does a detector become active?", options:[" A detector becomes active if it absorbs a radioactive particle"," A detector becomes active if it receives input from an active detector"," A detector becomes active if it absorbs a radioactive particle or receives input from an active detector"],required:true},
+            {prompt:"<b>Question 3</b>: When does a GCM become active?", options:[" A GCM becomes active if it absorbs a radioactive particle"," A GCM becomes active if all of its inputs are active"," A GCM becomes active if at least one of its inputs is active"],required:true},
+            {prompt:"<b>Question 3</b>: Which statement is true?", options:[" You should assign a number to every detector in every network"," You should click on only one detector in each network"," Some detectors are not clickable"],required:true}
+        ],
+        on_finish: function(data) {
+
+            if( data.responses == '{"Q0":" To decide what caused the activation of the GCM","Q1":" A detector becomes active if it absorbs a radioactive particle or receives input from an active detector","Q2":" A GCM becomes active if all of its inputs are active","Q3":" You should click on only one detector in each network"}') {
+                action = false;
+                instructioncorrect = true;
+            }
+
+            //console.log(data.responses)
+        }
+    }
+    introloop.push(instruction_check1)
+
+    var showsplash = true;
+    var splash_screen = {
+        type: 'image-button-response',
+        timing_post_trial: 0,
+	    button_html: '<button class="jspsych-btn">%choice%</button>',
+        choices: ['Click here to read the instructions again'],
+        is_html: true,
+        stimulus: 'img/inst_7.png'
+    }
+
+    var conditional_splash = {
+        timeline: [splash_screen],
+        conditional_function: function(data) {
+            return !instructioncorrect // skip if correct
+        }
+    }
+    introloop.push(conditional_splash)
+
+    var loop_node = {
+        timeline: introloop,
+        loop_function: function(data) {
+            
+            return !instructioncorrect // stop looping if correct
+        }
+    }
+    timeline.push(loop_node)
+
+
+
+    var successtrial = {
+        type: 'image-button-response',
+        timing_post_trial: 0,
+	    button_html: '<button class="jspsych-btn">%choice%</button>',
+        choices: ['Click here to begin'],
+        is_html: true,
+        stimulus: "img/inst_8.png"
+    };
+    timeline.push(successtrial);
+    
+
+    var all_trials = []
+
+
+    for(var i=0; i < animations.length; i++){
+        if(i<3){
+            var coord = coord_chain;
+        } else {
+            var coord = coord_branch;
+        }
+        var network = {
+            type: 'causal-graph1',
+            stimulus: [images[i],animations[i]],
+            status: 'active',
+            stim_width: width,
+            stim_height: height,
+            nodes_coord: coord,
+            gif_duration: anim_duration[i],
+            prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of the GCM?<br> Respond by clicking on a detector."],
+            button_label_again: "Run again",
+            button_label_next: ["Run","Next network"],
+            prompt_error: "ERROR ! You have to select one detector.<br>&nbsp;",
+        }
+        all_trials.push(network);
+    }
+
+    var all_trials_rand = jsPsych.randomization.repeat(all_trials, 1);
+
+    all_trials_rand.slice(-1)[0]["button_label_next"][1] = "Finish";
+    
+
+    for (var i=0; i < all_trials_rand.length; i++) {
+        timeline.push(all_trials_rand[i]);
+    }
+
+    var end_exp = {
+        type: "image-button-response",
+        stimulus: "img/inst_9.png",
+	    button_html: '<button class="jspsych-btn">%choice%</button>',
+        choices: ['Continue'],
+        is_html: true   
+    };
+    timeline.push(end_exp);
+
+    var survey_trial = {
+        type: 'survey-text',
+        questions: [
+            {prompt: "(Optional) Please let us know if you have any feedback about the task. This is totally optional <br>\
+            (you'll get paid regardless). We read everything but if you want us to respond you'll have to leave an email <br>\
+            address so we can do so. ", rows: 10, columns: 80},],};
+    
+    timeline.push(survey_trial);
+
+    </script>
+</html>
