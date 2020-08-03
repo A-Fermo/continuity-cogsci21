@@ -1,10 +1,10 @@
-,,top circle,,top square
-Event,unroll,rolled,,unrolled
-"a starts first, a->G continuous",X,X,,X
-"a starts first, b->G continuous", , ,,X
-"b starts first, b->G continuous",, ,,X
-"b starts first, a->G continuous",X,X,,X
+,,,top circle,top square
+Event,,unroll,rolled,unrolled
+"a starts first, a->G continuous","as,bs,bG0,aG1",X,X,X
+"a starts first, b->G continuous","as,bs,aG0,bG1", , ,X
+"b starts first, b->G continuous","bs,as,aG0,bG1",, ,X
+"b starts first, a->G continuous","bs,as,bG0,aG1",X,X,X
 ,,,,
 State,,,,
-a (state),,X (a->G continuous),,X (b->G continuous)
-"b (state), a->G continuous",X,X,,X
+a (state),,,X (a->G continuous),X (b->G continuous)
+"b (state), a->G continuous",,X,X,X
