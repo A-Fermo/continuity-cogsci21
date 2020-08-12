@@ -452,44 +452,50 @@
     var coord_branch_R = [[19,189],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[19,302],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,245]];
     var coord_branch_L = [[547,189],[472,189],[396,189],[321,189],[245,189],[170,189],[94,189],[547,302],[472,302],[396,302],[321,302],[245,302],[170,302],[94,302],[19,245]];
     var t = 1000;
+    
+    var CS_t = 6200+t;
+    var CC_t = 6700+t;
+    var RAAC_t = 14800+t;
+    var UABS_t = 9700+t;
+    var UAAC_t = 8600+t;
+    var UAAS_t = 8600+t;
+    var RBAC_t = 14200+t;
+    var UBAC_t = 7800+t;
+    var UBAS_t = 7800+t;
+    var UBBS_t = 6900+t;
+    var RAC_t = 9100+t;
+    var UAS_t = 6400+t;
+    var RBC_t = 14000+t;
+    var UBC_t = 7300+t;
+    var UBS_t = 7300+t;
+    anim_duration = [CS_t,CC_t,RAAC_t,RAC_t,RBAC_t,RBC_t,UAAC_t,UAAS_t,UABS_t,UAS_t,UBAC_t,UBAS_t,UBBS_t,UBC_t,UBS_t];
 
-    var ARUC_t = 12900+t;
-    var AUFS_t = 9600+t;
-    var AUUC_t = 8600+t;
-    var AUUS_t = 8500+t;
-    var anim_duration = [ARUC_t,AUFS_t,AUUC_t,AUUS_t]
-
-    /*
-    var CS_t = 5200+t;
-    var CM_t = 5400+t;
-    var CL_t = 5600+t;
-    var BS_t = 5200+t;
-    var BS1_t = 7200+t;
-    var BS2_t = 9200+t;
-    var BS3_t = 11200+t;
-    var BM_t = 5400+t;
-    var BM1_t = 7600+t;
-    var BM2_t = 9600+t;
-    var BM3_t = 11600+t;
-    var BL_t = 5600+t;
-    var BL1_t = 8000+t;
-    var BL2_t = 10000+t;
-    var BL3_t = 12000+t;
-    anim_duration = [CS_t,CM_t,CL_t,BS_t,BS1_t,BS2_t,BS3_t,BM_t,BM1_t,BM2_t,BM3_t,BL_t,BL1_t,BL2_t,BL3_t];
-    */
     
     function rd(conditions){
     	return conditions[Math.floor(Math.random()*conditions.length)];
     };
-
-    var inst = ["img/inst_1.png","img/inst_2R.png","img/inst_2L.png","img/inst_3R.png","img/inst_3L.png","img/inst_4R.png","img/inst_4L.png","img/inst_5R.png","img/inst_5L.png","img/inst_6.png",
+    
+    var inst = ["img/inst_1.svg","img/inst_2R.png","img/inst_2L.png","img/inst_3R.png","img/inst_3L.png","img/inst_4R.png","img/inst_4L.png","img/inst_5R.png","img/inst_5L.png","img/inst_6.png",
     "img/inst_7.png","img/inst_8.png","img/inst_9.png"];
+    
+    var gif_R = ['img/chain_RS.gif',rd(['img/chain_RCB.gif','img/chain_RCT.gif']),rd(['img/RAAC_RB.gif','img/RAAC_RT.gif']),rd(['img/RAC_RB.gif','img/RAC_RT.gif']),
+    rd(['img/RBAC_RB.gif','img/RBAC_RT.gif']),rd(['img/RBC_RB.gif','img/RBC_RT.gif']),rd(['img/UAAC_RB.gif','img/UAAC_RT.gif']),rd(['img/UAAS_RB.gif','img/UAAS_RT.gif']),
+    rd(['img/UABS_RB.gif','img/UABS_RT.gif']),rd(['img/UAS_RB.gif','img/UAS_RT.gif']),rd(['img/UBAC_RB.gif','img/UBAC_RT.gif']),rd(['img/UBAS_RB.gif','img/UBAS_RT.gif']),
+    rd(['img/UBBS_RB.gif','img/UBBS_RT.gif']),rd(['img/UBC_RB.gif','img/UBC_RT.gif']),rd(['img/UBS_RB.gif','img/UBS_RT.gif'])];
 
-    var img_R = ['img/ARUC_RT0.gif','img/AUFS_RT0.gif','img/AUUC_RT0.gif','img/AUUS_RT0.gif'];
-    var gif_R = ['img/ARUC_RT.gif','img/AUFS_RT.gif','img/AUUC_RT.gif','img/AUUS_RT.gif'];
+    var gif_L = ['img/chain_LS.gif',rd(['img/chain_LCB.gif','img/chain_LCT.gif']),rd(['img/RAAC_LB.gif','img/RAAC_LT.gif']),rd(['img/RAC_LB.gif','img/RAC_LT.gif']),
+    rd(['img/RBAC_LB.gif','img/RBAC_LT.gif']),rd(['img/RBC_LB.gif','img/RBC_LT.gif']),rd(['img/UAAC_LB.gif','img/UAAC_LT.gif']),rd(['img/UAAS_LB.gif','img/UAAS_LT.gif']),
+    rd(['img/UABS_LB.gif','img/UABS_LT.gif']),rd(['img/UAS_LB.gif','img/UAS_LT.gif']),rd(['img/UBAC_LB.gif','img/UBAC_LT.gif']),rd(['img/UBAS_LB.gif','img/UBAS_LT.gif']),
+    rd(['img/UBBS_LB.gif','img/UBBS_LT.gif']),rd(['img/UBC_LB.gif','img/UBC_LT.gif']),rd(['img/UBS_LB.gif','img/UBS_LT.gif'])];
 
-    var img_L = ['img/ARUC_RT0.gif','img/AUFS_RT0.gif','img/AUUC_RT0.gif','img/AUUS_RT0.gif'];
-    var gif_L = ['img/ARUC_RT.gif','img/AUFS_RT.gif','img/AUUC_RT.gif','img/AUUS_RT.gif'];
+    var img_R = ['img/chain_RS0.gif',gif_R[1].split('.')[0]+'0.gif',gif_R[2].split('.')[0]+'0.gif',gif_R[3].split('.')[0]+'0.gif',gif_R[4].split('.')[0]+'0.gif',gif_R[5].split('.')[0]+'0.gif',gif_R[6].split('.')[0]+'0.gif',gif_R[7].split('.')[0]+'0.gif',
+    gif_R[8].split('.')[0]+'0.gif',gif_R[9].split('.')[0]+'0.gif',gif_R[10].split('.')[0]+'0.gif',gif_R[11].split('.')[0]+'0.gif',gif_R[12].split('.')[0]+'0.gif',gif_R[13].split('.')[0]+'0.gif',
+    gif_R[14].split('.')[0]+'0.gif',];
+    
+
+    var img_L = ['img/chain_LS0.gif',gif_L[1].split('.')[0]+'0.gif',gif_L[2].split('.')[0]+'0.gif',gif_L[3].split('.')[0]+'0.gif',gif_L[4].split('.')[0]+'0.gif',gif_L[5].split('.')[0]+'0.gif',gif_L[6].split('.')[0]+'0.gif',gif_L[7].split('.')[0]+'0.gif',
+    gif_L[8].split('.')[0]+'0.gif',gif_L[9].split('.')[0]+'0.gif',gif_L[10].split('.')[0]+'0.gif',gif_L[11].split('.')[0]+'0.gif',gif_L[12].split('.')[0]+'0.gif',gif_L[13].split('.')[0]+'0.gif',
+    gif_L[14].split('.')[0]+'0.gif',];
 
     /*
     var gif_R = ["img/chain_RS.gif","img/chain_RM.gif","img/chain_RL.gif",rd(["img/branch_RTSS.gif","img/branch_RBSS.gif"]),rd(["img/branch_RTSE1.gif","img/branch_RBSE1.gif"]),
@@ -512,7 +518,7 @@
     */
     
     var group = ["Right","Left"];
-    //var condition = group[Math.floor(Math.random()*group.length)];
+    var condition = group[Math.floor(Math.random()*group.length)];
     var condition = 'Right';
     if(condition == "Right"){
         var images = img_R;
@@ -624,16 +630,18 @@
 
         startExperiment();
     }
-    /*
+    
     var inst_1 = {
           type: "image-button-response",
-          stimulus: "img/inst_1.png",
+          stimulus: "img/inst_1.svg",
           timing_post_trial: 0,
           button_html: '<button class="jspsych-btn">%choice%</button>',
           choices: ['Continue'],
+          width: width,
+          height: height,
           is_html: true
       };
-    
+    /*
     var inst_2 = {
             type: 'causal-graph1',
             status: 'inactive',
@@ -752,7 +760,7 @@
     timeline.push(successtrial);
     */
 
-    var all_trials = []
+    var all_trials = [];
 
 
     for(var i=0; i < animations.length; i++){

@@ -141,9 +141,9 @@ jsPsych.plugins['causal-graph1'] = (function() {
 			
 			}
 		}
-		var html_prompt = '<p id="prompt">'+trial.prompt[0]+'</p>';
+		var html_prompt = '<p id="prompt" style="margin-bottom:50px">'+trial.prompt[0]+'</p>';
 		var html_IMG = '<div id="IMG_container" style="padding:0px 50px 0px 50px"</div>';
-		var continue_btn = '<button id="jspsych-causal-graph1-continue-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next[0]+'</button>';
+		var continue_btn = '<button id="jspsych-causal-graph1-continue-btn" class="jspsych-btn" style="margin-left:5px ; margin-top:40px">'+trial.button_label_next[0]+'</button>';
 		var loader = '<div id="ld" class="loader"></div>';
 		var html = html_prompt + html_IMG;
 		display_element.innerHTML = html;
@@ -161,9 +161,9 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		var ld = document.getElementById("ld");
 		ld.style.visibility="hidden";
 
-		var again_btn = '<button id="jspsych-causal-graph1-again-btn" class="jspsych-btn" style="margin-right: 5px";>'+trial.button_label_again+'</button>';
-		var next_btn = '<button id="jspsych-causal-graph1-next-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next[1]+'</button>';
-		html_prompt = '<p id="prompt">'+trial.prompt[1]+'</p>';
+		var again_btn = '<button id="jspsych-causal-graph1-again-btn" class="jspsych-btn" style="margin-right:5px ; margin-top:40px";>'+trial.button_label_again+'</button>';
+		var next_btn = '<button id="jspsych-causal-graph1-next-btn" class="jspsych-btn" style="margin-left:5px ; margin-top:40px">'+trial.button_label_next[1]+'</button>';
+		html_prompt = '<p id="prompt" style="margin-bottom:50px">'+trial.prompt[1]+'</p>';
 		
 		cont_btn.addEventListener('click', function(){
 		
