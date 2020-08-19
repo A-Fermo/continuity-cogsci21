@@ -25,12 +25,6 @@ jsPsych.plugins['causal-graph3'] = (function() {
 			default: undefined,
 			description: 'Image to be displayed.'
 			},
-			loop_state : {
-			type: jsPsych.plugins.parameterType.INT,
-			pretty_name: 'Loop state',
-			default: null,
-			description: 'Whether the loop is in the state condition or not.'
-			},
 			stim_height: {
 			type: jsPsych.plugins.parameterType.INT,
 			pretty_name: 'Stimulus height',
@@ -56,19 +50,12 @@ jsPsych.plugins['causal-graph3'] = (function() {
 			default: 'active',
 			description: 'Whether the causal graph is active or not.'
 			},
-			B_coord: {
+			nodes_coord: {
 			type: jsPsych.plugins.parameterType.OBJECT,
 			pretty_name: 'Nodes coordinates',
 			default: null,
 			array: true,
-			description: 'Coordinates of the square detectors.'
-			},
-			A_coord: {
-			type: jsPsych.plugins.parameterType.OBJECT,
-			pretty_name: 'Nodes coordinates',
-			default: null,
-			array: true,
-			description: 'Coordinates of the round detectors.'
+			description: 'Coordinates of the top-left of each node'
 			},
 			prompt: {
 			type: jsPsych.plugins.parameterType.STRING,
@@ -107,13 +94,7 @@ jsPsych.plugins['causal-graph3'] = (function() {
 		src: trial.stim_GIF_A,
 		useMap:"#gra"
 		});
-		var GIFs_B_names;
-		if(trial.loop_state == true){
-			GIFs_B_names = ['GIF0','GIF1','GIF2','GIF3','GIF4','GIF5','GIF6','GIF7','GIF8','GIF9','GIF10','GIF11','GIF12','GIF13','GIF14','GIF15','GIF16','GIF17','GIF18','GIF19'];
-		} else if(trial.loop_state == false){
-			GIFs_B_names = ['GIF'];
-		}
-		
+		var GIFs_B_names = ['GIF0','GIF1','GIF2','GIF3','GIF4','GIF5','GIF6','GIF7','GIF8','GIF9','GIF10','GIF11','GIF12','GIF13','GIF14','GIF15','GIF16','GIF17','GIF18','GIF19']
 		var GIFs_B = {};
 		var GIFs_C = [];
 
@@ -189,9 +170,9 @@ jsPsych.plugins['causal-graph3'] = (function() {
 			
 			}
 		} */
-		var html_prompt = '<p id="prompt" style="margin-bottom:50px">'+trial.prompt[0]+'</p>';
+		var html_prompt = '<p id="prompt">'+trial.prompt[0]+'</p>';
 		var html_IMG = '<div id="IMG_container" style="padding:0px 50px 0px 50px"</div>';
-		var continue_btn = '<button id="jspsych-causal-graph3-continue-btn" class="jspsych-btn" style="margin-left: 5px ; margin-top:40px">'+trial.button_label_next[0]+'</button>';
+		var continue_btn = '<button id="jspsych-causal-graph3-continue-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next[0]+'</button>';
 		var loader = '<div id ="ld" class="spinner"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>';
 		var html = html_prompt + html_IMG;
 		display_element.innerHTML = html;
@@ -205,44 +186,32 @@ jsPsych.plugins['causal-graph3'] = (function() {
 		mapKey: "id"
 		});
 		
-		console.log(trial.stim_GIF_A.split('/')[1]);
-
 		var cont_btn = document.getElementById("jspsych-causal-graph3-continue-btn");
 		var ld = document.getElementById("ld");
 		ld.style.visibility="hidden";
 
-		var again_btn = '<button id="jspsych-causal-graph3-again-btn" class="jspsych-btn" style="margin-right: 5px ; margin-top:40px";>'+trial.button_label_again+'</button>';
-		var next_btn = '<button id="jspsych-causal-graph3-next-btn" class="jspsych-btn" style="margin-left: 5px ; margin-top:40px">'+trial.button_label_next[1]+'</button>';
-		html_prompt = '<p id="prompt" style="margin-bottom:50px">'+trial.prompt[1]+'</p>';
+		var again_btn = '<button id="jspsych-causal-graph3-again-btn" class="jspsych-btn" style="margin-right: 5px";>'+trial.button_label_again+'</button>';
+		var next_btn = '<button id="jspsych-causal-graph3-next-btn" class="jspsych-btn" style="margin-left: 5px">'+trial.button_label_next[1]+'</button>';
+		html_prompt = '<p id="prompt">'+trial.prompt[1]+'</p>';
 		
 		cont_btn.addEventListener('click', function(){
 
-			if(trial.loop_state == true){
-				var end_anim = performance.now();
-				var GIF_duration = end_anim - start_anim;
-				var start_loc = 10;
-				var detector_loc = Math.round((GIF_duration/2000-Math.floor(GIF_duration/2000))*10/0.5);
-				if(start_loc + detector_loc < 20){detector_loc = start_loc + detector_loc} else{detector_loc = start_loc + detector_loc-20};
-			} else if(trial.loop_state == false){
-				detector_loc = 0;
-			}
+			var end_anim = performance.now();
+			var GIF_duration = end_anim - start_anim;
+			var start_loc = 10;
+			var detector_loc = Math.round((GIF_duration/2000-Math.floor(GIF_duration/2000))*10/0.5);
+			if(start_loc + detector_loc < 20){detector_loc = start_loc + detector_loc} else{detector_loc = start_loc + detector_loc-20};
 			
 			if(trial.stim_GIF_B != null){
 				var nb_of_run = 1;
 				var index = 0;
 				function run_graph(GIFs_B,index,detector_loc){
 
+					
 					var html_GIF = '<div id="GIF_container" style="padding:0px 50px 0px 50px"</div>';
 					var html = html_prompt + html_GIF;
 					display_element.innerHTML = html;
-
-					var GIF_B;
-					if(trial.loop_state == true){
-						GIF_B = 'GIF'+detector_loc;
-					} else if(trial.loop_state == false){
-						GIF_B = 'GIF';
-					}
-					
+					var GIF_B = 'GIF'+detector_loc;
 					GIFs_B[GIF_B][index].appendTo("#GIF_container");
 					MAP1.appendTo("#GIF_container");
 
@@ -266,7 +235,7 @@ jsPsych.plugins['causal-graph3'] = (function() {
 						display_element.innerHTML = html;
 						GIFs_C[index].appendTo("#GIF_container");
 						MAP1.appendTo("#GIF_container");
-						if(trial.loop_state == true){var start_anim = performance.now()};
+						var start_anim = performance.now();
 						var start_time = performance.now();
 						display_element.innerHTML += (again_btn + next_btn + loader);
 						var nxt_btn = document.getElementById("jspsych-causal-graph3-next-btn");
@@ -281,14 +250,14 @@ jsPsych.plugins['causal-graph3'] = (function() {
 
 						var node_name;
 						if (trial.status == 'active'){
-							for (var i = 0; i < trial.B_coord.length; i++) {
-								var x_left = trial.B_coord[i][0];
-								var y_left = trial.B_coord[i][1];
-								var x_right = x_left+11;
-								var y_right = y_left+11;
+							for (var i = 0; i < trial.nodes_coord.length; i++) {
+								var x_left = trial.nodes_coord[i][0];
+								var y_left = trial.nodes_coord[i][1];
+								var x_right = x_left+12;
+								var y_right = y_left+12;
 								var coordinates = x_left+","+y_left+","+x_right+","+y_right;
 
-								node_name = "nodeB"+(i+1);
+								node_name = "nodeLine"+(i+1);
 
 								$('<area/>', {
 								'alt': '',
@@ -299,13 +268,13 @@ jsPsych.plugins['causal-graph3'] = (function() {
 								}).appendTo("map");
 							}
 
-							for (var i = 0; i < trial.A_coord.length; i++) {
-								var x = trial.A_coord[i][0];
-								var y = trial.A_coord[i][1];
+							for (var i = 0; i < trial.loop_coord.length; i++) {
+								var x = trial.loop_coord[i][0];
+								var y = trial.loop_coord[i][1];
 								var z = 5;
 								coordinates = x+","+y+","+z
 
-								node_name = "nodeA"+(i+1);
+								node_name = "nodeCurve"+(i+1);
 
 								$('<area/>', {
 								'alt': '',
@@ -385,19 +354,13 @@ jsPsych.plugins['causal-graph3'] = (function() {
 						});
 					
 						ag_btn.addEventListener('click', function(){
-							
+							var end_anim = performance.now();
 							index++;
 							nb_of_run++;
-
-							if(trial.loop_state == true){
-								var end_anim = performance.now();
-								var GIF_duration = end_anim - start_anim;
-								var start_loc = 11;
-								var detector_loc = Math.round((GIF_duration/2000-Math.floor(GIF_duration/2000))*10/0.5);
-								if(start_loc + detector_loc < 20){detector_loc = start_loc + detector_loc} else{detector_loc = start_loc + detector_loc-20};
-							} else if(trial.loop_state == false){
-								detector_loc = 0;
-							}
+							var GIF_duration = end_anim - start_anim;
+							var start_loc = 11;
+							var detector_loc = Math.round((GIF_duration/2000-Math.floor(GIF_duration/2000))*10/0.5);
+							if(start_loc + detector_loc < 20){detector_loc = start_loc + detector_loc} else{detector_loc = start_loc + detector_loc-20};
 
 							run_graph(GIFs_B,index,detector_loc);
 						}); 

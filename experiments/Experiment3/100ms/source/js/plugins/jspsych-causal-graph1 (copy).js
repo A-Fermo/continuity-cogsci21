@@ -37,25 +37,12 @@ jsPsych.plugins['causal-graph1'] = (function() {
 			default: 'active',
 			description: 'Whether the causal graph is active or not.'
 			},
-			A_detectors_type: {
-			type: jsPsych.plugins.parameterType.STRING,
-			pretty_name: 'Type of detectors in A',
-			default: null,
-			description: 'Whether the detectors in A are round or square.'
-			},
-			A_coord: {
+			nodes_coord: {
 			type: jsPsych.plugins.parameterType.OBJECT,
-			pretty_name: 'Coordinates of the square detectors',
+			pretty_name: 'Nodes coordinates',
 			default: null,
 			array: true,
-			description: 'Coordinates of the round detectors.'
-			},
-			B_coord: {
-			type: jsPsych.plugins.parameterType.OBJECT,
-			pretty_name: 'Coordinates of the square detectors',
-			default: null,
-			array: true,
-			description: 'Coordinates of the square detectors.'
+			description: 'Coordinates of the top-left of each node'
 			},
 			prompt: {
 			type: jsPsych.plugins.parameterType.STRING,
@@ -191,11 +178,52 @@ jsPsych.plugins['causal-graph1'] = (function() {
 					GIFs[index].appendTo("#GIF_container");
 					MAP1.appendTo("#GIF_container");
 					display_element.innerHTML += (again_btn + next_btn + loader);
+					var node_name;
+					if (trial.status == 'active'){
+						for (var i = 0; i < trial.nodes_coord.length; i++) {
+							var x_left = trial.nodes_coord[i][0];
+							var y_left = trial.nodes_coord[i][1];
+							var x_right = x_left+38;
+							var y_right = y_left+38;
+							var coordinates = x_left+","+y_left+","+x_right+","+y_right;
+
+							node_name = "node"+(i+1);
+
+							$('<area/>', {
+							'alt': '',
+							'id': node_name,
+							'coords' : coordinates,  
+							'shape' : 'rect',
+							"href" : '#',
+							}).appendTo("map");
+						}
+
+					}
+					/*
+					function onClick(data){
+						console.log(trial.stimulus[1],data.key)
+					}*/
 
 					var map = $("#Graphics");
 					map.mapster({
-					mapKey: "id"
-					})
+						noHrefIsMask: true,
+						highlight:false,
+						singleSelect: true,
+						render_highlight: {
+							fillColor: 'ff0000',
+							fillOpacity: 1,
+							stroke: true
+						},
+						render_select: {
+							strokeColor: 'ff0000',
+							strokeWidth: 3,
+							fillOpacity: 0,
+							stroke: true
+						},
+						fadeInterval: 50,
+						staticState:false,
+						mapKey : 'id'
+					});
 					
 					var nxt_btn = document.getElementById("jspsych-causal-graph1-next-btn");
 					var ag_btn = document.getElementById("jspsych-causal-graph1-again-btn");
@@ -214,92 +242,11 @@ jsPsych.plugins['causal-graph1'] = (function() {
 							ag_btn.disabled = false;
 						}
 						nxt_btn.disabled = false;
-
-						var node_name;
-						if (trial.status == 'active'){
-							if(trial.B_coord != null){
-								for (var i = 0; i < trial.B_coord.length; i++) {
-									var x_left = trial.B_coord[i][0];
-									var y_left = trial.B_coord[i][1];
-									var x_right = x_left+11;
-									var y_right = y_left+11;
-									var coordinates = x_left+","+y_left+","+x_right+","+y_right;
-		
-									node_name = "nodeB"+(i+1);
-		
-									$('<area/>', {
-									'alt': '',
-									'id': node_name,
-									'coords' : coordinates,  
-									'shape' : 'rect',
-									"href" : '#',
-									}).appendTo("map");
-								}
-							}
-							
-							if(trial.A_coord != null){
-								if(trial.A_detectors_type == 'square'){
-									for (var i = 0; i < trial.A_coord.length; i++) {
-										var x_left = trial.A_coord[i][0];
-										var y_left = trial.A_coord[i][1];
-										var x_right = x_left+12;
-										var y_right = y_left+12;
-										var coordinates = x_left+","+y_left+","+x_right+","+y_right;
-			
-										node_name = "nodeA"+(i+1);
-			
-										$('<area/>', {
-										'alt': '',
-										'id': node_name,
-										'coords' : coordinates,  
-										'shape' : 'rect',
-										"href" : '#',
-										}).appendTo("map");
-									}
-								} else if(trial.A_detectors_type == 'round'){
-									for (var i = 0; i < trial.A_coord.length; i++) {
-										var x = trial.A_coord[i][0];
-										var y = trial.A_coord[i][1];
-										var z = 5;
-										coordinates = x+","+y+","+z
-		
-										node_name = "nodeA"+(i+1);
-		
-										$('<area/>', {
-										'alt': '',
-										'id': node_name,
-										'coords' : coordinates,  
-										'shape' : 'circle',
-										"href" : '#',
-										}).appendTo("map");
-									
-									}
-								}
-								
-							}
-	
-						}
-	
-						var map = $("#Graphics");
-						map.mapster({
-							noHrefIsMask: true,
-							highlight: true,
-							singleSelect: true,
-							render_highlight: {
-								fillColor: 'ff0000',
-								fillOpacity: 1,
-								stroke: true
-							},
-							render_select: {
-								strokeColor: 'ff0000',
-								strokeWidth: 3,
-								fillOpacity: 0,
-								stroke: true
-							},
-							fadeInterval: 50,
-							staticState:null,
-							mapKey : 'id'
-						});
+						map.mapster("set_options",{
+							highlight:true,
+							staticState:null/*,
+							onClick: onClick*/
+							});
 					}
 							
 					nxt_btn.addEventListener('click', function(){
