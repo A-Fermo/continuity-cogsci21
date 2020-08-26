@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.2" width="160.19mm" height="140.19mm" viewBox="2261 3607 16019 14019" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
+<svg version="1.2" width="160.03mm" height="140.03mm" viewBox="2269 3615 16003 14003" preserveAspectRatio="xMidYMid" fill-rule="evenodd" stroke-width="28.222" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg" xmlns:ooo="http://xml.openoffice.org/svg/export" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:presentation="http://sun.com/xmlns/staroffice/presentation" xmlns:smil="http://www.w3.org/2001/SMIL20/" xmlns:anim="urn:oasis:names:tc:opendocument:xmlns:animation:1.0" xml:space="preserve">
  <defs>
   <font id="EmbeddedFont_1" horiz-adv-x="2048">
    <font-face font-family="Arial embedded" units-per-em="2048" font-weight="normal" font-style="normal" ascent="1852" descent="423"/>
@@ -87,9 +87,9 @@
  <g class="Page">
   <g class="com.sun.star.drawing.RectangleShape">
    <g id="id3">
-    <rect class="BoundingBox" stroke="none" fill="none" x="2261" y="3607" width="16019" height="14019"/>
+    <rect class="BoundingBox" stroke="none" fill="none" x="2269" y="3615" width="16003" height="14003"/>
     <path fill="rgb(255,255,255)" stroke="none" d="M 10270,17616 L 2270,17616 2270,3616 18270,3616 18270,17616 10270,17616 Z"/>
-    <path fill="none" stroke="rgb(255,255,255)" stroke-width="18" stroke-linejoin="round" d="M 10270,17616 L 2270,17616 2270,3616 18270,3616 18270,17616 10270,17616 Z"/>
+    <path fill="none" stroke="rgb(255,255,255)" d="M 10270,17616 L 2270,17616 2270,3616 18270,3616 18270,17616 10270,17616 Z"/>
    </g>
   </g>
   <g class="Graphic">

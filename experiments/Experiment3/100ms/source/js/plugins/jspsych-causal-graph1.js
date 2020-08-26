@@ -34,7 +34,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 			status: {
 			type: jsPsych.plugins.parameterType.STRING,
 			pretty_name: 'The status of the plugin',
-			default: 'active',
+			default: null,
 			description: 'Whether the causal graph is active or not.'
 			},
 			A_detectors_type: {
@@ -94,14 +94,17 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		src: trial.stimulus[0],
 		useMap:"#gra"
 		});
-		var GIFs = [];
-		for (var i=0; i < run_max; i++){
-			var GIF = $("<img>",{
-			id: "Graphics",
-			src: trial.stimulus[1]+"?a="+Math.random(),
-			useMap:"#gra"
-			});
-			GIFs.push(GIF);
+
+		if(trial.stimulus.length > 1){
+			var GIFs = [];
+			for (var i=0; i < run_max; i++){
+				var GIF = $("<img>",{
+				id: "Graphics",
+				src: trial.stimulus[1]+"?a="+Math.random(),
+				useMap:"#gra"
+				});
+				GIFs.push(GIF);
+			}
 		}
 
 		var MAP1 = $("<map>",{
@@ -109,7 +112,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		});
 		var stim_type, length, branch_first, state_OR_event, time_interval;
 		if(trial.stimulus.length > 1){
-		if(trial.stimulus[1].split("_")[0].split("/")[1] == "chain"){
+			if(trial.stimulus[1].split("_")[0].split("/")[1] == "chain"){
 				stim_type = "Chain";
 				if(trial.stimulus[1].split("_")[1][1] == "S"){
 					length = "Short";
@@ -169,8 +172,10 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		map.mapster({
 		mapKey: "id"
 		});
-		console.log(trial.stimulus[0].split('/')[1]);
-
+		function tb(stim){
+			return stim.split('/')[1].split('_')[1];
+		}
+		console.log(trial.stimulus[0].split('/')[1],tb(trial.stimulus[0]));
 		var cont_btn = document.getElementById("jspsych-causal-graph1-continue-btn");
 		var ld = document.getElementById("ld");
 		ld.style.visibility="hidden";
@@ -221,8 +226,8 @@ jsPsych.plugins['causal-graph1'] = (function() {
 								for (var i = 0; i < trial.B_coord.length; i++) {
 									var x_left = trial.B_coord[i][0];
 									var y_left = trial.B_coord[i][1];
-									var x_right = x_left+11;
-									var y_right = y_left+11;
+									var x_right = x_left+12;
+									var y_right = y_left+12;
 									var coordinates = x_left+","+y_left+","+x_right+","+y_right;
 		
 									node_name = "nodeB"+(i+1);

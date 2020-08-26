@@ -56,19 +56,19 @@ jsPsych.plugins['causal-graph3'] = (function() {
 			default: 'active',
 			description: 'Whether the causal graph is active or not.'
 			},
-			B_coord: {
-			type: jsPsych.plugins.parameterType.OBJECT,
-			pretty_name: 'Nodes coordinates',
-			default: null,
-			array: true,
-			description: 'Coordinates of the square detectors.'
-			},
 			A_coord: {
 			type: jsPsych.plugins.parameterType.OBJECT,
 			pretty_name: 'Nodes coordinates',
 			default: null,
 			array: true,
 			description: 'Coordinates of the round detectors.'
+			},
+			B_coord: {
+			type: jsPsych.plugins.parameterType.OBJECT,
+			pretty_name: 'Nodes coordinates',
+			default: null,
+			array: true,
+			description: 'Coordinates of the square detectors.'
 			},
 			prompt: {
 			type: jsPsych.plugins.parameterType.STRING,
@@ -204,8 +204,11 @@ jsPsych.plugins['causal-graph3'] = (function() {
 		map.mapster({
 		mapKey: "id"
 		});
-		
-		console.log(trial.stim_GIF_A.split('/')[1]);
+
+		function tb(stim){
+			return stim.split('/')[1].split('_')[1];
+		}
+		console.log(trial.stim_GIF_A.split('/')[1],tb(trial.stim_GIF_A));
 
 		var cont_btn = document.getElementById("jspsych-causal-graph3-continue-btn");
 		var ld = document.getElementById("ld");
@@ -284,8 +287,8 @@ jsPsych.plugins['causal-graph3'] = (function() {
 							for (var i = 0; i < trial.B_coord.length; i++) {
 								var x_left = trial.B_coord[i][0];
 								var y_left = trial.B_coord[i][1];
-								var x_right = x_left+11;
-								var y_right = y_left+11;
+								var x_right = x_left+12;
+								var y_right = y_left+12;
 								var coordinates = x_left+","+y_left+","+x_right+","+y_right;
 
 								node_name = "nodeB"+(i+1);
