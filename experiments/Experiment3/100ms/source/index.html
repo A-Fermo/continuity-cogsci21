@@ -911,7 +911,7 @@
         all_trials.push(network);
     }
 
-    var NoLoopState_t = [9400,null,8800,6800];
+    var NoLoopState_t = [9400,null,8800,7700];
     var loop_state, GIF_B_duration;
     for(var i=0; i < GIF_a_loop.length; i++){
         if(i == 1){
@@ -952,11 +952,11 @@
 
     var end_exp = {
         type: 'causal-graph1',
-        stimulus: ['img/inst15.svg'],
+        stimulus: ['img/inst_15.svg'],
         stim_width: width,
         stim_height: height,
-        prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of G?<br> Respond by clicking on a detector."],
-        button_label_next: ['Continue']  
+        prompt: ["&nbsp;<br>&nbsp;"],
+        button_label_next: ['Continue'] 
     };
     timeline.push(end_exp);
 
