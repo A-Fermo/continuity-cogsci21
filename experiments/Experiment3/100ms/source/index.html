@@ -447,29 +447,6 @@
     //var txt_prompt = "<p align='center'>Pick out the detector that is the main cause of the activation of the GCM</p>";
     var width = 605;
     var height = 529;
-    var coord_chain_R = [[19,245],[94,245],[170,245],[245,245],[321,245],[396,245],[472,245],[547,245]];
-    var coord_chain_L = [[547,245],[472,245],[396,245],[321,245],[245,245],[170,245],[94,245],[19,245]];
-    var coord_branch_R = [[19,189],[94,189],[170,189],[245,189],[321,189],[396,189],[472,189],[19,302],[94,302],[170,302],[245,302],[321,302],[396,302],[472,302],[547,245]];
-    var coord_branch_L = [[547,189],[472,189],[396,189],[321,189],[245,189],[170,189],[94,189],[547,302],[472,302],[396,302],[321,302],[245,302],[170,302],[94,302],[19,245]];
-    var t1 = 2000;
-    var t2 = 4000;
-    var t3 = 6000;
-    var CS_t = [5000,400];
-    var CM_t = [5000,400];
-    var CL_t = [5000,800];
-    var BS_t = [5000,300];
-    var BS1_t = [5100+t1,300];
-    var BS2_t = [5100+t2,300];
-    var BS3_t = [5100+t3,300];
-    var BM_t = [5000,300];
-    var BM1_t = [5300+t1,300];
-    var BM2_t = [5300+t2,300];
-    var BM3_t = [5300+t3,300];
-    var BL_t = [5000,800];
-    var BL1_t = [5500+t1,800];
-    var BL2_t = [5500+t2,800];
-    var BL3_t = [5500+t3,800];
-    anim_duration = [CS_t,CM_t,CL_t,BS_t,BS1_t,BS2_t,BS3_t,BM_t,BM1_t,BM2_t,BM3_t,BL_t,BL1_t,BL2_t,BL3_t];
     
     function rd(conditions){
     	return conditions[Math.floor(Math.random()*conditions.length)];
@@ -599,38 +576,6 @@
     var all_files_to_preload = inst_to_preload.concat(GIF_a_NOloop,GIF_a_loop);
 
     var t = 900;
-    
-    /*
-    var group = ["Right","Left"];
-    var condition = group[Math.floor(Math.random()*group.length)];
-    if(condition == "Right"){
-        var animations_A = GIF_AR;
-        var animations_B = GIF_BR;
-        var animations_C = GIF_CR;
-        var coord_chain = coord_chain_R;
-        var coord_branch = coord_branch_R; 
-        var inst_2 = "img/inst_2R.png";
-        var inst_3_png = "img/inst_3R.png";
-        var inst_3_gif = "img/inst_3R.gif";
-        var inst_4 = "img/inst_4R.png";
-        var inst_5_png = "img/inst_5R.png";
-        var inst_5_gif = rd(["img/inst_5RT.gif","img/inst_5RB.gif"]); 
-    }
-    if(condition == "Left"){
-        var animations_A = GIF_AL;
-        var animations_B = GIF_BL;
-        var animations_C = GIF_CL;
-        var coord_chain = coord_chain_L;
-        var coord_branch = coord_branch_L; 
-        var inst_2 = "img/inst_2L.png";
-        var inst_3_png = "img/inst_3L.png";
-        var inst_3_gif = "img/inst_3L.gif";
-        var inst_4 = "img/inst_4L.png";
-        var inst_5_png = "img/inst_5L.png";
-        var inst_5_gif = rd(["img/inst_5LT.gif","img/inst_5LB.gif"]); 
-        
-    } */
-    //var all_IMG = images//.concat(inst);
 
     var timeline = [];
     var introloop=[];
