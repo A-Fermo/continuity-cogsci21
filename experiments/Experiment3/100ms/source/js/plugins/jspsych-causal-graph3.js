@@ -144,7 +144,12 @@ jsPsych.plugins['causal-graph3'] = (function() {
 
 		var stim_type, A_branch_loc, rolled_OR_unrolled, A_detectors, state_OR_event, state_branch, root_1st, imdt_2nd;
 		if(trial.stim_GIF_B != null){
-			stim_name = trial.stim_GIF_B[0].split("/")[1].split(".")[0];
+			stim_name = trial.stim_GIF_B[0].split("/")[1].split(".")[0]
+			if(trial.stim_GIF_B.length > 1){
+				stim_name = stim_name.slice(0,stim_name.length -2);
+			} else {
+				stim_name = stim_name.slice(0,stim_name.length -1);
+			};
 			if(trial.stim_GIF_B[0].split("/")[1].split("_")[0] == "chainS"){
 				stim_type = "ChainS";
 			} else if (trial.stim_GIF_B[0].split("/")[1].split("_")[0] == "chainC"){
@@ -348,7 +353,7 @@ jsPsych.plugins['causal-graph3'] = (function() {
 								
 								if(trial.status == 'active'){
 									trial_data = {
-										"stimulus": stim_name.slice(0,stim_name.length -2),
+										"stimulus": stim_name,
 										"status": trial.status,
 										"stim_type": stim_type,
 										"rolled_OR_unrolled": rolled_OR_unrolled,
@@ -364,7 +369,7 @@ jsPsych.plugins['causal-graph3'] = (function() {
 									};
 								} else {
 									trial_data = {
-										"stimulus": stim_name.slice(0,stim_name.length -2),
+										"stimulus": stim_name,
 										"status": trial.status,
 										"nb_of_run": nb_of_run
 									};
@@ -410,7 +415,7 @@ jsPsych.plugins['causal-graph3'] = (function() {
 			
 			} else {
 				var trial_data = {
-					"stimulus": trial.stim_GIF_A.split("/")[1].split(".")[0],
+					"stimulus": stim_name,
 					"status": trial.status
 				};
 				display_element.innerHTML = '';

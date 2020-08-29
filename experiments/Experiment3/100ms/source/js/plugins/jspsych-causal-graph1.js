@@ -113,6 +113,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 		var stim_type, A_branch_loc, rolled_OR_unrolled, A_detectors, state_OR_event, state_branch, root_1st, imdt_2nd;
 		if(trial.stimulus[1] != null){
 			stim_name = trial.stimulus[1].split("/")[1].split(".")[0];
+			stim_name = stim_name.slice(0,stim_name.length-1);
 			if(trial.stimulus[1].split("/")[1].split("_")[0] == "chainS"){
 				stim_type = "ChainS";
 			} else if (trial.stimulus[1].split("/")[1].split("_")[0] == "chainC"){
@@ -122,7 +123,6 @@ jsPsych.plugins['causal-graph1'] = (function() {
 			} else{
 				stim_type = "AND_Gate";
 				rolled_OR_unrolled = 'Unrolled';
-				imdt_2nd = trial.stimulus[1].split("/")[1].split("_")[0][2];
 				if(trial.stimulus[1].split("/")[1].split("_")[1][1] == "T"){
 					A_branch_loc = "Top";
 				} else{
@@ -135,10 +135,16 @@ jsPsych.plugins['causal-graph1'] = (function() {
 				}
 				if(trial.stimulus[1].split("/")[1].split("_")[0].length == 3){
 					state_OR_event = "State";
+					if(trial.stimulus[1].split("/")[1].split("_")[0][1] == 'A'){
+						imdt_2nd = 'B'
+					} else if(trial.stimulus[1].split("/")[1].split("_")[0][1] == 'B'){
+						imdt_2nd = 'A'
+					}
 					state_branch = trial.stimulus[1].split("/")[1].split("_")[0][1];
 				} else {
 					state_OR_event = "Event";
 					root_1st = trial.stimulus[1].split("/")[1].split("_")[0][1];
+					imdt_2nd = trial.stimulus[1].split("/")[1].split("_")[0][2];
 				}
 			}
 		}
@@ -319,7 +325,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 							
 							if(trial.status == 'active'){
 								trial_data = {
-									"stimulus": trial.stimulus[1].split("/")[1].split(".")[0],
+									"stimulus": stim_name,
 									"status": trial.status,
 									"stim_type": stim_type,
 									"rolled_OR_unrolled": rolled_OR_unrolled,
@@ -335,7 +341,7 @@ jsPsych.plugins['causal-graph1'] = (function() {
 								};
 							} else {
 								trial_data = {
-									"stimulus": trial.stimulus[1].split("/")[1].split(".")[0],
+									"stimulus": stim_name,
 									"status": trial.status,
 									"nb_of_run": nb_of_run
 								};
