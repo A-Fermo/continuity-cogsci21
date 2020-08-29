@@ -141,54 +141,35 @@ jsPsych.plugins['causal-graph3'] = (function() {
 		var MAP1 = $("<map>",{
 		name: "gra"
 		});
-		var stim_type, length, branch_first, state_OR_event, time_interval;
-		/*
+
+		var stim_type, A_branch_loc, rolled_OR_unrolled, A_detectors, state_OR_event, state_branch, root_1st, imdt_2nd;
 		if(trial.stim_GIF_B != null){
-			if(trial.stimulus[1].split("_")[0].split("/")[1] == "chain"){
-				stim_type = "Chain";
-				if(trial.stimulus[1].split("_")[1][1] == "S"){
-					length = "Short";
-				}
-				if(trial.stimulus[1].split("_")[1][1] == "M"){
-					length = "Medium";
-				}
-				if(trial.stimulus[1].split("_")[1][1] == "L"){
-				length = "Long";
-				}
+			stim_name = trial.stim_GIF_B[0].split("/")[1].split(".")[0];
+			if(trial.stim_GIF_B[0].split("/")[1].split("_")[0] == "chainS"){
+				stim_type = "ChainS";
+			} else if (trial.stim_GIF_B[0].split("/")[1].split("_")[0] == "chainC"){
+				stim_type = "ChainC";
+			} else if (trial.stim_GIF_B[0].split("/")[1].split("_")[0] == "inst"){
+				stim_type = "inst";
 			} else{
 				stim_type = "AND_Gate";
-				if(trial.stimulus[1].split("_")[1][1] == "T"){
-					branch_first = "Top";
-				} else{
-					branch_first = "Bottom";
+				rolled_OR_unrolled = 'Rolled';
+				A_detectors = 'Circles';
+				imdt_2nd = 'A';
+				if(trial.stim_GIF_B[0].split("/")[1].split("_")[1][1] == "T"){
+					A_branch_loc = "Top";
+				} else {
+					A_branch_loc = "Bottom";
 				}
-				if(trial.stimulus[1].split("_")[1][2] == "S"){
-					length = "Short";
-				}
-				if(trial.stimulus[1].split("_")[1][2] == "M"){
-					length = "Medium";
-				}
-				if(trial.stimulus[1].split("_")[1][2] == "L"){
-					length = "Long";
-				}
-				if(trial.stimulus[1].split("_")[1][3] == "S"){
+				if(trial.stim_GIF_B[0].split("/")[1].split("_")[0].length == 3){
 					state_OR_event = "State";
-				}
-				if(trial.stimulus[1].split("_")[1][3] == "E"){
+					state_branch = trial.stim_GIF_B[0].split("/")[1].split("_")[0][1];
+				} else {
 					state_OR_event = "Event";
-					if(trial.stimulus[1].split("_")[1][4] == "1"){
-						time_interval = "Short";
-					}
-					if(trial.stimulus[1].split("_")[1][4] == "2"){
-						time_interval = "Medium";
-					}
-					if(trial.stimulus[1].split("_")[1][4] == "3"){
-						time_interval = "Long";
-					}
+					root_1st = trial.stim_GIF_B[0].split("/")[1].split("_")[0][1];
 				}
-			
 			}
-		} */
+		}
 		var html_prompt = '<p id="prompt" style="margin-bottom:50px">'+trial.prompt[0]+'</p>';
 		var html_IMG = '<div id="IMG_container" style="padding:0px 50px 0px 50px"</div>';
 		var continue_btn = '<button id="jspsych-causal-graph3-continue-btn" class="jspsych-btn" style="margin-left: 5px ; margin-top:40px">'+trial.button_label_next[0]+'</button>';
@@ -208,7 +189,6 @@ jsPsych.plugins['causal-graph3'] = (function() {
 		function tb(stim){
 			return stim.split('/')[1].split('_')[1];
 		}
-		console.log(trial.stim_GIF_A.split('/')[1],tb(trial.stim_GIF_A));
 
 		var cont_btn = document.getElementById("jspsych-causal-graph3-continue-btn");
 		var ld = document.getElementById("ld");
@@ -322,6 +302,10 @@ jsPsych.plugins['causal-graph3'] = (function() {
 
 
 						}
+						/*
+						function onClick(data){
+							console.log(stim_name.slice(0,stim_name.length -2),data.key)
+						} */
 					
 						var map = $("#Graphics");
 						map.mapster({
@@ -341,7 +325,8 @@ jsPsych.plugins['causal-graph3'] = (function() {
 							},
 							fadeInterval: 50,
 							staticState:null,
-							mapKey : 'id'
+							mapKey : 'id'/*,
+							onClick: onClick*/
 						});
 
 						nxt_btn.addEventListener('click', function(){
@@ -363,20 +348,23 @@ jsPsych.plugins['causal-graph3'] = (function() {
 								
 								if(trial.status == 'active'){
 									trial_data = {
-										"stimulus": trial.stimulus,
+										"stimulus": stim_name.slice(0,stim_name.length -2),
 										"status": trial.status,
 										"stim_type": stim_type,
-										"length": length,
+										"rolled_OR_unrolled": rolled_OR_unrolled,
+										"A_branch_loc": A_branch_loc,
+										"A_detectors": A_detectors,
 										"state_OR_event": state_OR_event,
-										"branch_first": branch_first,
-										"time_interval": time_interval,
+										"state_branch": state_branch,
+										"root_1st": root_1st,
+										"imdt_2nd": imdt_2nd,
 										"node_selected": node_selected,
 										"nb_of_run": nb_of_run,
 										"rt": rt
 									};
 								} else {
 									trial_data = {
-										"stimulus": trial.stimulus,
+										"stimulus": stim_name.slice(0,stim_name.length -2),
 										"status": trial.status,
 										"nb_of_run": nb_of_run
 									};
@@ -409,7 +397,7 @@ jsPsych.plugins['causal-graph3'] = (function() {
 					
 					/*
 					function onClick(data){
-						console.log(trial.stimulus[1],data.key)
+						console.log(trial.stim_GIF_B[1],data.key)
 					}*/
 
 					
@@ -422,7 +410,7 @@ jsPsych.plugins['causal-graph3'] = (function() {
 			
 			} else {
 				var trial_data = {
-					"stimulus": trial.stimulus,
+					"stimulus": trial.stim_GIF_A.split("/")[1].split(".")[0],
 					"status": trial.status
 				};
 				display_element.innerHTML = '';

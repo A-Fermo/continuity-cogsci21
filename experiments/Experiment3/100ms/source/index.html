@@ -3,7 +3,6 @@
     <head>
         <title>Particules detection</title>
         <script src="js/jspsych.js"></script>
-        <script src="js/plugins/jspsych-image-button-response.js"></script>
         <script src="js/plugins/jspsych-survey-multi-choice.js"></script>
         <script src="js/jquery.min.js"></script>
         <script src="js/jquery.imagemapster.js"></script>
@@ -486,7 +485,6 @@
     var group = ["Right","Left"];
     var condition = group[Math.floor(Math.random()*group.length)];
     var chainS,chainC,RAAC,RAC,RBAC,RBC,UAAC,UAAS,UABS,UAS,UBAC,UBAS,UBBS,UBC,UBS;
-    condition = "Right";
     if(condition == "Right"){
         inst_2 = 'img/inst_R2.gif';
         inst_3a = 'img/inst_R3a.gif';
@@ -520,7 +518,21 @@
         UBS = rd(['img/UBS_RB','img/UBS_RT']);
 
     } else{
-
+        inst_2 = 'img/inst_L2.gif';
+        inst_3a = 'img/inst_L3a.gif';
+        inst_3b = 'img/inst_L3b.gif';
+        inst_4 = 'img/inst_L4.gif';
+        inst_5 = 'img/inst_L5.gif';
+        inst_6a = 'img/inst_L6a.gif';
+        inst_6b = 'img/inst_L6b.gif';
+        inst_7 = 'img/inst_L7.gif';
+        inst_8a = 'img/inst_L8a.gif';
+        inst_8b = 'img/inst_L8b.gif';
+        inst_9a = 'img/inst_L9a.gif';
+        inst_9b = 'img/inst_L9b.gif';
+        inst_9c = 'img/inst_L9c.gif';
+        inst_10 = 'img/inst_L10.gif';
+        inst_11 = 'img/inst_L11.gif';
         chainS = 'img/chainS_L';
         chainC = rd(['img/chainC_LB','img/chainC_LT']);
         RAAC = rd(['img/RAAC_LB','img/RAAC_LT']);
@@ -576,7 +588,7 @@
 
     var coord_A_NOloop = [null,circles_chain[tb(chainC)],circles_A[tb(UAAC)],squares_A[tb(UAAS)],squares_A[tb(UABS)],squares_A[tb(UAS)],circles_A[tb(UBAC)],squares_A[tb(UBAS)],squares_A[tb(UBBS)],
     circles_A[tb(UBC)],squares_A[tb(UBS)]]
-    var coord_B_Noloop = [squares_chain,null,squares_B[tb(UAAC)],squares_B[tb(UAAS)],squares_B[tb(UABS)],squares_B[tb(UAS)],squares_B[tb(UBAC)],squares_B[tb(UBAS)],squares_B[tb(UBBS)],
+    var coord_B_Noloop = [squares_chain,[coord_G],squares_B[tb(UAAC)],squares_B[tb(UAAS)],squares_B[tb(UABS)],squares_B[tb(UAS)],squares_B[tb(UBAC)],squares_B[tb(UBAS)],squares_B[tb(UBBS)],
     squares_B[tb(UBC)],squares_B[tb(UBS)]];
 
     var A_detectors_type = [null,'round','round','square','square','square','round','square','square','round','square'];
@@ -586,7 +598,7 @@
 
     var all_files_to_preload = inst_to_preload.concat(GIF_a_NOloop,GIF_a_loop);
 
-    var t = 1000;
+    var t = 900;
     
     /*
     var group = ["Right","Left"];
@@ -933,7 +945,7 @@
             A_coord: coord_A_loop[i],
             B_coord: coord_B_loop[i],
             GIF_B_duration: GIF_B_duration,
-            prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of the GCM?<br> Respond by clicking on a detector."],
+            prompt: ["Click on RUN to observe an activation sequence.<br>&nbsp;","&nbsp;<br>&nbsp;","In this sequence what caused the activation of G?<br> Respond by clicking on a detector."],
             button_label_again: "Run again",
             button_label_next: ["Run","Next network"],
             prompt_error: "ERROR ! You have to select one detector.<br>&nbsp;"
