@@ -3,8 +3,8 @@ Event,,unroll,rolled,unrolled
 "a starts first, a->G continuous","as,bs,bG0,aG1",X (UAAC),X (RAAC),X (UAAS)
 "a starts first, b->G continuous","as,bs,aG0,bG1", , ,X (UABS)
 "b starts first, b->G continuous","bs,as,aG0,bG1",, ,X (UBBS)
-"b starts first, a->G continuous","bs,as,bG0,aG1",X (UBAC),X,X (UBAS)
+"b starts first, a->G continuous","bs,as,bG0,aG1",X (UBAC),X (RBAC),X (UBAS)
 ,,,,
 State,,,,
-a (state),,,X (a->G continuous),X (b->G continuous)
-"b (state), a->G continuous",,X,X,X
+a (state) ,,,X (a->G continuous) (RAC),X (b->G continuous) (UAS)
+"b (state), a->G continuous",,X (UBC),X (RBC),X (UBS)
