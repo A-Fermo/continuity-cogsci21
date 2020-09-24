@@ -1,0 +1,35 @@
+subject_id,stimulus,trial_type,time_elapsed,gender,age,language,country,sampling,turkcode,nb_of_run,rt,responses,stim_type,rolled_OR_unrolled,A_branch_loc,A_detectors,state_OR_event,state_branch,root_1st,imdt_2nd,node_selected
+1,instruction,causal-graph1,1723,male,26.0,french,Australia,Left,R562805197500gxrw,,,,,,,,,,,,
+1,instruction,causal-graph1,4389,male,26.0,french,Australia,Left,R562805197500gxrw,,,,,,,,,,,,
+1,instruction,causal-graph1,12017,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,,,,,,,,,,,
+1,instruction,causal-graph1,12735,male,26.0,french,Australia,Left,R562805197500gxrw,,,,,,,,,,,,
+1,instruction,causal-graph1,19377,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,,,,,,,,,,,
+1,instruction,causal-graph1,20035,male,26.0,french,Australia,Left,R562805197500gxrw,,,,,,,,,,,,
+1,instruction,survey-multi-choice,25583,male,26.0,french,Australia,Left,R562805197500gxrw,,,"{""Q0"":"" To decide what caused the activation of G"",""Q1"":"" A detector becomes active if it absorbs a radioactive particle or receives input from an active detector"",""Q2"":"" G becomes active if all of its inputs are active""}",,,,,,,,,
+1,instruction,causal-graph1,26192,male,26.0,french,Australia,Left,R562805197500gxrw,,,,,,,,,,,,
+1,UAAS_LB,causal-graph1,54923,male,26.0,french,Australia,Left,R562805197500gxrw,2.0,11055.135000000068,,AND_Gate,Unrolled,Bottom,Squares,Event,,A,A,nodeB1
+1,UAS_LT,causal-graph1,64980,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,8876.534999999873,,AND_Gate,Unrolled,Top,Squares,State,A,,B,nodeA2
+1,UABS_LB,causal-graph1,78760,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,12606.574999999793,,AND_Gate,Unrolled,Bottom,Squares,Event,,A,B,nodeA3
+1,chainS_L,causal-graph1,87833,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,8387.105000000243,,ChainS,,,,,,,,nodeB4
+1,UBS_LB,causal-graph1,98468,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,9798.38000000018,,AND_Gate,Unrolled,Bottom,Squares,State,B,,A,nodeA5
+1,UBAS_LB,causal-graph1,115762,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,16435.009999999704,,AND_Gate,Unrolled,Bottom,Squares,Event,,B,A,nodeB6
+1,UBBS_LT,causal-graph1,125947,male,26.0,french,Australia,Left,R562805197500gxrw,1.0,9166.535000000295,,AND_Gate,Unrolled,Top,Squares,Event,,B,B,nodeA6
+1,instruction,causal-graph1,126781,male,26.0,french,Australia,Left,R562805197500gxrw,,,,,,,,,,,,
+1,comment,survey-text,131011,male,26.0,french,Australia,Left,R562805197500gxrw,,4219.465000000113,"{""Q0"":""coucou""}",,,,,,,,,
+2,instruction,causal-graph1,835,,,,Australia,Left,R564495347230gxrw,,,,,,,,,,,,
+2,instruction,causal-graph1,1550,,,,Australia,Left,R564495347230gxrw,,,,,,,,,,,,
+2,instruction,causal-graph1,6435,,,,Australia,Left,R564495347230gxrw,1.0,,,,,,,,,,,
+2,instruction,causal-graph1,7009,,,,Australia,Left,R564495347230gxrw,,,,,,,,,,,,
+2,instruction,causal-graph1,13110,,,,Australia,Left,R564495347230gxrw,1.0,,,,,,,,,,,
+2,instruction,causal-graph1,14097,,,,Australia,Left,R564495347230gxrw,,,,,,,,,,,,
+2,instruction,survey-multi-choice,22655,,,,Australia,Left,R564495347230gxrw,,,"{""Q0"":"" To decide what caused the activation of G"",""Q1"":"" A detector becomes active if it absorbs a radioactive particle or receives input from an active detector"",""Q2"":"" G becomes active if all of its inputs are active""}",,,,,,,,,
+2,instruction,causal-graph1,23238,,,,Australia,Left,R564495347230gxrw,,,,,,,,,,,,
+2,UABS_LT,causal-graph1,47057,,,,Australia,Left,R564495347230gxrw,1.0,23013.739999999867,,AND_Gate,Unrolled,Top,Squares,Event,,A,B,nodeB1
+2,UBBS_LB,causal-graph1,62446,,,,Australia,Left,R564495347230gxrw,1.0,12679.984999999759,,AND_Gate,Unrolled,Bottom,Squares,Event,,B,B,nodeA2
+2,UBAS_LB,causal-graph1,78423,,,,Australia,Left,R564495347230gxrw,1.0,14733.090000000171,,AND_Gate,Unrolled,Bottom,Squares,Event,,B,A,nodeB3
+2,UAS_LT,causal-graph1,113600,,,,Australia,Left,R564495347230gxrw,1.0,30110.644999999746,,AND_Gate,Unrolled,Top,Squares,State,A,,B,nodeA4
+2,UBS_LT,causal-graph1,126586,,,,Australia,Left,R564495347230gxrw,1.0,11699.444999999743,,AND_Gate,Unrolled,Top,Squares,State,B,,A,nodeB5
+2,UAAS_LT,causal-graph1,167624,,,,Australia,Left,R564495347230gxrw,1.0,24618.56500000021,,AND_Gate,Unrolled,Top,Squares,Event,,A,A,nodeA6
+2,chainS_L,causal-graph1,181916,,,,Australia,Left,R564495347230gxrw,1.0,9884.189999999771,,ChainS,,,,,,,,nodeB7
+2,instruction,causal-graph1,182514,,,,Australia,Left,R564495347230gxrw,,,,,,,,,,,,
+2,comment,survey-text,186419,,,,Australia,Left,R564495347230gxrw,,3891.050000000192,"{""Q0"":""coucou2""}",,,,,,,,,
