@@ -4,11 +4,7 @@ This repository provides the source code, the data and the experimental material
 
 [cite paper in preparation...]
 
-<br>
-
 ## Overview
----
-<br>
 
 `experiments` contains the experimental materials for four different pilot experiments we ran.
 
@@ -20,13 +16,9 @@ This repository provides the source code, the data and the experimental material
 
 `docs` contains different useful file like ethics form and articles.
 
-<br>
-
 ## Folder `experiments`
----
-Contains four folders including the materials for the pilot experiments we ran.
 
-<br>
+Contains four folders including the materials for the pilot experiments we ran.
 
 `Experiment1`
 - `500ms_temporary`. Folder that contains the materials for the first version of the experiment. The stimuli and the task correspond to Experiment 1 in the paper however the time delay between two activations was initially set at 500ms. This is a temporary version. 29 participants. [Not included in the paper]
@@ -41,14 +33,9 @@ Contains four folders including the materials for the pilot experiments we ran.
 `Experiment2`
 - `100ms_definitive`. Contains the materials for **Experiment 2** we included in the paper. 98 participants.
 
-<br>
-
 ## Changelog
----
 
 Series of modifications that affected all the subsequent experiments. The date indicates when the experiment was deployed on Google App Engine. 
-
-<br>
 
 **Experiment1, 500ms_temporary (29/05/2020)**
 
