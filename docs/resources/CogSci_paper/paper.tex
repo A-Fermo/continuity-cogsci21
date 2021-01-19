@@ -30,9 +30,6 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{multirow}
-%\usepackage{epsfig}
-%\usepackage{epstopdf}
-%\epstopdfsetup{update=false}
 
 %\cogscifinalcopy % Uncomment this line for the final submission 
 
@@ -43,6 +40,8 @@
                    % placement to [H] for conformity to Word template,
                    % though floating tables and figures to top is
                    % still generally recommended!
+
+\newcommand{\ev}[2]{$#1_#2$}
 
 %\usepackage[none]{hyphenat} % Sometimes it can be useful to turn off
 %hyphenation for purposes such as spell checking of the resulting
@@ -90,7 +89,7 @@ Identifying the causes of an event involves not only logical rules but also diff
 \includegraphics{figures/introfig.eps}
 \end{center}
 \caption{(a) An example of an AND-Gate causal system. In an AND-Gate for an effect to occur it needs the occurence of all the causes it is linked to. Here for the smoke alarm to go off, both the ionization and photoelectric detectors it is connected to have to be activated. In this scenario the detectors activation spreads over the top chain first (ii) and then over the bottom chain leading to the alarm activation (iii).} 
-\label{fig:1}
+\label{fig:intro}
 \end{figure*}
 
 What would Lilly think caused the alarm to go off? Several answers can be considered. Based on logical dependencies, people's causal judgements can state that both the furthest activated ionization detector (first root change ``R1'') and the furthest activated photoelectric detector (second root change ``R2'') are equally the causes of the alarm activation. However a more intuitive answer would be that the provided temporal information influences people's choice toward one cause more than the other one. An important selection criterium could be how recent a candidate cause is compared to another one and would lead for instance to the following preferences: R2 $\succ$ R1, and I2 $\succ$ I1 (``I2'' and ``I1'' being respectively the second and first immediate changes). Nonetheless we can imagine other cases where people potentially rely in part on another type of temporal criterium: let's imagine that the activation of the ionization detectors starts before and finishes after the activation of the photoelectric detectors, such that R1 and I2 are linked by a \textit{continuous sequence of changes}. In that case this is the activation of the oldest root change R1 and not the most recent root change R2 that initiate a continuous sequence of changes until the activation of the alarm. In such situations we want to know what people would consider as the main cause of the system.
@@ -99,23 +98,54 @@ The alarm case can be seen as an example of ``singular causation''\footnote{Also
 
 In this paper we present two experiments that show the importance of taking into account temporal information to explain the causal judgements people make. In particular we relied on the intuition behind the example above that the chronological order and the temporal relationship between distinct causes can bias people toward an event rather than another in considering which one is the main cause of the effect.
 
-\section{Theoretical proposition}
+% Intro:
+% smoke detector example
+% 
 
-So far it seems that none of the current main theories of actual causation has focused on the role of temporal information for inferring causal relationship between events qua changes of states over time. In contrast we hypothesised that people's causal judgements are influenced not only by the values of all relevant variables at the time the effect occurs, but also the temporal order in which these variables took their values. This approach has some precedent in the literature but has not been developed carefully and has never been tested experimentally as we intend to do. We add further that people mainly identify causation with a \textit{continuous} sequence of changes of states over time. The underlying intuition is that people trace back the history of changes from the immediate one that directly brought about the occurrence of the effect, up to the root change in the system that initiated the series of changes along the path. As we think that in common life it is really rare to see simultaneously two or more events occurring at the very same time and producing some common effect, we also want to postulate a \textit{no coincidence principle}. Relying on this principle we can split the system's time frame in units of time that are small enough to have no more than one event\footnote{Again we insist on the definition of \textit{event} as \textit{change of state}.} per unit. Lets represent by $\mu^{\emptyset}_{z_{i\rightarrow j}}(t)$ a change of state at time $t$, from variable $Z=z_i$ to $Z=z_j$, $\forall i,j\in {R}_+$. Here $Z$ is the variable we want to reason about and has no children (represented by the empty set $\{\emptyset\}$). Formalizing our above mentioned idea we first have to find $\mathcal{U}^Z_{\bm{y}_{i\rightarrow j}}(t-1)$, that is the set of the immediate changes in the parents $\bm{Y}$ of the variable $Z$ at time $t-1$ that led to the observed change in $Z$ at time $t$. So we want to find $\mathcal{U}$ such that $\mathcal{U}^Z_{\bm{y}_{i\rightarrow j}}(t-1)\rightarrow \mu^{\emptyset}_{z_{i\rightarrow j}}(t)$. According to our \textit{no coincidence principle} $\mathcal{U}$ is either empty or a singleton -- including only one parent whose value changed. Lets say that at $t-1$ we find a change in a parent variable $Y$, so $\mathcal{U}^Z_{\bm{y}_{i\rightarrow j}}(t-1)=\{\mu^{Z}_{y_{i\rightarrow j}}(t-1)\}$. Then we want to find the set of changes such that $\mathcal{U}^Y_{\bm{x}_{i\rightarrow j}}(t-2)\rightarrow \mu^{Z}_{y_{i\rightarrow j}}(t-1)$, that is the set of immediate previous changes in the parents $\bm{X}$ of the variable $Y$ at time $t-2$ that led to the observed change in $Y$ at time $t-1$. Following the same logic we suggest that if $\mathcal{U}^X_{\bm{w}_{i\rightarrow j}}(t-3)\rightarrow \mu^{Y}_{x_{i\rightarrow j}}(t-2)$ is such that $\mathcal{U}^X_{\bm{w}_{i\rightarrow j}}(t-3)=\emptyset$, then it means that $\mu^{Y}_{x_{i\rightarrow j}}(t-2)$ represents the chronologically first change along the path, occurring in $X$, and we suggest that this change is identified as being the main cause of $Z$.
+\section{The continuity account of actual causation}
+
+This section uses the smoke detector example in Figure~\ref{fig:intro}a to introduce our theoretical approach to actual causation. Like physical process theory, we focus on processes unfolding in continuous time, but it will be convenient to divide up the dimension of time into a sequence of intervals brief enough that there is at most one event per interval. The effect to be explained is an event that happens within one of these intervals: for example, a smoke alarm's changeof state from inactive to active. Given this setup, our theory can be formulated using a procedure that starts with the effect and steps backwards through time until the actual cause of the effect is identified.
+
+The immediate cause of the smoke alarm's activation must be an event that took place in the interval preceding the activation. In Figure~\ref{fig:intro}a, the event immediately preceding the alarm's activation was the activation of \ev{I}{C}. Having identified this immediate cause, we then step backwards and identify the immediate cause of this event, and so on.  The procedure terminates once we arrive at an event that has no immediate cause within the system of interest, 
+and this cause is declared to be the main cause of the effect.  In Figure~\ref{fig:intro}a the main cause is the activation of \ev{R}{C}. 
+
+In most cases, the backward-tracing procedure just described will identify a single main cause of the effect. If the effect has no immediate cause within the system, then no main cause will be identified. Because there is at most one event per interval, the procedure can never identify more than one main cause.
+
+The assumption that at most one event occurs per interval follows from the idea that there are no coincidences. In continuous time it is exceedingly improbable that two events would occur at exactly the same time --- in technical terms this kind of coincidence can be described as a ``measure zero'' possibility. If there are no coincidences, then slicing the time dimension sufficiently finely will ensure that there is at most one event per interval.
+
+The boundaries of the causal system under consideration will depend on context. For simplicity, our discussion of Figure~\ref{fig:intro}a focused only on events internal to the alarm system, and addressed the question of which detector is best viewed as the main cause of the alarm's activation. Questions about smoke alarms, however, will often be framed with respect to a causal system that includes both the alarm system and its surroundings. Expanding the causal system in this may can allow the alarm's activation to be traced back to an event such as an electrical fault that started a fire which in turn triggered the alarm.
+
+
+
+
+%So far it seems that none of the current main theories of actual causation has focused on the role of temporal information for inferring causal relationship between events qua changes of states over time. In contrast we hypothesised that people's causal judgements are influenced not only by the values of all relevant variables at the time the effect occurs, but also the temporal order in which these variables took their values. This approach has some precedent in the literature but has not been developed carefully and has never been tested experimentally as we intend to do. We add further that people mainly identify causation with a \textit{continuous} sequence of changes of states over time. The underlying intuition is that people trace back the history of changes from the immediate one that directly brought about the occurrence of the effect, up to the root change in the system that initiated the series of changes along the path. As we think that in common life it is really rare to see simultaneously two or more events occurring at the very same time and producing some common effect, we also want to postulate a \textit{no coincidence principle}. Relying on this principle we can split the system's time frame in units of time that are small enough to have no more than one event\footnote{Again we insist on the definition of \textit{event} as \textit{change of state}.} per unit. Lets represent by $\mu^{\emptyset}_{z_{i\rightarrow j}}(t)$ a change of state at time $t$, from variable $Z=z_i$ to $Z=z_j$, $\forall i,j\in {R}_+$. Here $Z$ is the variable we want to reason about and has no children (represented by the empty set $\{\emptyset\}$). Formalizing our above mentioned idea we first have to find $\mathcal{U}^Z_{\bm{y}_{i\rightarrow j}}(t-1)$, that is the set of the immediate changes in the parents $\bm{Y}$ of the variable $Z$ at time $t-1$ that led to the observed change in $Z$ at time $t$. So we want to find $\mathcal{U}$ such that $\mathcal{U}^Z_{\bm{y}_{i\rightarrow j}}(t-1)\rightarrow \mu^{\emptyset}_{z_{i\rightarrow j}}(t)$. According to our \textit{no coincidence principle} $\mathcal{U}$ is either empty or a singleton -- including only one parent whose value changed. Lets say that at $t-1$ we find a change in a parent variable $Y$, so $\mathcal{U}^Z_{\bm{y}_{i\rightarrow j}}(t-1)=\{\mu^{Z}_{y_{i\rightarrow j}}(t-1)\}$. Then we want to find the set of changes such that $\mathcal{U}^Y_{\bm{x}_{i\rightarrow j}}(t-2)\rightarrow \mu^{Z}_{y_{i\rightarrow j}}(t-1)$, that is the set of immediate previous changes in the parents $\bm{X}$ of the variable $Y$ at time $t-2$ that led to the observed change in $Y$ at time $t-1$. Following the same logic we suggest that if $\mathcal{U}^X_{\bm{w}_{i\rightarrow j}}(t-3)\rightarrow \mu^{Y}_{x_{i\rightarrow j}}(t-2)$ is such that $\mathcal{U}^X_{\bm{w}_{i\rightarrow j}}(t-3)=\emptyset$, then it means that $\mu^{Y}_{x_{i\rightarrow j}}(t-2)$ represents the chronologically first change along the path, occurring in $X$, and we suggest that this change is identified as being the main cause of $Z$.
 
 \section{Experiments}
 
-To test our hypothesis that the main cause of an effect is the root change that initiates a continuous sequences of changes until the occurrence of the effect, participants were presented animations showing activation spreading over networks of nodes up to the final node. We run two experiments which shared the same plot that we wanted as intuitive as possible: participants were told that they were working in a nuclear control room and that their job was to monitor networks of particule detectors. The instructions said that when a detector, depicted by a square or circle (see below), absorbs a radioactive particule it becomes active and turns black, transmitting the activation across the links of the network so that an active detector activates the next one in the chain and so forth. All the networks include a special component, called 'Gauge of Critical Moment', that becomes active only if all of its input from the detectors it is connected to are active. The Gauge of Critical Moment is always represented by a square with ``GCM'' (Experiment 1) or ``G'' (Experiment 2) above. At the end of an activation sequence, it is asked to click on the detector(s) they considered as the main cause(s) of the activation of the Gauge of Critical Moment. Examples of network activations were shown in the instructions and participants had to answer to answer a survey at the end to see if they correctly understood the instructions. If they made a mistake they had to read again all the instructions and answer again the survey. 
+We developed two experiments to test the continuity account of actual causation just presented.  The first experiment explores some simple cases directly analogous to the smoke detector example. The second experiment explores cases that elaborate that distinguish between the continuity account and Spellman's probability raising account~\cite{spellman97}.
 
-In both experiments we included only two types of input-output logic, namely single input (chains) and AND-Gate (branches where the effect needs the activation of two inputs to occur). When people were presented chains, we first wanted to see if they identified the main cause of the effect with a change of state that occurred in the chain the furthest away from effect (\textit{root change}) or the closest to it (\textit{immediate change}). When they were presented AND-Gates, we wanted to see if they identified the main cause of the effect with the root change that occurred chronologically first (\textit{1\textsuperscript{st} root change}, labeled ``R1'' henceforth), the root change that occurred chronologically last (\textit{2\textsuperscript{nd} root change}, ``R2'' henceforth), the immediate change that occurred chronologically first (\textit{1\textsuperscript{st} immediate change}, ``I1'') or the immediate change that occurred chronologically last (\textit{2\textsuperscript{nd} immediate change}, ``I1'').
+The cover story for both experiments asked participants to imagine that they worked in a control room and that their job was to monitor networks of particle detectors. Detectors were shown as white squares (as in Figure~\ref{fig:intro} that become active and turn black when they absorb a radioactive particle. Activation is transmitted across links in the network, and a detector activates if all of its input detectors are active. Each network contains a special detector called the Gauge of Critical Moment (GCM, analogous to the smoke alarm in Figure~\ref{fig:intro}a) and participants were told that ``for each activation sequence that you see, your job is to decide what caused the activation of the GCM.'' The prompt after each sequence was ``In this sequence what caused the activation of the GCM? Respond by clicking on a detector,'' and participants were required to choose a single detector in response. 
+
+Both experiments included chains in which the GCM received input from one detector, and dual branch networks such as Figure~\ref{fig:intro}a in which the GCM received input from two detectors. For chains, the continuity account predicts that participants will tend to choose the root cause of the effect (ie the detector that initiates the activation sequence) rather than the immediate cause (the detector that immediately precedes the GCM). For dual branch networks, the continuity account predicts that participants will tend to choose the root cause on the branch whose activation is temporally continuous with the activation of the GCM. We refer to this branch as the continuous branch, and refer to the root cause and the immediate cause on this branch as \ev{R}{C} and \ev{I}{C} respectively, where the subscript denotes ``continuous.'' We refer to the other branch as the ``delayed branch,'' and use \ev{R}{D} and \ev{I}{D} for the root and immediate cause on this branch. The ``delay'' in this naming scheme refers to the delay that occurs between the activation of \ev{I}{D} and the activation of the GCM.
 
 \subsection{Experiment 1}
 
+The purpose 
+
+
+
 The objective of this experiment was to see whether people's causal judgement were influenced by: the length of the sequences of changes (for chains and AND-Gates), and -- for AND-Gates only -- the delay between the last activation of the first branch (I1) and the first activation of the second branch (R2). In this experiment activation starts to spread over the second branch after the activation reached the end of the first branch (like in Fig.\ref{fig:1}).
 
-\textbf{Participants}. The experiment was hosted by Google Cloud App Engine and 30 participants were recruited via Amazon Mahchanical Turk. There were 10 females (average age: 37.3) and 20 males (average age: 37.6). 28 participants were english speakers, 1 were italian speaker and 1 marathi speaker.
+\textbf{Participants}. 30 participants were recruited via Amazon Mechanical Turk and paid XXX for a YYY minute experiment.
 
-\textbf{Method}. Each participant was presented 15 different networks of square detectors. Square detectors maintain their activation through time. Participants were first presented the network in its initial and static state and were asked to click the ``Run'' button to observe an activation sequence over the network. They waited 5000ms to see a first change of state occurring in a detector and the activation delay between any two successive detectors was set on 100ms. 
+%The experiment was hosted by Google Cloud App Engine and 30 participants were recruited via Amazon Mahchanical Turk. There were 10 females (average age: 37.3) and 20 males (average age: 37.6). 28 participants were english speakers, 1 were italian speaker and 1 marathi speaker.
+
+\textbf{Method}. 
+
+% Examples of network activations were shown in the instructions and participants had to answer to answer a survey at the end to see if they correctly understood the instructions. If they made a mistake they had to read again all the instructions and answer again the survey. 
+
+
+Each participant was presented 15 different networks of square detectors. Square detectors maintain their activation through time. Participants were first presented the network in its initial and static state and were asked to click the ``Run'' button to observe an activation sequence over the network. They waited 5000ms to see a first change of state occurring in a detector and the activation delay between any two successive detectors was set on 100ms. 
 
 Three stimuli were chains that differed in length of activation sequence, that is including 2, 4 or 7 activated squares (with the GCM). These lengths were labeled ``Short'', ``Medium'' and ``Long''. The AND-Gates were similarily categorised ``Short'', ``Medium'' (the one in Fig.\ref{fig:1}) and ``Long'' with both branches being the same length. In each length category participants were shown three similar AND-Gates that differed uniquely in the delays between I1 and R2. The delays were 2s, 4s and 6s.
 
@@ -129,7 +159,8 @@ After the activation of the GCM (the end of the animation) participants had to w
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8cm]{results_E1}
+%\includegraphics[width=8cm]{results_E1}
+\includegraphics{figures/expt1.eps}
 \end{center}
 \caption{Comparison of the results for different length of activation in AND-Gates. Short: 1 activated detector in each branch. Medium: 3 activated detectors in each branch. Long: 6 activated detectors in each branch. ``State'' responses correspond to the networks where one branch was already activated before participants run the animation. ``Event'' responses correspond to the networks where no detectors were activated before and include results for 2s, 4s and 6s delays between I1 and R2. BUT SEE WARNING ABOVE.} 
 \label{fig:2}
@@ -145,20 +176,21 @@ In the previous experiment we have seen that people generally chose R2 (identica
 
 As in Experiment 1 participants were first presented the network in its initial state and were asked to click the ``Run'' button to observe an activation sequence over the network. Participants waited 5000ms to see a first change of state occurring in a detector. Activation delay between any two successive square activations was set on 100ms as well. All the stimuli were presented in a random order and participants were assigned to either group "Left" or "Right" as in Experiment 1, and each AND-Gate was randomly presented with the curved chain (see Fig.\ref{fig:3})) at the top or at the bottom.
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=8cm]{stim_E2a}
-\end{center}
-\caption{An example of an activation spreading over a network of Experiment 2. Here a continuous sequence of changes links R1 and I2 -- in other words this is the sequence of activations initiated by the chronologically first root change (curved branch) that eventually leads to the activation of the last immediate change and therefore G.} 
-\label{fig:3}
-\end{figure}
+%\begin{figure}[ht]
+%\begin{center}
+%\includegraphics[width=8cm]{stim_E2a}
+%\end{center}
+%\caption{An example of an activation spreading over a network of Experiment 2. Here a continuous sequence of changes links R1 and I2 -- in other words this is the sequence of activations initiated by the chronologically first root change (curved branch) that eventually leads to the activation of the last immediate change and therefore G.} 
+%\label{fig:3}
+%\end{figure}
 
 
 \textbf{Results}. First we observed no significant effect (statistics?) of neither the orientation of the networks (left \textit{vs} right) nor the location of the curved chain (top \textit{vs} bottom). On average participants took 8 min to complete the experiment and overall 91\% of the time participants run an animation only once. Second the reversed response pattern for R1 and R2 between ``R1 cont'', ``R2 cont'' and ``State'' stimuli type shown in (Fig.\ref{fig:4}) confirms our hypothesis: when this is the first root change R1 that initiates a continuous sequence of changes until the activation of G, R1 is considered the cause of the activation of G about two times more than R2 (31\% against 15\%) while this is the opposite when this is the second root change that initiates a continuous sequence of changes (18\% against 29\%). Coherently, for ``State'' condition (when this is R2 that initiates the continuous sequence of changes) participants prefer R2 over R1 in a very large extent (47\% against 5\%). As expected the type of network had however no effect on the responses for I1 nor I2 and the percentages of responses for I2 and the root change that initiates the continuous sequence for the Event network (31\% and 34\% for respectively the ``R1 cont'' and ``R2 cont'' networks) were approximately the same.
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=8cm]{results_E2}
+%\includegraphics[width=8cm]{results_E2}
+\includegraphics{figures/expt2.eps}
 \end{center}
 \caption{Results for AND-Gates where the continuous sequence of changes is either between R1 and I2 or between R2 and I2. ``Event (R1 cont)'': responses for the networks where no detectors were already active before the participant runs the animation and where the continuous sequence of changes is between R1 and I2. ``Event (R2 cont)'': responses for the networks where no detectors were already active and where the continuous sequence is between R2 and I2. ``State (R2cont)'': responses for networks where one branch was already activated before the participant runs the animation and where the continuous sequence of activation is necessarily initiated by R2.} 
 \label{fig:4}
