@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.7)  22 JAN 2021 18:37
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.9.7)  23 JAN 2021 15:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -301,37 +301,42 @@ LaTeX Warning: Citation `spellman97' undefined on input line 76.
 
 ]
 Package epstopdf Info: Source file: <figures/fig1a.eps>
-(epstopdf)                    date: 2021-01-22 18:34:16
-(epstopdf)                    size: 43024 bytes
+(epstopdf)                    date: 2021-01-23 15:30:19
+(epstopdf)                    size: 43038 bytes
 (epstopdf)             Output file: <figures/fig1a-eps-converted-to.pdf>
-(epstopdf)                    date: 2021-01-22 18:35:04
-(epstopdf)                    size: 21083 bytes
+(epstopdf)                    date: 2021-01-23 15:28:52
+(epstopdf)                    size: 21003 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/fig1a-eps-converte
 d-to.pdf figures/fig1a.eps>
 (epstopdf)             \includegraphics on input line 94.
-Package epstopdf Info: Output file is already uptodate.
-<figures/fig1a-eps-converted-to.pdf, id=8, 142.5325pt x 200.75pt>
+runsystem(repstopdf --outfile=figures/fig1a-eps-converted-to.pdf figures/fig1a.
+eps)...executed safely (allowed).
+
+Package epstopdf Info: Result file: <figures/fig1a-eps-converted-to.pdf>
+(epstopdf)                    date: 2021-01-23 15:30:33
+(epstopdf)                    size: 21030 bytes.
+<figures/fig1a-eps-converted-to.pdf, id=8, 142.5325pt x 198.7425pt>
 File: figures/fig1a-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/fig1a-eps-converted-to.pdf>
 Package pdftex.def Info: figures/fig1a-eps-converted-to.pdf  used on input line
  94.
-(pdftex.def)             Requested size: 142.53214pt x 200.7495pt.
+(pdftex.def)             Requested size: 142.53214pt x 198.742pt.
 Package epstopdf Info: Source file: <figures/fig1b.eps>
-(epstopdf)                    date: 2021-01-22 18:34:40
-(epstopdf)                    size: 90975 bytes
+(epstopdf)                    date: 2021-01-23 15:26:08
+(epstopdf)                    size: 92961 bytes
 (epstopdf)             Output file: <figures/fig1b-eps-converted-to.pdf>
-(epstopdf)                    date: 2021-01-22 18:35:04
-(epstopdf)                    size: 33997 bytes
+(epstopdf)                    date: 2021-01-23 15:27:35
+(epstopdf)                    size: 33101 bytes
 (epstopdf)             Command: <repstopdf --outfile=figures/fig1b-eps-converte
 d-to.pdf figures/fig1b.eps>
 (epstopdf)             \includegraphics on input line 98.
 Package epstopdf Info: Output file is already uptodate.
-<figures/fig1b-eps-converted-to.pdf, id=9, 142.5325pt x 200.75pt>
+<figures/fig1b-eps-converted-to.pdf, id=9, 142.5325pt x 198.7425pt>
 File: figures/fig1b-eps-converted-to.pdf Graphic file (type pdf)
 <use figures/fig1b-eps-converted-to.pdf>
 Package pdftex.def Info: figures/fig1b-eps-converted-to.pdf  used on input line
  98.
-(pdftex.def)             Requested size: 142.53214pt x 200.7495pt.
+(pdftex.def)             Requested size: 142.53214pt x 198.742pt.
 
 Underfull \hbox (badness 1052) in paragraph at lines 149--150
 []\OT1/ptm/m/n/10 The coun-ter-fac-tual ac-count makes no clear pre-dic-tion
@@ -420,7 +425,7 @@ etic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/urw/times/utmri8a.pfb></usr/share/texlive/texmf-di
 st/fonts/type1/urw/zapfding/uzdr.pfb>
-Output written on paper.pdf (6 pages, 287000 bytes).
+Output written on paper.pdf (6 pages, 286064 bytes).
 PDF statistics:
  108 PDF objects out of 1000 (max. 8388607)
  79 compressed objects within 1 object stream
