@@ -1,0 +1,575 @@
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
+```
+
+
+```{r libraries}
+library(tidyverse)
+library(here)
+library(ggthemes)
+library(lme4)
+library(brms)
+```
+
+
+```{r data, include=TRUE}
+dpath_exp1 <- here("data", "responsesOnly_E1_100def.csv")
+dpath_exp2 <- here("data", "responsesOnly_E2_100def.csv")
+
+mytheme <-  theme_classic(base_size = 10)  + 
+            theme(strip.background = element_blank())
+
+theme_set(mytheme)
+```
+
+```{r loadds, include=TRUE}
+
+# Experiment 1 data frame 
+d1 <- read_csv(dpath_exp1) #%>%
+
+```
+
+### Plot data
+
+```{r exp1plot, include=TRUE, fig.height=4, fig.width=6}
+
+d1plot <- d1 %>% 
+  filter(stimulustype != "chain") %>% 
+  group_by(state_or_event, length, response) %>% 
+  summarize(count = n()) %>% 
+  mutate(response = factor(response, levels = c("RC_IC", "RC", "RD_ID", "RD", "IC", "other")))
+
+plot1 <- d1plot %>% 
+  ggplot(aes(x = response, y=count)) +
+  geom_bar(stat="identity") +
+  facet_grid(state_or_event~length)
+plot1
+  
+```
+
+
+### Stats for Expt 1
+
+
+```{r exp1stats, include=TRUE, fig.height=4, fig.width=6}
+
+sdif_coding <- function(x) {
+  x <- as.factor(x)
+  contrasts(x) <- MASS::contr.sdif(levels(x))
+  x
+}
+
+d1_stats1 <- d1 %>% 
+  mutate(ri = factor(case_when(response=="RC_IC" ~  NA_character_,
+                        response=="RC" ~     "root",
+                        response=="RD_ID" ~  NA_character_,
+                        response=="RD" ~     "root",
+                        response=="IC" ~     "immediate",
+                        response=="ID" ~     "immediate",
+                        TRUE ~ NA_character_ 
+                        )),
+         cd = factor(case_when(response=="RC_IC" ~  "continuous",
+                        response=="RC" ~     "continuous",
+                        response=="RD_ID" ~  "delayed",
+                        response=="RD" ~     "delayed",
+                        response=="IC" ~     "continuous",
+                        response=="ID" ~     "delayed",
+                        TRUE ~ NA_character_ 
+                        )),
+         #lengthc = sdif_coding(factor(length))
+         lengthc = contr.sum(factor(length))  # use sum coding
+        )
+
+m0 <- glmer(ri ~ state_or_event + length + (1|participantnum), data = d1_stats1, 
+            family = binomial(link = "logit"))
+
+nchain <- 1 # for testing
+
+fit1_ri <- brm( ri ~ state_or_event + lengthc + (1|participantnum), family=bernoulli(), data = d1_stats1, chains = nchain)
+
+fit1_cd <- brm( cd ~ state_or_event + lengthc + (1|participantnum), family=bernoulli(), data = d1_stats1, chains = nchain)
+
+```
+
+
+
+### Fig 2a
+
+```{r fig2a, include=TRUE, fig.height=4, fig.width=6}
+
+#dsumm <- d %>% 
+#  select(character, Oracle, Bronze, Seal, simplified, traditional, `first period`) %>% 
+#  pivot_longer(cols=all_of(periods), names_to="period", values_to = "complexity" ) %>% 
+#  mutate(period = factor(period, levels=periods, order=TRUE)) %>% 
+#  rename(first = `first period`)
+
+fig2a <- dsumm %>% 
+  ggplot(aes(x=period, y=complexity, group=character))+
+  geom_line(alpha = 0.05) 
+fig2a
+```
+
+### Fig 2b
+
+```{r fig2b, include=TRUE, fig.height=4, fig.width=6}
+
+dmeans <- dsumm %>%
+  group_by(period, first) %>%
+  dplyr::summarize( n=sum(!is.na(complexity)), sd = sd(complexity, na.rm=TRUE), se=sd/sqrt(n), complexity=mean(complexity, na.rm=TRUE), .groups="drop")  %>%
+  group_by(first) %>%
+  mutate(n = mean(n))
+
+fig2b <- dmeans %>%
+  #filter(first!="traditional") %>%
+  ggplot(aes(x=period, y=complexity, group=first, color=first,size=n))+
+  geom_line(alpha = 0.7) +
+  geom_point(alpha = 1.0, size=1) +
+  geom_errorbar(aes(ymin=complexity-se, ymax=complexity+se), size = 0.5 , width=0.1) +
+  scale_color_manual(values = period_col, guide='none') +
+  scale_size_continuous(name="count") +
+  theme(legend.position = c(0.15, 0.82))
+
+fig2b
+ggsave(here("analysis","output", "avcomplexityperfirstperiod.pdf"), plot = fig2b, width = 3.4252,height = 2.8)
+
+```
+## Fig 3
+
+```{r fig3, include=TRUE, fig.height=4, fig.width=6}
+d_trad_vs_ob <- dsumm %>%
+  select(-distinctiveness) %>% 
+  pivot_wider(names_from=period, values_from=complexity) %>%
+  mutate(complexification= Traditional - Oracle) %>%
+  select(character, C1Type, complexification, numcomp)
+
+fig3a <- d_trad_vs_ob %>%
+  filter(numcomp <= 5) %>%
+  ggplot(aes(x=numcomp, y=complexification, group=numcomp))+
+  geom_violin(fill="gray80", draw_quantiles = c(0.25, 0.5, 0.75)) +
+  geom_hline(yintercept=0,linetype="dashed") +
+  xlab("Number of components")
+
+fig3a
+fig3b <- d_trad_vs_ob %>%
+  ggplot(aes(x=C1Type, y=complexification, group=C1Type))+
+  geom_violin(fill="gray80", draw_quantiles = c(0.25, 0.5, 0.75)) +
+  geom_hline(yintercept=0,linetype="dashed") +
+  xlab("Character type")
+fig3b
+
+patchr <- fig3b / fig3a
+
+patchrprint <- patchr + 
+  plot_annotation(tag_levels = c('a'), tag_suffix = ')') 
+
+ggsave(here("analysis","output", "changebyclasses.pdf"), plot = patchrprint, width = 3.5, height = 2.8)
+
+patchall <- fig2b + 
+  patchr + 
+  plot_layout(widths=c(1.7,2)) + 
+  plot_annotation(tag_levels = c('a'), tag_suffix = ')') 
+
+patchall
+ggsave(here("analysis","output", "complexitychange.pdf"), plot = patchall, width = 7.08661,height = 2.8)
+
+```
+
+##  Frequency
+```{r frequency, include=TRUE}
+
+dsumm_bin <- dsumm %>% 
+  filter(first == 'Oracle') %>% 
+  mutate(freqbin = -floor(log10(frequency))) %>% 
+  group_by(period, freqbin) %>% 
+  dplyr::summarize(complexity = mean(complexity)) %>% 
+  drop_na()
+  
+wireframe(complexity ~ freqbin * period, 
+          data = dsumm_bin,
+          screen = list(z = 45, x=-60),
+          )
+
+freqplot <- dsumm_bin %>% 
+  mutate(freqbin = -freqbin) %>% 
+  ggplot(aes(x=period, y=complexity, group=freqbin, color=freqbin)) +
+  geom_line()
+freqplot
+
+```  
+##  Distinctiveness
+
+```{r distinct, include=TRUE}
+dmeans_distinct <- dsumm %>%
+  group_by(period, first) %>%
+  dplyr::summarize( n=sum(!is.na(distinctiveness)), sd = sd(distinctiveness, na.rm=TRUE), se=sd/sqrt(n), complexity=mean(distinctiveness, na.rm=TRUE), .groups="drop")  %>%
+  group_by(first) %>%
+  mutate(n = mean(n))
+
+fig2b_distinct <- fig2b %+% dmeans_distinct +
+  ylab('distinctiveness') +
+  theme(legend.position = c(0.15, 0.76))
+
+fig2b_distinct
+ggsave(here("analysis","output", "avdistinctivenessperfirstperiod.pdf"), plot = fig2b_distinct, width = 3.4252,height = 2.8)
+
+fig_complexvsdistinct <- dsumm %>% 
+  ggscatter(x = "complexity", y = "distinctiveness",
+    size = 0.5,
+    add = "reg.line",  
+    add.params = list(color = "blue", fill = "lightgray"), 
+    ggtheme = mytheme
+  ) +
+  stat_cor(
+    aes(label = ..r.label..),
+    label.x = 3,
+    cor.coef.name='r'
+  ) +
+  coord_fixed(ratio=2)
+
+fig_complexvsdistinct
+
+patchall <- fig_complexvsdistinct +
+  fig2b_distinct + 
+  #plot_layout(widths=c(1.7,2)) + 
+  plot_annotation(tag_levels = c('a'), tag_suffix = ')') 
+   
+ggsave(here("analysis","output", "distinctivenesschange.pdf"), plot = patchall, width = 7.08661,height = 2.8)
+
+#  ggplot(aes(x=complexity, y=discriminability)) +
+#  geom_point() +
+#  geom_smooth(method=lm) +
+#  stat_cor(method="pearson")
+
+```
+
+
+##  Mixed effects regression. 
+
+For simplicity we treat period as a numeric variable. We run the same approach with complexity and distinctiveness as dependent variables.
+
+```{r frequentist, include=TRUE}
+  
+# Model comparison:
+
+# M0: Complexity ~ 1 + (1+Period | Character)
+# M1: Complexity ~ Period + (1+Period | Character)
+
+dsumm_numeric <- dsumm %>% 
+  mutate(period = as.numeric(period)) 
+
+dc_numeric <- d_c %>% 
+  mutate(period = as.numeric(period))
+  
+dvs <- c("complexity")
+
+for (dv in dvs) {
+  dforstats <- dsumm_numeric #%>% 
+    #filter(!is.na(!!as.symbol(dv)))
+  
+  m0 <- lmer(as.formula(paste0(dv, "~ 1 + (1+period|character)")), data = dforstats, REML = FALSE)  
+  m1 <- lmer(as.formula(paste0(dv, "~ period + (1+period|character)")), data = dforstats, REML = FALSE)  
+  
+  beta_period <- round(coef(summary(m1))[2,"Estimate"], 2)
+  ci_period <- confint(m1)
+  
+  a <- anova(m1, m0)
+  # pull out p value and chi-squared statistic
+  p_value <-  signif(a$"Pr(>Chisq)"[2] , digits=3)
+  #chi_sq <- signif(a$Chisq[2], digits=3)
+  chi_sq <- a$Chisq[2]
+  df <- a$Df[2]
+  
+  summ <- sprintf( "The likelihood ratio test reveals a statistically significant relationship between period and %s ($\\beta$ = %.2f, 95%% CI =  [ %.2f, %.2f], $\\chi^2$(%d) = %.2f, p =  %s). The coefficient for period indicates that moving from one period to the next tends to increase %s by around %.2f units", dv, beta_period, round(ci_period[6,1], 2), round(ci_period[6,2], 2), df, chi_sq, as.character(p_value), dv, beta_period)
+                   
+  print(summ)
+  
+  aprint <- a %>% 
+    select(AIC, BIC, Chisq, Df, `Pr(>Chisq)`) %>% 
+    rownames_to_column() %>% 
+    rename(model=rowname) %>% 
+    mutate(model = recode(model, "m0"="1 + (1+period|character)", 
+                                 "m1"= "period + (1+period|character)")) %>% 
+    mutate( `Pr(>Chisq)` = as.character(signif(`Pr(>Chisq)`, digits=3)))
+  mstable <- xtable(aprint, caption = paste0("Comparison between models with and without period as a predictor. The dependent variable is ", dv, "."), label = paste0("tab:regtable_linear_", dv))
+  print(mstable, file = here("analysis", "output", paste0("regtable_linear_", dv, ".tex")), include.rownames = FALSE)
+}  
+
+```
+
+The likelihood ratio test reveals a statistically significant relationship between period and complexity ($\beta$ = `r beta_period`, 95% CI =  [ `r round(ci_period[6,1], 2)`, `r round(ci_period[6,2], 2)`], $\chi^2$(`r df`) = `r chi_sq `, p =  `r p_value `). The coefficient for period indicates that moving from one period to the next tends to increase complexity by around `r beta_period` units.
+
+```{r frequentistfreqdata, include=TRUE}
+
+dsumm_numeric_freq <- dsumm_numeric %>% 
+  filter(first=="Oracle") %>%   # only characters in Oracle stream
+  filter(period<5) %>%   # ignore simplified b/c singular fit when we include it
+  filter(!is.na(logfrequency)) %>% 
+  mutate(periodscale = scale(period)[,1]) %>% 
+  #mutate(periodscale = period) %>% 
+  mutate(rarity= -logfrequencyscale) %>% 
+  mutate(rarityraw= -logfrequencyrawscale)
+  
+suffix<- "raw"  
+
+m0 <- lmer(complexity ~ period + (1+period|character), data = dsumm_numeric_freq, REML = FALSE)  
+m1 <- lmer(formula(paste0("complexity ~ rarity", suffix, " + period + (1+period|character)")), data = dsumm_numeric_freq, REML = FALSE)  
+m2 <- lmer(formula(paste0("complexity ~ rarity", suffix, " + period + rarity", suffix, "*period + (1+period|character)")), data = dsumm_numeric_freq, REML = FALSE)  
+
+beta_freq <- round(coef(summary(m2))[2,"Estimate"], 2)
+beta_period <- round(coef(summary(m2))[3,"Estimate"], 2)
+beta_product<- round(coef(summary(m2))[4,"Estimate"], 2)
+
+ci_period <- confint(m2)
+
+ci_periodtab <- ci_period %>%
+  as_tibble() %>% 
+  tail(4) %>% 
+  rename(lint = "2.5 %", rint = "97.5 %") %>% 
+  mutate(lint = paste0("[", round(lint, digits=1), ","), rint = paste0(round(rint, digits=1), "]")) %>% 
+  unite(`95 % CI`, lint, rint, sep=" ") 
+  
+m2table <- tidy(m2) %>% 
+  select(term, estimate) %>% 
+  rename(coefficient = "term") %>% 
+  head(4) %>% 
+  cbind(ci_periodtab)
+  
+m2tableout <- xtable(m2table, caption = "Coefficients for a mixed-effects regression model with with formula complexity $\\sim$ rarity + frequency + rarity*frequency + (1 + period$|$ character). Both rarity and frequency were standardized so the coefficients for these variables indicate the increase in complexity expected when the predictor increases by one standard deviation.", label = paste0("tab:coeftable_freq", suffix))
+print(m2tableout, file = here("analysis", "output", paste0("coeftable_freq", suffix, ".tex")), include.rownames = FALSE)
+
+a <- anova(m2, m1, m0)
+
+aprint <- a %>% 
+  select(AIC, BIC, Chisq, Df, `Pr(>Chisq)`) %>% 
+  rownames_to_column() %>% 
+  rename(model=rowname) %>% 
+  mutate(model = recode(model, "m0"="period + (1+period|character)", 
+                               "m1"= "rarity + period + (1+period|character)",
+                               "m2"= "rarity + period + rarity * period + (1+period|character)")) %>% 
+  mutate( `Pr(>Chisq)` = as.character(signif(`Pr(>Chisq)`, digits=3)))
+mstable <- xtable(aprint, caption = "Comparison between models that add rarity and an interaction between rarity and period  to a null model.", label = paste0("tab:regtable_freq", suffix))
+print(mstable, file = here("analysis", "output", paste0("regtable_freq", suffix, ".tex")), include.rownames = FALSE)
+
+# pull out p value and chi-squared statistic
+p_value <-  signif(a$"Pr(>Chisq)"[2] , digits=3)
+chi_sq <- signif(a$Chisq[2], digits=3)
+df <- a$Df[2]
+```
+
+Here we've scaled both `period` and `logfrequency`, and for ease of interpretation we've inverted `logfrequency` to create a variable called `rarity` (ie bigger values denote rarity). The likelihood ratio tests indicate that the best model includes both a fixed effect of rarity and an interaction between rarity and period. All coefficients are positive, suggesting that complexity increases as period increases, complexity increases as rarity increases, and that the complexity increases faster with period as rarity increases.
+
+## Bayesian analysis with brms
+
+
+```{r bayesian, include=FALSE}
+  
+# Model comparison:
+
+# M0: Complexity ~   1 + (1 + mo(Period) | Character)
+# M1: Complexity ~   mo(Period) + (1 + mo(Period) | Character)
+
+# Based in part on
+#https://github.com/paul-buerkner/monotonic-effects-paper/blob/master/monotonic_effects.Rmd
+
+sdif_coding <- function(x) {
+  x <- as.factor(x)
+  contrasts(x) <- MASS::contr.sdif(levels(x))
+  x
+}
+
+dsumm_brm <- dsumm %>% 
+  mutate(periodl = as.numeric(period)) %>%  
+  mutate(periodc = sdif_coding(factor(period))) %>% 
+  select(character, period, periodl, periodc, complexity, distinctiveness, first, logfrequency, logfrequencyscale, logfrequencyraw, logfrequencyrawscale)
+ 
+nchain <- 1 # for testing
+
+# Takes a while to run
+#fit1 <- brm( complexity ~ mo(period) + (1 + mo(period) | character), data = dsumm_brm, chains = nchain)
+#plot(conditional_effects(fit1))
+
+#fit2 <- brm( complexity ~ periodl + (1 + period| character), data = dsumm_brm, chains = nchain)
+
+fit3 <- brm( complexity ~ periodc + (1 + period| character), data = dsumm_brm, chains = nchain)
+
+#pme1 <- plot(conditional_effects(fit1), plot = FALSE, ask = FALSE)
+#pme2 <- plot(conditional_effects(fit2), plot = FALSE, ask = FALSE)
+pme3 <- plot(conditional_effects(fit3), plot = FALSE, ask = FALSE)
+
+#pmeall <- pme1[[1]] + pme2[[1]] + pme3[[1]]
+#loo(fit1, fit2, fit3)
+#model_weights(fit1, fit2, fit3, weights = "loo")
+
+coefnames <- fixef(fit3) %>% rownames()
+coefsamples <- fixef(fit3, summary=FALSE, pars=coefnames[-1]) %>% 
+  as_tibble() %>% 
+  rename("Bronze-Oracle"=periodcBronzeMOracle, "Seal-Bronze"=periodcSealMBronze, "Traditional-Seal"=periodcTraditionalMSeal, "Simplified-Traditional"=periodcSimplifiedMTraditional)
+postplot <- mcmc_areas(coefsamples)
+
+ggsave(here("analysis","output", "bayesreg_period.pdf"), plot = postplot,  width=4,height = 2.8)
+
+#comp2 <- loo_compare(loo(fit1), loo(fit2), loo(fit3)) %>%
+#  as.data.frame() %>%
+#  select(elpd_loo, elpd_diff, se_diff, p_loo, looic) %>%
+#  rename(
+#    "ELPD-Diff" = elpd_diff, "SE-Diff" = se_diff, 
+#    "ELPD-LOO" = elpd_loo, "P-LOO" = p_loo, "LOOIC" = looic
+#  )
+#mw2 <- model_weights(fit1, fit2, fit3, weights = "loo")[rownames(comp2)]
+#comp2 %>%
+#  cbind("Akaike-Weight" = mw2) %>%
+#  apa_table(
+#    format = "latex", booktabs = TRUE, digits = 2,
+#    caption = "Comparison of models fit4 to fit6 based on approximate leave-one-out cross-validation.",
+#    note =  "ELPD-LOO = expected log posterior predictive density (higher is better); ELPD-DIFF = difference in ELPD values compared to the best model. SE-DIFF = standard error of the ELPD difference. P-LOO = effective number of model parameters (lower is better); LOOIC: leave-one-out information criterion (lower is better); Akaike-Weight = Model weight based on the LOOIC values (higher is better).",
+#    align = c("l", rep("r", 6))
+#  )
+
+```
+
+```{r bayesianfreqdata, include=FALSE}
+dsumm_brm_freq <- dsumm_brm %>% 
+  filter(first=="Oracle") %>%   # only characters in Oracle stream
+  filter(period<"Simplified") %>%   # ignore simplified b/c singular fit when we include it
+  filter(!is.na(logfrequency)) %>% 
+  mutate(rarity= -logfrequencyscale) %>% 
+  mutate(rarityraw= -logfrequencyrawscale) %>% 
+  mutate(periodc = sdif_coding(factor(period))) 
+
+suffix <- "raw"
+
+dsumm_forstats <- dsumm_brm_freq %>% 
+  mutate(rarity = !!as.symbol(paste0("rarity", suffix)))
+
+fit3_freq <- brm( complexity ~ periodc + rarity + periodc*rarity + (1 + period| character), data = dsumm_forstats, chains = nchain)
+
+coefnames <- fixef(fit3_freq) %>% rownames()
+coefsamples <- fixef(fit3_freq, summary=FALSE, pars=coefnames[-1]) %>% 
+  as_tibble() %>% 
+  rename("Bronze-Oracle"=periodcBronzeMOracle, 
+         "Seal-Bronze"=periodcSealMBronze, 
+         "Traditional-Seal"=periodcTraditionalMSeal, 
+         "(Bronze-Oracle):rarity"="periodcBronzeMOracle:rarity", 
+         "(Seal-Bronze):rarity"="periodcSealMBronze:rarity", 
+         "(Traditional-Seal):rarity"="periodcTraditionalMSeal:rarity")  
+
+postplot <- mcmc_areas(coefsamples)
+
+ggsave(here("analysis","output", paste0("bayesreg_freq", suffix, ".pdf")), plot = postplot,  width=5,height = 5)
+
+```
+
+
+```{r bayesianpictographic, include=FALSE}
+
+fit3_ctype <- brm( complexification ~ 0+C1Type, data = d_trad_vs_ob, chains = nchain)
+
+d_trad_vs_ob_smallcomp <- d_trad_vs_ob %>%
+  filter(numcomp <= 5) %>% 
+  mutate(numcomp = factor(numcomp))
+
+fit3_numcomp <- brm( complexification ~ 0+numcomp, data = d_trad_vs_ob_smallcomp, chains = nchain)
+
+coefnames <- fixef(fit3_ctype) %>% rownames()
+coefsamples <- fixef(fit3_ctype, summary=FALSE, pars=coefnames) %>% 
+  as_tibble() %>% 
+  rename("pictographic"="C1Typepictographic",
+         "pictologic"="C1Typepictologic", 
+         "pictosyn"="C1Typepictosyn.", 
+         "pictophon"="C1Typepictophon.", 
+         "other"="C1Typeother") 
+
+postplot_ctype <- mcmc_areas(coefsamples) +
+                  xlab('complexification')
+
+coefnames <- fixef(fit3_numcomp) %>% rownames()
+coefsamples <- fixef(fit3_numcomp, summary=FALSE, pars=coefnames) %>% 
+  as_tibble() %>% 
+  rename("1 comp"="numcomp1",
+         "2 comp"="numcomp2", 
+         "3 comp"="numcomp3", 
+         "4 comp"="numcomp4", 
+         "5 comp"="numcomp5") 
+
+postplot_numcomp <- mcmc_areas(coefsamples) +
+                  xlab('complexification')
+
+posteriors <- postplot_ctype + postplot_numcomp + 
+    plot_annotation(tag_levels = c('a'), tag_suffix = ')') 
+
+ggsave(here("analysis","output", "bayesreg_ctype.pdf"), plot = posteriors, width = 7.08661,height = 3.5)
+
+```
+
+
+# Supporting information
+
+## Alternative complexity measures
+
+```{r alternativecomplexity, include=TRUE}
+dpath_pixcomp <- here("data", "hanziyuan_pix_complexity.csv")
+dpath_cd<- here("data", "character_dataset.csv")
+dpath_gc<- here("data", "gif_complexities.csv")
+
+d_pixcomp <- read_csv(dpath_pixcomp) %>%
+    rename(Traditional=traditional,  Simplified=simplified) %>% 
+    pivot_longer(cols=periods, names_to = "period", values_to = "pixcomplexity") %>% 
+  select(character, period, pixcomplexity) %>% 
+  group_by(character, period) %>%
+  dplyr::summarize(pixcomplexity=mean(pixcomplexity), .groups="drop")  %>% 
+  right_join(dsumm, by = c("character", "period"))
+
+d_cd <- read_csv(dpath_cd) %>%
+  select(character, "stroke count") %>% 
+  mutate(period="Simplified") %>% 
+  right_join(dsumm, by=c("character","period")) %>% 
+  mutate(pixcomplexity = `stroke count`)
+
+d_gc <- read_csv(dpath_gc) %>%
+  mutate(period="Simplified") %>% 
+  right_join(dsumm, by=c("character","period")) %>% 
+  mutate(pixcomplexity = `gif complexity`)
+  
+myscatter <- function(d) {
+  pixcomplexity <- d %>% 
+    ggscatter(x = "complexity", y = "pixcomplexity",
+    size = 0.5,
+    add = "reg.line",  
+    add.params = list(color = "blue", fill = "lightgray"), 
+    ggtheme = mytheme
+  ) +
+  stat_cor(
+    aes(label = ..r.label..),
+    label.x = 3,
+    cor.coef.name='r'
+  )  + #+ coord_fixed(ratio=2)
+  xlab('perimetric complexity') 
+    
+  return(pixcomplexity)
+}    
+
+
+pixcomplexity  <- myscatter(d_pixcomp) +
+  ylab('pixel-based complexity') 
+
+pixcomplexity 
+strokecount<- myscatter(d_cd) +
+  ylab('stroke count') 
+strokecount
+
+gifcomplexity<- myscatter(d_gc) +
+  ylab('writing time') 
+
+altcomplex <- pixcomplexity + strokecount + gifcomplexity +
+  plot_annotation(tag_levels = c('a'), tag_suffix = ')') 
+
+ggsave(here("analysis","output", "altcomplexitymeasures.pdf"), plot = altcomplex,  width=7.08661,height = 2.8)
+      
+```
+
+
+
+
