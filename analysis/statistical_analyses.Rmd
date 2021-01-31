@@ -29,6 +29,7 @@ theme_set(mytheme)
 
 # Experiment 1 data frame 
 d1 <- read_csv(dpath_exp1) #%>%
+d2 <- read_csv(dpath_exp2) #%>%
 
 ```
 
@@ -54,13 +55,7 @@ plot1
 ### Stats for Expt 1
 
 
-```{r exp1stats, include=TRUE, fig.height=4, fig.width=6}
-
-sdif_coding <- function(x) {
-  x <- as.factor(x)
-  contrasts(x) <- MASS::contr.sdif(levels(x))
-  x
-}
+```{r exp1stats, eval=FALSE, fig.height=4, fig.width=6}
 
 d1_stats1 <- d1 %>% 
   mutate(ri = factor(case_when(response=="RC_IC" ~  NA_character_,
@@ -70,7 +65,7 @@ d1_stats1 <- d1 %>%
                         response=="IC" ~     "immediate",
                         response=="ID" ~     "immediate",
                         TRUE ~ NA_character_ 
-                        )),
+                        ), levels = c("immediate", "root")),
          cd = factor(case_when(response=="RC_IC" ~  "continuous",
                         response=="RC" ~     "continuous",
                         response=="RD_ID" ~  "delayed",
@@ -78,22 +73,119 @@ d1_stats1 <- d1 %>%
                         response=="IC" ~     "continuous",
                         response=="ID" ~     "delayed",
                         TRUE ~ NA_character_ 
-                        )),
-         #lengthc = sdif_coding(factor(length))
-         lengthc = contr.sum(factor(length))  # use sum coding
+                        ), levels = c("delayed", "continuous")),
+         length = factor(length, levels = c("short", "medium", "long")),
+         state_or_event= factor(state_or_event, levels = c("event", "state")),
         )
+
+
+d1_stats1ri <- d1_stats1 %>% 
+  drop_na(ri)
+
+d1_stats1cd <- d1_stats1 %>% 
+  drop_na(cd)
+
+# use sum coding 
+#options(contrasts=c("contr.sum", "contr.poly"))
+options(contrasts=c("contr.treatment", "contr.poly"))
 
 m0 <- glmer(ri ~ state_or_event + length + (1|participantnum), data = d1_stats1, 
             family = binomial(link = "logit"))
 
 nchain <- 1 # for testing
+niter <- 500 # for testing
 
-fit1_ri <- brm( ri ~ state_or_event + lengthc + (1|participantnum), family=bernoulli(), data = d1_stats1, chains = nchain)
+nchain <- 4 # for real run
+niter <- 2000 # for real run
 
-fit1_cd <- brm( cd ~ state_or_event + lengthc + (1|participantnum), family=bernoulli(), data = d1_stats1, chains = nchain)
+fit1_ri <- brm( ri ~ state_or_event + length + (1|participantnum), family=bernoulli(), data = d1_stats1ri, chains = nchain, iter = niter )
+
+fit1_cd <- brm( cd ~ state_or_event + length + (1|participantnum), family=bernoulli(), data = d1_stats1cd,  chains = nchain, iter = niter )
+
+cd_tab <- fixef(fit1_cd) %>% as_tibble(rownames="NA") 
+ 
+mcdtableout<- xtable(cd_tab, caption = "Coefficients for cd regression, Expt 1" )
+print(mcdtableout, file = here("analysis", "output", paste0("coeftable_cd_exp1.tex")))
+
+ri_tab <- fixef(fit1_ri) %>% as_tibble(rownames="NA") 
+ 
+mritableout<- xtable(ri_tab, caption = "Coefficients for ri regression, Expt 1" )
+print(mritableout, file = here("analysis", "output", paste0("coeftable_ri_exp1.tex")), include.rownames = FALSE)
 
 ```
 
+### Fig 2
+```{r exp2plot, include=TRUE, fig.height=4, fig.width=6}
+
+d2plot <- d2 %>% 
+  filter(stimulustype != "chain") %>% 
+  group_by(order, response) %>% 
+  summarize(count = n()) %>% 
+  mutate(response = factor(response, levels = c("RC", "RD", "IC", "ID", "other")))
+
+plot2 <- d2plot %>% 
+  ggplot(aes(x = response, y=count)) +
+  geom_bar(stat="identity") +
+  facet_wrap(~order)
+plot2
+  
+```
+
+### Stats for Experiment 2
+
+```{r exp2stats, eval=TRUE, fig.height=4, fig.width=6}
+
+d2_stats1 <- d2 %>% 
+  mutate(ri = factor(case_when(response=="RC" ~     "root",
+                               response=="RD" ~     "root",
+                               response=="IC" ~     "immediate",
+                               response=="ID" ~     "immediate",
+                               TRUE ~ NA_character_ 
+                               ), levels = c("immediate", "root")),
+         cd = factor(case_when(response=="RC" ~     "continuous",
+                               response=="RD" ~     "delayed",
+                               response=="IC" ~     "continuous",
+                               response=="ID" ~     "delayed",
+                               TRUE ~ NA_character_ 
+                               ), levels = c("delayed", "continuous")),
+         order = factor(order, levels = c("RC_RD_ID", "RD_RC_ID", "RD_ID_RC"))
+        )
+
+
+d2_stats1ri <- d2_stats1 %>% 
+  drop_na(ri)
+
+d2_stats1cd <- d2_stats1 %>% 
+  drop_na(cd)
+
+# use sum coding 
+#options(contrasts=c("contr.sum", "contr.poly"))
+options(contrasts=c("contr.treatment", "contr.poly"))
+
+m0 <- glmer(ri ~ order + (1|participantnum), data = d2_stats1, 
+            family = binomial(link = "logit"))
+
+nchain <- 1 # for testing
+niter <- 500 # for testing
+
+nchain <- 4 # for real run
+niter <- 2000 # for real run
+
+fit2_ri <- brm( ri ~ order + (1|participantnum), family=bernoulli(), data = d2_stats1ri, chains = nchain, iter = niter )
+
+fit2_cd <- brm( cd ~ order + (1|participantnum), family=bernoulli(), data = d2_stats1cd,  chains = nchain, iter = niter )
+
+cd_tab <- fixef(fit2_cd) %>% as_tibble(rownames="NA") 
+ 
+mcdtableout<- xtable(cd_tab, caption = "Coefficients for cd regression, Expt 2" )
+print(mcdtableout, file = here("analysis", "output", paste0("coeftable_cd_exp2.tex")))
+
+ri_tab <- fixef(fit2_ri) %>% as_tibble(rownames="NA") 
+ 
+mritableout<- xtable(ri_tab, caption = "Coefficients for ri regression, Expt 2" )
+print(mritableout, file = here("analysis", "output", paste0("coeftable_ri_exp2.tex")), include.rownames = FALSE)
+
+```
 
 
 ### Fig 2a
