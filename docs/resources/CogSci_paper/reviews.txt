@@ -1,0 +1,257 @@
+Decision on submission 1708 to CogSci 2021
+Tue, 13 Apr 2021 14:46:37 -0400
+Tecumseh Fitch & 2021 Organizing Committee <cogsci21a@precisionconference.com>
+cogsci2021submission@gmail.com
+Aurélien Fermo <aurelien.fermo@ens.psl.eu>
+
+Dear Aurélien Fermo :
+
+We are very pleased to inform you that your paper submission
+
+1708 - Temporal Continuity and the Judgment of Actual Causation
+
+has been accepted for poster presentation and for a proceedings paper at CogSci 2021. Please read this entire email carefully, as it contains important information about your presentation, and instructions for finalizing your submission for publication in the proceedings.
+
+Due to COVID-19, the CogSci 2021 conference will be held primarily in a virtual environment. Although we would have preferred to allow the opportunity for cognitive scientists from around the world to gather in-person in Vienna, ongoing COVID-related risks and risk-mitigation policies make this impossible.
+
+There will be a small sampling of content provided live from Vienna, limited to people who are already located in Vienna and thus will not require travel or accommodation. All other presentations will be pre-recorded and delivered virtually. We look forward to being able to showcase the City of Vienna, the University of Vienna and the Cognitive Science Hub in Vienna in this virtual conference environment.
+
+Authors will have the opportunity to remotely participate in live Q&A after their pre-recorded presentations during the conference July 26 - 29, 2021. Detailed conference schedules and guidelines about participation in the virtual conference will be made available through the following webpage that will be updated regularly before the conference dates:
+https://cognitivesciencesociety.org/cogsci-2021/
+
+We received 710 paper submissions this year, and each underwent careful peer review. We accepted 152 (22%) for oral presentation and 332 (46%) for poster presentation with full paper publication. Your submission will be allocated a talk time during one of the allotted paper sessions, allowing you and/or your co-authors to present this work and to answer questions from the audience. Details concerning the timing of your talk in the conference program will be provided in the coming weeks. First, there are a few issues to address.
+
+
+You have the option of publishing either your full paper or just the abstract in the CogSci Conference Proceedings. This option was introduced to address concerns that some authors have expressed about publishing the same, or a similar, paper in a journal after it has already appeared in the CogSci Proceedings. Although the Cognitive Science Society's policy is clear that proceedings publications should not block journal publications (https://cognitivesciencesociety.org/wp-content/uploads/2019/01/Policy-on-Journal-Publication-of-Conference-Papers.pdf), there have been isolated issues with some journals.
+If you decide to publish the full paper, you are required to take into account in your revisions the reviewers’ comments that appear at the end of this message. You have an extra page to do so (final published papers can be a strict maximum of 7 pages long). This is one page more than the 6 pages allowed for the original submission. The Cognitive Science Society has made this change to enable authors to revise their papers to address the reviewers’ comments as well as include all the appropriate references and author information.
+Regardless of which option you choose, you must login to the Precision Conference website (link below) to make your final submission. If you do not take this final step, neither your paper nor your abstract will appear in the conference proceedings. Thus, it is very important that you complete this step before May 11, 2021 at:
+
+https://new.precisionconference.com/cogsci
+
+Please keep in mind that papers must be no longer than 7 pages and must be formatted using one of the templates found here:
+https://dearmond.sharepoint.com/:f:/g/ExternalSharing/EgcbkEToDqpDojTHPw0XgTMBPueRKMZADepPevXiBA8LCA?e=7dKKRb
+
+It is critical that you use one of the templates for the final version without altering font size, spacing, margins, etc. Any papers with format alterations, or exceeding 7 pages including references will be ** rejected ** and will not be published, nor will a presentation be scheduled.
+
+
+Guidelines and instructions will be made available to poster presenters around mid-May. The society will add a web page to the website with a comprehensive set of details and instructions, and tips for making the most of presenting virtually. Poster presenters will be asked to pre-record and upload a short video and a PDF of the poster.
+
+Details about conference registration and registration fees will be available shortly. Registration fees will be offered at substantially reduced rates for Cognitive Science Society members. In an effort to be more inclusive and global, CSS has a “Pay what you can (PWYC)” membership rate. More information regarding membership can be found on the website - https://cognitivesciencesociety.org/membership/ .
+
+In order for your talk to be presented, at least one of the paper’s authors must be registered for the conference. If you opt out of the virtual presentation, at least one of the paper’s authors must be registered for the conference for your paper to appear in the proceedings. We are doing our utmost to make CogSci 2021 accessible to all so please do take advantage of the PWYC membership to CSS.
+
+Thank you very much for contributing your interesting work to CogSci 2021. We look forward to seeing you in the virtual conference in July!
+
+With best regards,
+
+Tecumseh Fitch & 2021 Organizing Committee
+cogsci2021submission@gmail.com
+
+
+----------------------------------------------------------------
+
+metareviewer review
+score 4/5
+
+Type of Submission
+
+Psychology
+
+The Review
+
+All reviewers agreed that this work is clearly of interest to the cognitive
+science community. Reviewer 1 suggests that counterfactual and process theories of
+causation might not be as strongly in conflict as the authors make it look like.
+Even though Reviewer 2 is not an expert on causation, they enjoyed reading the
+paper which suggests that this paper will appeal to a broader audience. The
+reviewer raises an important point about how the current account construes the
+relevant model of the situation. Reviewer 3 finds the problem that this work
+addresses extremely interesting and important, and that temporal continuity is
+likely to play an important role in the solution to the problem. However, they
+raise important points both with respect to theory and empirical support. I agree
+with the reviewer that it's not clear enough yet how the concrete predictions are
+derived from the theoretical framework, and whether Experiment 2 actually helps
+adjudicate between the different proposals in the literature. I also encourage the
+authors to expand on their discussion of the relevant background literature (I
+suggest some relevant papers below). Finally, it would help to conceptually
+separate the problem of actual causation (which events were causes versus weren't
+causes of a particular outcome) from the problem of causal selection (which event
+is chosen as *the* cause of the outcome from a set of candidates that were
+identified to be *a* cause of the outcome).
+
+I encourage the authors to make their data and materials openly available via the
+Open Science Framework. It's possible to do so even for an anonymous submission as
+explained here: https://help.osf.io/hc/en-us/articles/360019930333-Create-a-View-
+only-Link-for-a-Project
+
+Based on these reviews and my own independent reading, I recommend that the paper
+be accepted as "Full paper plus either talk or poster".
+
+Some relevant references:
+Hilton, D. J., McClure, J., & Sutton, R. M. (2010). Selecting explanations from
+causal chains: Do statistical principles explain preferences for voluntary causes.
+European Journal of Social Psychology, 40(3), 383-400.
+
+Lagnado, D. A. & Sloman, S. (2004). The advantage of timely intervention. Journal
+of Experimental Psychology: Learning, Memory, and Cognition, 30(4), 856-876.
+
+Lagnado, D. A. & Sloman, S. A. (2006). Time as a guide to cause. Journal of
+Experimental Psychology: Learning, Memory, and Cognition, 32(3), 451-460.
+
+----------------------------------------------------------------
+
+reviewer 1 review
+score 5/5
+
+Type of Submission
+
+Psychology
+
+The Review
+
+The cogsci - 21a-sub1708-i10 paper titled « Temporal Continuity and the Judgment
+of Actual Causation » is about causal reasoning and states that, as opposite to
+Bayesian approach that ignore change of states, (i) causal relationships are
+relationships between events rather than facts or states of affairs, (ii) events
+are changes of states and effect to be explained and its cause are both changes of
+state related to temporal order and continuity.
+
+Their continuity account theory treats events as changes of state in continuous
+time and traces a sequence of stage changes backwards through time from an event
+to its primary cause. The continuity account of physical processes was ingeniously
+tested in two well designed experiment by asking people to identify the primary
+cause of events occurring in simple physical systems.
+
+The theory is quite new and the reviewer agrees with the authors that state that (i) their approach is highly compatible with work by « Michotte and others
+suggesting that temporal information is often critical for identifying causes »
+and
+(ii) “(To our knowledge), previous work has not explored the implications of
+temporal continuity in the way that we do here » although this continuity account
+« does not aspire to capture all of people’s intuitions about actual causation ».
+
+As a suggestion causality based on counterfactual and causality based on the
+physical
+process might be not contradictory but based on the information at disposition.
+
+
+The authors should complete their references:
+Gerstenberg, T., Goodman, N., Lagnado, D., & Tenenbaum, J. (2020). A
+counterfactual simulation model of causal judgment…
+
+Is to appear in Psychological Review
+
+And Hall, N. (2004). Two concepts of … is published In John David Collins, Edward J. Hall, and Laurie Ann Paul, eds,
+Causation and Counterfactuals, 225–276. Cambridge, Massachusetts: MIT Press.
+
+----------------------------------------------------------------
+
+reviewer 2 review
+score 5/5
+
+Type of Submission
+
+Cognitive Science, Philosophy, Psychology
+
+The Review
+
+The paper presents an intriguing and intuitive hypothesis about representations
+underlying judgments of actual causation (“was event A caused by event B?”). The
+Temporal Continuity account presented uses a procedure that starts with the effect
+/ outcome (B) and steps backwards through time (looking for the immediate causes
+of B, and then the immediate causes of that event, and so on..) until an event
+which has no immediate cause is reached. The paper presents two experiments that
+broadly provide support for the continuity account and discussed ways in which the
+continuity account is compatible with two dominant extant theories of causation:
+physical process and counterfactuals.
+
+The paper is well written and the theory is explained in good detail. I think it’s
+a very nice contribution to the CogSci conference and will be appreciated by a
+relatively broad audience. I myself am someone outside of the “causation world”
+and I found the paper a pleasure to read and thought provoking.
+
+One question I had about the account (and I am sorry if this doesn’t make any
+sense) came at the end of their section on the account about the particle
+detection network being embedded in a large causal system. I wonder how the
+account would approach a problem where the effect was produced by an “AND” rule
+(two other necessary events needed to occur) where those two events were from
+different levels of the context (e.g., inside and outside the particle detector).
+Would that kind of causal system require a reformulation of what counts as the
+boundaries of the causal system (e.g., a definition of the causal system that
+included both inside and outside the particle detector)?
+
+On the analysis side, the authors describe some factors (network orientation and
+position of the curve branch) that “had no effect” and they collapsed across these
+variables. I think it would be more statistically appropriate to treat these
+variables as random effects (e.g., like different items in an experiment) and
+incorporate them explicitly into the mixed models.
+
+Finally, a nitpick comment: There are a number of uses of commas that I think are
+unnecessary / prescriptively grammatically incorrect. Mostly, these are cases
+where there is a conjunctive “and” which is joining two clauses (e.g., “For
+simplicity, our discussion of Figure 1a has focused only on … particle detection,
+and has attempted to characterize…”). The usage of a comma here is prescriptively
+incorrect as it is joining two clauses and not two sentences (with their own
+subject nouns). This incorrect usage appears throughout the paper.
+
+----------------------------------------------------------------
+
+reviewer 3 review
+score 1/5
+
+Type of Submission
+
+Cognitive Science, Psychology
+
+The Review
+
+The author(s) address an enduring question in the causation literature, the
+problem how people determine the main cause of an effect. To do so, the author(s)
+introduce a "continuity account" of causal selection and describe two experiments
+that provide support for this account. The experiments are nicely conducted and
+rigorously analyzed. Though the paper has several strengths, it does not bring
+closure to the critical problem it addressed.
+
+In terms of theory, some of the predictions of the author(s)'s continuity account
+were unclear. For example, the author(s) state that the continuity account
+predicts that participants will choose the root cause as "the" single main cause
+of the effect. The reason why was not explain. They state that once the
+immediate_continuous (I_c) cause is identified, people step backwards and
+determine the ultimate cause of that immediate_continuous cause. Why do people
+step backwards? Why don't they simply choose the I_c? It seemed the author(s)'
+main prediction could be summarized as "the main cause is the root cause of the
+most immediate cause of the final outcome." To begin with, we know from the work
+of Spellman (1997) that this cannot be true. Spellman (1997) documented how
+sometimes people sometimes identify "the cause" as the root cause and other times
+as the immediate cause; hence the main cause is not always the root cause.
+
+The authors note that in the scenarios they constructed, neither the
+counterfactual or physical causation accounts made precise predictions about
+whether the root cause or immediate cause should take priority. This is correct.
+The purpose of Experiment 2 was to pit the continuity account against Spellman's
+Crediting Causality account. They note that the situation depicted in Figure 1b is
+one in which the delayed_root chain guarantees the occurrence of the effect, and
+so it should be selected as "the cause" according to the Crediting Causality
+account. However, doesn't the continuous_root chain also guarantee the occurrence
+of the effect? If so, just like the counterfactual and physical causation
+accounts, the crediting causality hypothesis does not clear the predictions in
+Experiment 2. In sum, the experiments were not well constructed to pit the
+continuous account against alternative models of causation.
+
+Spellman's account could explain why "the cause" in a single chain could be the
+root or the immediate cause. The author(s) 's account offers no way of explaining
+a switch from immediate to root causation in a single chain, only in two chain
+networks, and as stated above, it is not all clear it could do so even for these
+networks.
+
+Let me circle around to what I think the paper gets right. The problem is
+extremely interesting and important. Moreover, they are probably right that the
+best explanation might be one that brings in physical causation and time. They are
+probably also right that continuity in time might be the feature that invites
+causal attributions, thus offering a potential explanation for causal illusions,
+but the theoretical story and the empirical support for this story need more work.
+
+----------------------------------------------------------------
+
+
+
+

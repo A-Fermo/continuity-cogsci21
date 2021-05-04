@@ -9,8 +9,9 @@
 \usepackage{graphicx}
 \usepackage{subfig}
 \usepackage{multirow}
+\usepackage{balance}
 
-%\cogscifinalcopy % Uncomment this line for the final submission 
+\cogscifinalcopy % Uncomment this line for the final submission 
 
 \usepackage{pslatex}
 \usepackage{apacite}
@@ -20,13 +21,11 @@
                    % still generally recommended!
 
 \newcommand{\ev}[2]{$#1_#2$}
-\renewcommand\bibliographytypesize{\footnotesize}
-
+%\renewcommand\bibliographytypesize{\footnotesize}
 
 %\usepackage[none]{hyphenat} % Sometimes it can be useful to turn off
 %hyphenation for purposes such as spell checking of the resulting
 %PDF.  Uncomment this block to turn off hyphenation.
-
 
 %\setlength\titlebox{4.5cm}
 % You can expand the titlebox if you need extra space
@@ -41,12 +40,12 @@
 %\title{Actual Causes as Changes of State in Continuous Time}
 \title{Temporal Continuity and the Judgment of Actual Causation}
  
-\author{{\large \bf Morton Ann Gernsbacher (MAG@Macc.Wisc.Edu)} \\
-  Department of Psychology, 1202 W. Johnson Street \\
-  Madison, WI 53706 USA
-  \AND {\large \bf Sharon J.~Derry (SDJ@Macc.Wisc.Edu)} \\
-  Department of Educational Psychology, 1025 W. Johnson Street \\
-  Madison, WI 53706 USA}
+\author{{\large \bf Aur\'{e}lien Fermo (XXX)} \\
+  XXX \\
+  XXX 
+  \AND {\large \bf Charles Kemp (c.kemp@unimelb.edu.au)} \\
+  School of Psychological Sciences, University of Melbourne\\
+  Parkville, Victoria 3010, Australia}
 
 
 \begin{document}
@@ -65,7 +64,7 @@ Psychological theories of actual causation aim to characterize which of multiple
 
 Around 5:27 pm on November 9, 1965, Martin Saltzman found himself trapped in a dark elevator roughly a quarter of a way up the Empire State building~\cite{gelbr1965night}. The stopping of Saltzman's elevator was one of thousands of unexpected events that occurred that evening, and all of the people involved must have wondered about the causes of these events. Subsequent accounts of the Great Northeastern Blackout often trace these events back to the tripping of a relay on line Q29BD in Ontario that triggered a cascade of failures.
 
-Identifying the cause of an event (e.g.\ the stopping of an elevator) requires a judgment of actual causation, also known as singular or token causation~\cite{danks17}. Psychologists and philosophers have explored these judgments in detail~and have developed formal models of actual causation, including models based on Bayesian networks \cite{halpern16}, force dynamics \cite{wolfft17} and mental simulation~\cite{gerstenberg20}.  Here we present and evaluate an account of actual causation that highlights the role of temporal continuity.  On this account, the tripping of relay Q29BD is the main cause of the elevator stopping because the tripping initiated a continuous sequence of state changes that culminated in the stopping of the elevator.
+Identifying the cause of an event (e.g.\ the stopping of an elevator) requires a judgment of actual causation, also known as singular or token causation~\cite{danks17}. Psychologists and philosophers have explored these judgments in detail~and have developed formal models of actual causation, including models based on Bayesian networks \cite{halpern16}, force dynamics \cite{wolfft17} and mental simulation~\cite{gerstenberg21}.  Here we present and evaluate an account of actual causation that highlights the role of temporal continuity.  On this account, the tripping of relay Q29BD is the main cause of the elevator stopping because the tripping initiated a continuous sequence of state changes that culminated in the stopping of the elevator.
 
 Most accounts of actual causation are consistent with one of two broad views of causation: the counterfactual approach and the physical process approach~\cite{hall04}. The counterfactual approach suggests that the tripping of relay Q29BD is a cause of the elevator stopping because if the relay had not tripped then the elevator would not have stopped. The physical process view suggests that the relay tripping is a cause of the elevator stopping because the two are linked by a physical process involving the transmission of force or energy.  Both accounts need additional machinery in order to specify which among the many causes of an event is singled out as the main cause. Our continuity account fits most naturally with the physical process approach, and can be viewed as an attempt to bring out some implications of this approach for actual causation. 
 
@@ -217,9 +216,10 @@ It is notable that people's judgments are largely unaffected by the delay betwee
 \subsection{Experiment 2}
 
 The results of Experiment 1 are broadly consistent with both the continuity and probability raising accounts, and the goal of Experiment 2 was to distinguish between these accounts. The two make different predictions for dual branch sequences in which the delayed branch activates after activation has already begun along the continuous branch. One such sequence is shown in Figure~\ref{fig:intro}b. 
-In cases like this, \ev{R}{D} guarantees the occurrence of the effect, and therefore qualifies as the primary cause according to the probability raising account. The continuity account, however, still treats \ev{R}{C} as the primary cause.
+In cases like this, the continuity account still treats \ev{R}{C} as the primary cause, but the probability raising account now treats \ev{R}{D} as the primary cause. To see why, let $b$ (for baserate) be the probability of activation along along a given branch during a given trial. At the start of a dual branch trial, the probability that the GCM will activate is $b^2$, because independent activations are required along both branches. After \ev{R}{C} the probability increases to $b$, and after \ev{R}{D} the probability increases to 1. The two probability increments are therefore $b - b^2$ and $1 - b$, and it is straightforward to show that $b - b^2 \le 1 - b$ for all values of $b$, with equality attained only when $b = 1$.  As a result, the probability raising account chooses \ev{R}{D} for virtually all values of the baserate, and if $b=1$ the account is indifferent between \ev{R}{C} and \ev{R}{D}. 
 
-The materials and procedure for Experiment 2 are similar to those for Experiment 1, and we highlight only the few points of difference.
+
+The materials and procedure for Experiment 2 are similar to those for Experiment 1, and we will highlight only the few points of difference.  As for Experiment 1, no explicit information about the baserate $b$ was provided. For each network shown, activation eventually occurred along each branch, and some participants may have therefore assumed that $b=1$. Most participants, however, probably implicitly assumed that $b < 1$, which allows for the possibility of observation periods during which no activations occurred. We therefore assume that $b < 1$ when discussing the predictions of the probability raising account. 
 
 \textbf{Participants}. 100 participants were recruited via Amazon Mechanical Turk and paid \$1 for a 6 minute experiment. 
 %Two did not submit a valid completion code, leaving 98 sets of responses for analysis. NO LONGER TRUE
@@ -289,10 +289,16 @@ As suggested earlier, standard formulations of the physical process view treat b
 The experimental paradigm we have developed can easily be extended to a more diverse set of causal systems. For example, by introducing preventive causal links, we can explore case of double prevention (e.g.\ cases where an active detector that would have prevented the activation of the GCM is itself inactivated by another detector). \citeA{glymourstone} point out that current work on actual causation is based largely on discussions of an ``infinitesimal fraction'' of the set of possible cases, but our paradigm can potentially be used to carry out a comprehensive survey of judgments about actual causation.
 
 
+\section{Acknowledgments}
+
+AF carried out this work at the University of Melbourne while enrolled in a Master's degree at the \'{E}cole Normale Sup\'{e}rieure. 
+% add financial support?
+
 \bibliographystyle{apacite}
 \setlength{\bibleftmargin}{.125in}
 \setlength{\bibindent}{-\bibleftmargin}
 
+\balance
 \bibliography{uber}
 
 
