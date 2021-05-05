@@ -78,15 +78,23 @@ d1_stats1 <- d1 %>%
                         TRUE ~ NA_character_ 
                         ), levels = c("delayed", "continuous")),
          length = factor(length, levels = c("short", "medium", "long")),
-         state_or_event= factor(state_or_event, levels = c("event", "state")),
+         state_or_event = factor(state_or_event, levels = c("event", "state")),
+         position = factor(case_when(is.na(position) ~  "middle",
+                                     TRUE ~ position
+                        ), levels = c("top", "bottom", "middle")),
+         delay = factor(case_when(is.na(delay) ~  "none",
+                                     TRUE ~ as.character(delay) 
+                        ), levels = c("none", "2", "4", "6"))
         )
 
 
 d1_stats1ri <- d1_stats1 %>% 
-  drop_na(ri)
+  drop_na(ri) %>% 
+  drop_na(state_or_event) # drop chain
 
 d1_stats1cd <- d1_stats1 %>% 
-  drop_na(cd)
+  drop_na(cd) %>% 
+  drop_na(state_or_event)  # drop chain
 
 # use sum coding 
 #options(contrasts=c("contr.sum", "contr.poly"))
@@ -101,7 +109,7 @@ niter <- 500 # for testing
 nchain <- 8 # for real run
 niter <- 4000 # for real run
 
-fit1_ri <- brm( ri ~ state_or_event + length + (1|participantnum), family=bernoulli(), data = d1_stats1ri, chains = nchain, iter = niter )
+fit1_ri <- brm( ri ~ state_or_event + length + (1|participantnum), family=bernoulli(), data = d1_stats1ri, chains = nchain, iter = niter, control = list(adapt_delta = 0.99) )
 
 fit1_cd <- brm( cd ~ state_or_event + length + (1|participantnum), family=bernoulli(), data = d1_stats1cd,  chains = nchain, iter = niter )
 
