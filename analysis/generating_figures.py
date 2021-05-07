@@ -13,14 +13,15 @@ root_dir = os.path.dirname(os.getcwd())
 
 #%%
 # Importing data from experiment 1 and experiment 2.
-
-data_E1 = pd.read_csv("{}/data/E1_responses.csv".format(root_dir))
+data_E1 = pd.read_csv(os.path.join(root_dir,'data','E1_responses.csv'))
 for col in data_E1.columns[1:]:
     data_E1[col] = data_E1[col].astype('category')
+print('\n Dataframe of the results of Experiment 1:\n\n',data_E1)
 
-data_E2 = pd.read_csv("{}/data/E2_responses.csv".format(root_dir))
+data_E2 = pd.read_csv(os.path.join(root_dir,'data','E2_responses.csv'))
 for col in data_E2.columns[1:]:
     data_E2[col] = data_E2[col].astype('category')
+print('\n Dataframe of the results of Experiment 2:\n\n',data_E2)
 
 #%%
 # Functions for bootstraping and generating the two figures of the paper.
@@ -165,6 +166,7 @@ def graph_E2(x):
                           index=categories)   
     df_mean.plot.bar(ax=axis,yerr=df_std,capsize=1,ecolor='black',rot=0,error_kw={'elinewidth':0.5,'capthick':0.5},fontsize=7)
     axis.legend(fontsize=7)
+    plt.show()
 
 #%%
 ShortState = data_E1[(data_E1['stimulustype']=='dualbranch')&(data_E1['length']=='short')&(data_E1['state_or_event']=='state')]

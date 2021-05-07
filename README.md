@@ -1,4 +1,4 @@
-# Actual causes as changes of state in continuous time
+# Temporal Continuity and the Judgment of Actual Causation
 
 This repository provides the source code, the data and the experimental materials for: 
 
