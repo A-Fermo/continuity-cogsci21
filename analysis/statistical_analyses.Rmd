@@ -17,8 +17,8 @@ library(xtable)
 
 
 ```{r data, include=TRUE}
-dpath_exp1 <- here("data", "responsesOnly_E1_100def.csv")
-dpath_exp2 <- here("data", "responsesOnly_E2_100def.csv")
+dpath_exp1 <- here("data", "E1_responses.csv")
+dpath_exp2 <- here("data", "E2_responses.csv")
 
 mytheme <-  theme_classic(base_size = 10)  + 
             theme(strip.background = element_blank())
