@@ -10,7 +10,6 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 library(tidyverse)
 library(here)
 library(ggthemes)
-library(lme4)
 library(brms)
 library(xtable)
 ```
@@ -88,6 +87,8 @@ d1_stats1 <- d1 %>%
         )
 
 
+# For simplicity run analyses on dual networks only
+
 d1_stats1ri <- d1_stats1 %>% 
   drop_na(ri) %>% 
   drop_na(state_or_event) # drop chain
@@ -96,18 +97,10 @@ d1_stats1cd <- d1_stats1 %>%
   drop_na(cd) %>% 
   drop_na(state_or_event)  # drop chain
 
-# use sum coding 
-#options(contrasts=c("contr.sum", "contr.poly"))
 options(contrasts=c("contr.treatment", "contr.poly"))
 
-m0 <- glmer(ri ~ state_or_event + length + (1|participantnum), data = d1_stats1, 
-            family = binomial(link = "logit"))
-
-nchain <- 1 # for testing
-niter <- 500 # for testing
-
-nchain <- 8 # for real run
-niter <- 4000 # for real run
+nchain <- 8 
+niter <- 4000 
 
 fit1_ri <- brm( ri ~ state_or_event + length + (1|participantnum), family=bernoulli(), data = d1_stats1ri, chains = nchain, iter = niter, control = list(adapt_delta = 0.99) )
 
@@ -171,18 +164,13 @@ d2_stats1ri <- d2_stats1 %>%
 d2_stats1cd <- d2_stats1 %>% 
   drop_na(cd)
 
-# use sum coding 
-#options(contrasts=c("contr.sum", "contr.poly"))
 options(contrasts=c("contr.treatment", "contr.poly"))
 
 m0 <- glmer(ri ~ order + (1|participantnum), data = d2_stats1, 
             family = binomial(link = "logit"))
 
-nchain <- 1 # for testing
-niter <- 500 # for testing
-
-nchain <- 4 # for real run
-niter <- 2000 # for real run
+nchain <- 8 
+niter <- 4000 
 
 fit2_ri <- brm( ri ~ order + (1|participantnum), family=bernoulli(), data = d2_stats1ri, chains = nchain, iter = niter )
 

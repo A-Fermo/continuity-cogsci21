@@ -2,7 +2,7 @@
 
 This repository provides the source code, the data and the experimental materials for: 
 
-Fermo, A. & Kemp, C. (2021). Temporal Continuity and the Judgment of Actual Causation. In S. Denison., M. Mack, Y. Xu, & B.C. Armstrong (Eds.), Proceedings of the 43rd Annual Conference of the Cognitive Science Society. Cognitive Science Society. 
+Fermo, A. & Kemp, C. (2021). Temporal Continuity and the Judgment of Actual Causation. In T. Fitch, C. Lamm, H. Leder, & K Teßmar-Raible (Eds.), Proceedings of the 43rd Annual Conference of the Cognitive Science Society. Cognitive Science Society. 
 
 ## Overview
 
