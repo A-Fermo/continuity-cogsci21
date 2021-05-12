@@ -5,6 +5,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 ```
 
+This notebook uses `brms` to analyze data from the two experiments reported in Fermo, A. & Kemp, C. (2021). Temporal Continuity and the Judgment of Actual Causation.
+
 
 ```{r libraries}
 library(tidyverse)
@@ -28,12 +30,12 @@ theme_set(mytheme)
 ```{r loadds, include=TRUE}
 
 # Experiment 1 data frame 
-d1 <- read_csv(dpath_exp1) #%>%
-d2 <- read_csv(dpath_exp2) #%>%
+d1 <- read_csv(dpath_exp1) 
+d2 <- read_csv(dpath_exp2) 
 
 ```
 
-### Plot data
+### Plot Experiment 1 Data
 
 ```{r exp1plot, include=TRUE, fig.height=4, fig.width=6}
 
@@ -52,7 +54,7 @@ plot1
 ```
 
 
-### Stats for Expt 1
+### Statistical analyses for Expt 1
 
 
 ```{r exp1stats, eval=TRUE, fig.height=4, fig.width=6}
@@ -87,7 +89,7 @@ d1_stats1 <- d1 %>%
         )
 
 
-# For simplicity run analyses on dual networks only
+# the state_or_event variable doesn't apply to chains, so for simplicity we run analyses on dual networks only
 
 d1_stats1ri <- d1_stats1 %>% 
   drop_na(ri) %>% 
@@ -118,7 +120,8 @@ print(mritableout, file = here("analysis", "output", paste0("coeftable_ri_exp1.t
 
 ```
 
-### Fig 2
+### Plot Experiment 2 data
+
 ```{r exp2plot, include=TRUE, fig.height=4, fig.width=6}
 
 d2plot <- d2 %>% 
