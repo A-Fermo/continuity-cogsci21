@@ -10,4 +10,4 @@ Fermo, A. & Kemp, C. (2021). Temporal Continuity and the Judgment of Actual Caus
 
 `data` contains the cleaned data of the experiments (in CSV format). 
 
-`analysis` contains a python script generating figures 2-b and 3-c of the paper and an R markdown script for reproducing the statistical analysis.
+`analysis` contains a python script generating figures 2-b and 3-c of the paper and an R markdown script for reproducing the statistical analysis. For the python script, numpy = 1.19.2, pandas = 1.2.4 and matplotlib = 3.3.4 were used.
